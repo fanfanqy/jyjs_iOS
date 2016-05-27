@@ -230,7 +230,12 @@
         if ([lunarArray[2] intValue] > 2049) {
             
             [self removeFromSuperview];
-            NSLog(@"超出范围");
+//            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//            HUD.mode = MBProgressHUDModeText;
+//            HUD.labelText = @"您所选择的日期超出范围";
+//            HUD.removeFromSuperViewOnHide = YES;
+//            [HUD hide:YES afterDelay:1.5];
+
             return;
         }
 

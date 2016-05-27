@@ -40,29 +40,36 @@
 #define FALVCALENDAR @"falvcalendar.zip"
 #define FALVCALENDARDB @"falvcalendar.db"
 //藏历视图
-#define PADDING (ScreenWidth * 0.06)
+#define PADDING (ScreenWidth * 0.07)
 #define CALENDARBTNPADDING (ScreenWidth / 15)
 #define TEXTCOLOR [UIColor colorWithRed:127/255.0 green:114/255.0 blue:73/255.0 alpha:1]
 #define BTNTITLECOLOR UIColorFromRGB(0xdc9f35)
-#define TEXTNUMBERONE 20
+#define TEXTNUMBERONE 22
 #define TEXTNUMBERTWO 18
 #define TEXTNUMBERTHREE 16
 #define TEXTNUMBERFOUR 14
-#define TEXTNUMBERFIVE 10
-#define TEXTNUMBERLEAST 12
+#define TEXTNUMBERFIVE 9
+#define TEXTNUMBERLEAST 10
 #define TEXTCOLORRED UIColorFromRGB(0xc31214)
 #define TEXTCOLORBLACK UIColorFromRGB(0x72706b)
+#define TEXTCOLORBLACKFONT UIColorFromRGB(0x000000)
+#define CALENDARFONTKAITI @"Kaiti"
+#define CALENDARFONTHEITI @"SimHei"
+#define TOPBUTTONHEIGHT 10
 #define pushFontSize 16    //弹出框大小
-
+#define DownHeight 0
 // location 城市管理
 #define EditHeight 40
 #define EditWidth (ScreenWidth / 3)
 // 当前城市代号
 #define LocationCity @"当前城市"
 
+<<<<<<< HEAD
 #define Token @"asdf1234"
 
 // 根据经纬度获取天气数据
+=======
+>>>>>>> origin/master
 #define WeatherUrl @"https://api.wunderground.com/api/b41af3a86f950211/geolookup/conditions/forecast10day/q/%f,%f.json"
 // 根据经纬度获取一个城市一天的天气数据
 #define WeatherUrlForOneCity @"https://api.wunderground.com/api/b41af3a86f950211/geolookup/q/%f,%f.json"
@@ -72,11 +79,14 @@
 // 获取日出日落时间的接口
 #define SunTimesInPeriod @"http://192.168.10.6:800/service/sq/Weather.asmx"
 
+<<<<<<< HEAD
 // 获取图片列表的接口
 #define WallPaperList @"http://192.168.10.6:800/service/sq/wellpaper.asmx/getWellPaperList"
 // 获取单张图片
 #define wallPaperImage @"http://192.168.10.6:800/service/sq/wellpaper.asmx/getImage"
 
+=======
+>>>>>>> origin/master
 #endif /* PrefixHeader_pch */
 
 #ifdef __OBJC__

@@ -56,8 +56,8 @@
     flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flow.sectionInset = UIEdgeInsetsZero;
     flow.itemSize = CGSizeMake(frame.size.width/3-1, self.collectionView.frame.size.height);
-    NSLog(@":%f   %f",self.collectionView.frame.size.height , flow.itemSize.height);
-    
+//    NSLog(@":%f   %f",self.collectionView.frame.size.height , flow.itemSize.height);
+
     flow.minimumLineSpacing = 1;
   
 }
