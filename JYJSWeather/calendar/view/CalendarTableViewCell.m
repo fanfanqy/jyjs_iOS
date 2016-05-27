@@ -8,8 +8,8 @@
 
 #import "CalendarTableViewCell.h"
 #import "CalendarCollectionViewCell.h"
-#import "CalendarVC.h"
-
+//#import "CalendarVC.h"
+#import "CalendarViewController1.h"
 
 @implementation CalendarTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -50,7 +50,8 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CalendarVC *calendarVC = [[CalendarVC alloc]init];
+    CalendarViewController1 *calendarVC = [[CalendarViewController1 alloc]init];
+//     CalendarVC  *calendarVC = [[CalendarVC alloc]init];
     [self.viewControllerDelegate.navigationController pushViewController:calendarVC animated:YES];
 }
 

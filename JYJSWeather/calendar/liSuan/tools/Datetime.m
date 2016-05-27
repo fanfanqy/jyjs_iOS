@@ -58,37 +58,232 @@
 
 //获取指定年份指定月份的星期排列表
 +(NSMutableArray *)GetDayArrayByYear:(int) year andMonth:(int) month{
-    NSMutableArray * dayArray = [[NSMutableArray alloc]init];
+    NSMutableArray * dayArray1 = [[NSMutableArray alloc]init];
     for (int i = 0; i< 42; i++) {
-        if (i < [self GetTheWeekOfDayByYera:year andByMonth:month]-1) {
-            [dayArray addObject:@" "];
+        NSString * days;
+        if (i <= [self GetTheWeekOfDayByYera:year andByMonth:month]-1) {
+            if (month==1) {
+                year--;
+                month=12;
+                //跨年
+                days = [NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:month]-([self GetTheWeekOfDayByYera:year andByMonth:month]-i)+1];
+            }else{
+             days = [NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:(month-1)]-([self GetTheWeekOfDayByYera:year andByMonth:month]-i)+1];
+            }
+            [dayArray1 addObject:days];
         }else if ((i>[self GetTheWeekOfDayByYera:year andByMonth:month]-1)&&(i<[self GetTheWeekOfDayByYera:year andByMonth:month]+[self GetNumberOfDayByYera:year andByMonth:month])){
-            NSString * days;
-            if((i - [self GetTheWeekOfDayByYera:year andByMonth:month] +1)< 10)
                 days = [NSString stringWithFormat:@"%d",i-[self GetTheWeekOfDayByYera:year andByMonth:month]+1];
-            else days = [NSString stringWithFormat:@"%d",i-[self GetTheWeekOfDayByYera:year andByMonth:month]+1];
-            [dayArray addObject:days];
+                [dayArray1 addObject:days];
         }else {
-            [dayArray addObject:@" "];
+            //这里是根据 i 和"上个月"算的
+            days = [NSString stringWithFormat:@"%d",i-[self GetNumberOfDayByYera:year andByMonth:month]-[self GetTheWeekOfDayByYera:year andByMonth:month]+1];
+            [dayArray1 addObject:days];
         }
     }
-    return dayArray;
+    return dayArray1;
+}
+
+//获取指定年份指定月份指定日子的一周排列
++(NSMutableArray *)GetDayArrayByYear:(int) year andMonth:(int) month andDay:(int) day{
+    NSMutableArray * dayArray2 = [[NSMutableArray alloc]init];
+    //某一天是周几
+    int index1 = [self GetTheWeekOfDayByYera:year andByMonth:month andByDay:day];//6
+    //月首日是周几
+    int index = [self GetTheWeekOfDayByYera:year andByMonth:month];//0
+    for (int i = 0; i< 7; i++) {
+        if (i<index1) {
+            if ((day - index1+i)>0) {//大于1号
+                [dayArray2 addObject:[NSString stringWithFormat:@"%d",day-index1+i]];
+            }else{
+                if (month==1) {
+                    year--;
+                    month=12;
+                    [dayArray2 addObject:[NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:month]-(index-i)+1]];
+                }else{
+                [dayArray2 addObject:[NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:(month-1)]-(index-i)+1]];
+                }
+            }
+        }else {
+            if (day+(i-index1)<=[self GetNumberOfDayByYera:year andByMonth:month]) {
+                [dayArray2 addObject:[NSString stringWithFormat:@"%d",day+i-index1]];
+            }else{
+                int index2 = 0;
+                if (month==12) {
+                    index2 = [self GetTheWeekOfDayByYera:year++ andByMonth:1];
+                }else{
+                    index2 = [self GetTheWeekOfDayByYera:year andByMonth:(month+1)];
+                }
+                [dayArray2 addObject:[NSString stringWithFormat:@"%d",i-index2+1]];
+            }
+        }
+    }
+//    NSLog(@"dayArray2:%@",dayArray2);
+    return dayArray2;
+}
+
++(NSMutableArray *)GetDayDicByYear:(int) year andMonth:(int) month andDay:(int) day{
+     NSMutableArray * dayArrayDay = [[NSMutableArray alloc]init];
+     NSMutableArray * dayArrayMonth = [[NSMutableArray alloc]init];
+     NSMutableArray * dayArrayYear = [[NSMutableArray alloc]init];
+     NSMutableArray * dayArray4 = [[NSMutableArray alloc]init];
+    //某一天是周几
+    int index1 = [self GetTheWeekOfDayByYera:year andByMonth:month andByDay:day];
+    //月首日是周几
+    int index = [self GetTheWeekOfDayByYera:year andByMonth:month];
+    for (int i = 0; i< 7; i++) {
+        if (i<index1) {
+            if ((day - index1+i)>0) {//大于1号
+                [dayArrayDay addObject:[NSString stringWithFormat:@"%d",day-index1+i]];
+                [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month]];
+                [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+            }else{
+                if (month==1) {
+                    year--;
+                    month=12;
+                    [dayArrayDay addObject:[NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:month]-(index-i)+1]];
+                    [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month]];
+                    [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+                }else{
+                    [dayArrayDay addObject:[NSString stringWithFormat:@"%d",[self GetNumberOfDayByYera:year andByMonth:(month-1)]-(index-i)+1]];
+                    [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month-1]];
+                    [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+                }
+            }
+        }else {
+            if (day+(i-index1)<=[self GetNumberOfDayByYera:year andByMonth:month]) {
+                [dayArrayDay addObject:[NSString stringWithFormat:@"%d",day+i-index1]];
+                [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month]];
+                [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+            }else{
+                int index2 = 0;
+                if (month==12) {
+                    index2 = [self GetTheWeekOfDayByYera:year++ andByMonth:1];
+                    [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",1]];
+                }else{
+                    index2 = [self GetTheWeekOfDayByYera:year andByMonth:(month+1)];
+                     [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month+1]];
+                }
+                [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i-index2+1]];
+                [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+            }
+        }
+    }
+    [dayArray4 addObject:dayArrayYear];
+    [dayArray4 addObject:dayArrayMonth];
+    [dayArray4 addObject:dayArrayDay];
+    return dayArray4;
+}
+
+
+//根据传入某一天日期,获取这天前后共计一周的日子排列(农历)
++(NSMutableArray *)GetLunarDayArrayByYear:(int) year
+                          andMonth:(int) month andDay:(int)day{
+    NSMutableArray * dayArray4 = [NSMutableArray array];
+    //某一天是周几
+    int index1 = [self GetTheWeekOfDayByYera:year andByMonth:month andByDay:day];
+    //月首日是周几
+    int index = [self GetTheWeekOfDayByYera:year andByMonth:month];
+    for (int i = 0; i< 7; i++) {
+        if (i<index1) {
+            if ((day - index1+i)>0) {//大于1号
+                [dayArray4 addObject:[self GetLunarDayByYear:year andMonth:month andDay:day-index1+i]];
+            }else{
+                if (month==1) {
+                    year--;
+                    month=12;
+                [dayArray4 addObject:[self GetLunarDayByYear:year andMonth:month andDay:([self GetNumberOfDayByYera:year andByMonth:month]-(index-i)+1)]];
+                }else{
+
+                    int day = [self GetNumberOfDayByYera:year andByMonth:(month-1)]-(index-i)+1;
+                     [dayArray4 addObject:[self GetLunarDayByYear:year andMonth:(month-1) andDay:day]];
+
+                }
+            }
+        }else {
+            if (day-(i-index1)<=[self GetNumberOfDayByYera:year andByMonth:month]) {
+                 [dayArray4 addObject:[self GetLunarDayByYear:year andMonth:month andDay:day+i-index1]];
+            }else{
+
+                int index2 = 0;
+                if (month==12) {
+                    index2 = [self GetTheWeekOfDayByYera:year++ andByMonth:1];
+                }else{
+                    index2 = [self GetTheWeekOfDayByYera:year andByMonth:(month+1)];
+                }
+                [dayArray4 addObject:[self GetLunarDayByYear:year andMonth:month andDay:i-index2+1]];
+
+            }
+        }
+    }
+//     NSLog(@"dayArray4:%@",dayArray4);
+    return dayArray4;
+}
+//获取指定年份指定月份的相邻2个月总共3个月的排列表
++(NSMutableArray *)GetThreeMonthArrayByYear:(int) year
+                                   andMonth:(int) month{
+    NSMutableArray * dayArray3 = [[NSMutableArray alloc]init];
+    int yearTemp = year;
+    int monthTemp = month;
+    int yearTemp1 = year;
+    int monthTemp1 = month;
+    if (monthTemp==1) {
+        yearTemp--;monthTemp=12;
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp andByMonth:monthTemp]; i++) {
+            [dayArray3 addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }else {
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp  andByMonth:(monthTemp-1)]; i++) {
+            [dayArray3 addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }
+
+    for (int i=0; i<[self GetNumberOfDayByYera:year andByMonth:month]; i++) {
+        [dayArray3 addObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
+
+    if (monthTemp1==12) {
+        yearTemp1++;monthTemp1=1;
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp1 andByMonth:monthTemp1]; i++) {
+            [dayArray3 addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }else{
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp1 andByMonth:monthTemp1+1]; i++) {
+            [dayArray3 addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }
+    return dayArray3;
+    
 }
 
 //获取指定年份指定月份的星期排列表(农历)
 +(NSMutableArray *)GetLunarDayArrayByYear:(int) year andMonth:(int) month{
-    NSMutableArray * dayArray = [[NSMutableArray alloc]init];
+    NSMutableArray * dayArray5 = [[NSMutableArray alloc]init];
     for (int i = 0; i< 42; i++) {
-        if (i < [self GetTheWeekOfDayByYera:year andByMonth:month]-1) {
-            [dayArray addObject:@" "];
+        NSString * days;
+        if (i <= [self GetTheWeekOfDayByYera:year andByMonth:month]-1) {
+            if (month==1) {
+                year--;
+                month=12;
+                days = [self GetLunarDayByYear:year andMonth:month andDay:([self GetNumberOfDayByYera:year andByMonth:month]-([self GetTheWeekOfDayByYera:year andByMonth:month]-i)+1)];
+            }else{
+            days = [self GetLunarDayByYear:year andMonth:(month-1) andDay:([self GetNumberOfDayByYera:year andByMonth:(month-1)]-([self GetTheWeekOfDayByYera:year andByMonth:month]-i)+1)];
+            }
+            [dayArray5 addObject:days];
         }else if ((i>[self GetTheWeekOfDayByYera:year andByMonth:month]-1)&&(i<[self GetTheWeekOfDayByYera:year andByMonth:month]+[self GetNumberOfDayByYera:year andByMonth:month])){
-            NSString * days = [self GetLunarDayByYear:year andMonth:month andDay:(i-[self GetTheWeekOfDayByYera:year andByMonth:month]+1)];
-            [dayArray addObject:days];
+             days = [self GetLunarDayByYear:year andMonth:month andDay:(i-[self GetTheWeekOfDayByYera:year andByMonth:month]+1)];
+            [dayArray5 addObject:days];
         }else {
-            [dayArray addObject:@" "];
+            if (month==12) {
+                year++;
+                month=1;
+                days = [self GetLunarDayByYear:year andMonth:month andDay:(i-[self GetNumberOfDayByYera:year andByMonth:month]-[self GetTheWeekOfDayByYera:year andByMonth:month]+1)];
+            }else{
+            days = [self GetLunarDayByYear:year andMonth:(month+1) andDay:(i-[self GetNumberOfDayByYera:year andByMonth:month]-[self GetTheWeekOfDayByYera:year andByMonth:month]+1)];
+            }
+            [dayArray5 addObject:days];
         }
     }
-    return dayArray;
+    return dayArray5;
 }
 
 //获取某年某月某日的对应农历日
@@ -103,7 +298,14 @@
     return lunarday;
 }
 
-
+//具体某一天是周几
++(int)GetTheWeekOfDayByYera:(int)year andByMonth:(int)month andByDay:(int)day{
+    int dayTemp = (day-1)%7+[self GetTheWeekOfDayByYera:year andByMonth:month];
+    while (dayTemp>=7) {
+        dayTemp = dayTemp%7;
+    }
+    return dayTemp;
+}
 
 //计算year年month月第一天是星期几，周日则为0
 +(int)GetTheWeekOfDayByYera:(int)year

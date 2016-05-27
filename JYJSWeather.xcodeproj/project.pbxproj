@@ -11,7 +11,6 @@
 		3E017EA01CE969C4005EBCCB /* WeekTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017E9F1CE969C4005EBCCB /* WeekTableViewCell.m */; };
 		3E017EA41CE96DD3005EBCCB /* IndexTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EA21CE96DD3005EBCCB /* IndexTableViewCell.m */; };
 		3E017EAC1CE97681005EBCCB /* IndexButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EAB1CE97681005EBCCB /* IndexButton.m */; };
-		3E017EAF1CE998F1005EBCCB /* CalendarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EAE1CE998F1005EBCCB /* CalendarVC.m */; };
 		3E017EB31CE99EC7005EBCCB /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EB11CE99EC7005EBCCB /* IndexViewController.m */; };
 		3E017EB41CE99EC7005EBCCB /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E017EB21CE99EC7005EBCCB /* IndexViewController.xib */; };
 		3E017EB81CE99F36005EBCCB /* LimitNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EB61CE99F36005EBCCB /* LimitNumberVC.m */; };
@@ -19,7 +18,6 @@
 		3E017EBD1CE9B146005EBCCB /* IndexCollectionViewCell_down.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EBB1CE9B146005EBCCB /* IndexCollectionViewCell_down.m */; };
 		3E017EBE1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E017EBC1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib */; };
 		3E1A9DFD1CEE0EE700C9471B /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1A9DFC1CEE0EE700C9471B /* AboutUsViewController.m */; };
-		3E32F8CB1CEB0AB0009376FC /* CalendarViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8CA1CEB0AB0009376FC /* CalendarViewController1.m */; };
 		3E32F8D81CEB0ACF009376FC /* ConvertLunarOrSolar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8CD1CEB0ACF009376FC /* ConvertLunarOrSolar.m */; };
 		3E32F8D91CEB0ACF009376FC /* Date+string.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8CF1CEB0ACF009376FC /* Date+string.m */; };
 		3E32F8DA1CEB0ACF009376FC /* day.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E32F8D01CEB0ACF009376FC /* day.plist */; };
@@ -32,7 +30,6 @@
 		3E32F8E91CEB0AF2009376FC /* Calendary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8E31CEB0AF2009376FC /* Calendary.m */; };
 		3E32F8EA1CEB0AF2009376FC /* dateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8E51CEB0AF2009376FC /* dateModel.m */; };
 		3E32F8EB1CEB0AF2009376FC /* timeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8E71CEB0AF2009376FC /* timeModel.m */; };
-		3E32F8F61CEB0B2A009376FC /* calendarBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8ED1CEB0B2A009376FC /* calendarBtnView.m */; };
 		3E32F8F71CEB0B2A009376FC /* calendarDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8EF1CEB0B2A009376FC /* calendarDateView.m */; };
 		3E32F8F81CEB0B2A009376FC /* calendarYiJiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8F11CEB0B2A009376FC /* calendarYiJiView.m */; };
 		3E32F8F91CEB0B2A009376FC /* liSuanCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8F31CEB0B2A009376FC /* liSuanCalendarView.m */; };
@@ -87,8 +84,8 @@
 		3E74E7581CE2F4F60075659F /* ToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7571CE2F4F60075659F /* ToolVC.m */; };
 		3E74E7EC1CE3224E0075659F /* WeekCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7EA1CE3224E0075659F /* WeekCollectionCell.m */; };
 		3E74E7ED1CE3224E0075659F /* WeekCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E74E7EB1CE3224E0075659F /* WeekCollectionCell.xib */; };
-		3ECA0C591CEC387D00BF377E /* CalendarDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA0C581CEC387D00BF377E /* CalendarDateView.m */; };
-		3ECA0C5B1CEC389600BF377E /* CalendarDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ECA0C5A1CEC389600BF377E /* CalendarDateView.xib */; };
+		3ECA0C591CEC387D00BF377E /* AlmanacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA0C581CEC387D00BF377E /* AlmanacView.m */; };
+		3ECA0C5B1CEC389600BF377E /* AlmanacView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ECA0C5A1CEC389600BF377E /* AlmanacView.xib */; };
 		3ECEA7731C86CDDC003C1343 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECEA7721C86CDDB003C1343 /* PhotosUI.framework */; };
 		3EFDAF841CE57C3F0060CAA3 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF831CE57C3F0060CAA3 /* BaseTableViewCell.m */; };
 		3EFDAF871CE59C110060CAA3 /* WeatherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF861CE59C110060CAA3 /* WeatherTableViewCell.m */; };
@@ -100,10 +97,18 @@
 		3EFDAF9B1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF9A1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m */; };
 		3EFDAF9E1CE5E4120060CAA3 /* WallpaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF9D1CE5E4120060CAA3 /* WallpaperTableViewCell.m */; };
 		3EFDAFB61CE609560060CAA3 /* WallpaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAFB41CE609560060CAA3 /* WallpaperCollectionViewCell.m */; };
+		8A749E041CEECFE100F66BCD /* Kaiti.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A749E031CEECFE100F66BCD /* Kaiti.ttf */; };
+		8A749E071CEEDC4D00F66BCD /* calendarBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A749E061CEEDC4D00F66BCD /* calendarBtnView.m */; };
+		8A749E131CEF01FA00F66BCD /* CalendarViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A749E121CEF01FA00F66BCD /* CalendarViewController1.m */; };
+		8A749E161CEF126500F66BCD /* WeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A749E151CEF126500F66BCD /* WeekView.m */; };
+		8A749E181CEF13DA00F66BCD /* SimHei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A749E171CEF13DA00F66BCD /* SimHei.ttf */; };
 		8AC872571CED9BCA002CC063 /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC872561CED9BCA002CC063 /* WeatherModel.m */; };
 		8AC8725F1CED9CD5002CC063 /* DBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8725A1CED9CD5002CC063 /* DBModel.m */; };
 		8AC872601CED9CD6002CC063 /* SqlDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8725C1CED9CD5002CC063 /* SqlDataBase.m */; };
 		8AC872611CED9CD6002CC063 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC8725E1CED9CD5002CC063 /* Utils.m */; };
+		8AD6C8CC1CF58F8100CE8107 /* ZangLiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6C8CB1CF58F8100CE8107 /* ZangLiModel.m */; };
+		8AD6C8CE1CF59C6F00CE8107 /* zangli.db in Resources */ = {isa = PBXBuildFile; fileRef = 8AD6C8CD1CF59C6F00CE8107 /* zangli.db */; };
+		8ADEE58C1CF402F8008EF34E /* NarrowCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEE58B1CF402F8008EF34E /* NarrowCalendarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,8 +137,6 @@
 		3E017EA21CE96DD3005EBCCB /* IndexTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndexTableViewCell.m; path = weather/view/IndexTableViewCell.m; sourceTree = "<group>"; };
 		3E017EAA1CE97681005EBCCB /* IndexButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndexButton.h; path = weather/view/IndexButton.h; sourceTree = "<group>"; };
 		3E017EAB1CE97681005EBCCB /* IndexButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndexButton.m; path = weather/view/IndexButton.m; sourceTree = "<group>"; };
-		3E017EAD1CE998F1005EBCCB /* CalendarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarVC.h; path = calendar/controller/CalendarVC.h; sourceTree = "<group>"; };
-		3E017EAE1CE998F1005EBCCB /* CalendarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarVC.m; path = calendar/controller/CalendarVC.m; sourceTree = "<group>"; };
 		3E017EB01CE99EC7005EBCCB /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndexViewController.h; path = weather/controller/IndexViewController.h; sourceTree = "<group>"; };
 		3E017EB11CE99EC7005EBCCB /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndexViewController.m; path = weather/controller/IndexViewController.m; sourceTree = "<group>"; };
 		3E017EB21CE99EC7005EBCCB /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IndexViewController.xib; path = weather/controller/IndexViewController.xib; sourceTree = "<group>"; };
@@ -145,8 +148,6 @@
 		3E017EBC1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IndexCollectionViewCell_down.xib; path = weather/view/IndexCollectionViewCell_down.xib; sourceTree = "<group>"; };
 		3E1A9DFB1CEE0EE700C9471B /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutUsViewController.h; path = tool/controller/AboutUsViewController.h; sourceTree = "<group>"; };
 		3E1A9DFC1CEE0EE700C9471B /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutUsViewController.m; path = tool/controller/AboutUsViewController.m; sourceTree = "<group>"; };
-		3E32F8C91CEB0AB0009376FC /* CalendarViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController1.h; path = calendar/liSuan/controller/CalendarViewController1.h; sourceTree = "<group>"; };
-		3E32F8CA1CEB0AB0009376FC /* CalendarViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController1.m; path = calendar/liSuan/controller/CalendarViewController1.m; sourceTree = "<group>"; };
 		3E32F8CC1CEB0ACF009376FC /* ConvertLunarOrSolar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertLunarOrSolar.h; path = calendar/liSuan/customerDatePicker/ConvertLunarOrSolar.h; sourceTree = "<group>"; };
 		3E32F8CD1CEB0ACF009376FC /* ConvertLunarOrSolar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConvertLunarOrSolar.m; path = calendar/liSuan/customerDatePicker/ConvertLunarOrSolar.m; sourceTree = "<group>"; };
 		3E32F8CE1CEB0ACF009376FC /* Date+string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Date+string.h"; path = "calendar/liSuan/customerDatePicker/Date+string.h"; sourceTree = "<group>"; };
@@ -167,8 +168,6 @@
 		3E32F8E51CEB0AF2009376FC /* dateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dateModel.m; path = calendar/liSuan/model/dateModel.m; sourceTree = "<group>"; };
 		3E32F8E61CEB0AF2009376FC /* timeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timeModel.h; path = calendar/liSuan/model/timeModel.h; sourceTree = "<group>"; };
 		3E32F8E71CEB0AF2009376FC /* timeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = timeModel.m; path = calendar/liSuan/model/timeModel.m; sourceTree = "<group>"; };
-		3E32F8EC1CEB0B2A009376FC /* calendarBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calendarBtnView.h; path = calendar/liSuan/view/calendarBtnView.h; sourceTree = "<group>"; };
-		3E32F8ED1CEB0B2A009376FC /* calendarBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = calendarBtnView.m; path = calendar/liSuan/view/calendarBtnView.m; sourceTree = "<group>"; };
 		3E32F8EE1CEB0B2A009376FC /* calendarDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calendarDateView.h; path = calendar/liSuan/view/calendarDateView.h; sourceTree = "<group>"; };
 		3E32F8EF1CEB0B2A009376FC /* calendarDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = calendarDateView.m; path = calendar/liSuan/view/calendarDateView.m; sourceTree = "<group>"; };
 		3E32F8F01CEB0B2A009376FC /* calendarYiJiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calendarYiJiView.h; path = calendar/liSuan/view/calendarYiJiView.h; sourceTree = "<group>"; };
@@ -271,9 +270,9 @@
 		3E74E7E91CE3224E0075659F /* WeekCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeekCollectionCell.h; path = weather/view/WeekCollectionCell.h; sourceTree = "<group>"; };
 		3E74E7EA1CE3224E0075659F /* WeekCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeekCollectionCell.m; path = weather/view/WeekCollectionCell.m; sourceTree = "<group>"; };
 		3E74E7EB1CE3224E0075659F /* WeekCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeekCollectionCell.xib; path = weather/view/WeekCollectionCell.xib; sourceTree = "<group>"; };
-		3ECA0C571CEC387D00BF377E /* CalendarDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarDateView.h; path = calendar/view/CalendarDateView.h; sourceTree = "<group>"; };
-		3ECA0C581CEC387D00BF377E /* CalendarDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarDateView.m; path = calendar/view/CalendarDateView.m; sourceTree = "<group>"; };
-		3ECA0C5A1CEC389600BF377E /* CalendarDateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarDateView.xib; path = calendar/view/CalendarDateView.xib; sourceTree = "<group>"; };
+		3ECA0C571CEC387D00BF377E /* AlmanacView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlmanacView.h; path = calendar/view/AlmanacView.h; sourceTree = "<group>"; };
+		3ECA0C581CEC387D00BF377E /* AlmanacView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlmanacView.m; path = calendar/view/AlmanacView.m; sourceTree = "<group>"; };
+		3ECA0C5A1CEC389600BF377E /* AlmanacView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlmanacView.xib; path = calendar/view/AlmanacView.xib; sourceTree = "<group>"; };
 		3ECEA7721C86CDDB003C1343 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		3EFDAF821CE57C3F0060CAA3 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		3EFDAF831CE57C3F0060CAA3 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
@@ -294,6 +293,14 @@
 		3EFDAF9D1CE5E4120060CAA3 /* WallpaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WallpaperTableViewCell.m; path = wallpaper/view/WallpaperTableViewCell.m; sourceTree = "<group>"; };
 		3EFDAFB31CE609560060CAA3 /* WallpaperCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WallpaperCollectionViewCell.h; path = wallpaper/view/WallpaperCollectionViewCell.h; sourceTree = "<group>"; };
 		3EFDAFB41CE609560060CAA3 /* WallpaperCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WallpaperCollectionViewCell.m; path = wallpaper/view/WallpaperCollectionViewCell.m; sourceTree = "<group>"; };
+		8A749E031CEECFE100F66BCD /* Kaiti.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kaiti.ttf; path = calendar/SystemFile/Kaiti.ttf; sourceTree = "<group>"; };
+		8A749E051CEEDC4D00F66BCD /* calendarBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calendarBtnView.h; path = calendar/liSuan/view/calendarBtnView.h; sourceTree = "<group>"; };
+		8A749E061CEEDC4D00F66BCD /* calendarBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = calendarBtnView.m; path = calendar/liSuan/view/calendarBtnView.m; sourceTree = "<group>"; };
+		8A749E111CEF01FA00F66BCD /* CalendarViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController1.h; path = calendar/controller/CalendarViewController1.h; sourceTree = "<group>"; };
+		8A749E121CEF01FA00F66BCD /* CalendarViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController1.m; path = calendar/controller/CalendarViewController1.m; sourceTree = "<group>"; };
+		8A749E141CEF126500F66BCD /* WeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekView.h; sourceTree = "<group>"; };
+		8A749E151CEF126500F66BCD /* WeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekView.m; sourceTree = "<group>"; };
+		8A749E171CEF13DA00F66BCD /* SimHei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimHei.ttf; path = calendar/SystemFile/SimHei.ttf; sourceTree = "<group>"; };
 		8AC872551CED9BCA002CC063 /* WeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
 		8AC872561CED9BCA002CC063 /* WeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
 		8AC872591CED9CD5002CC063 /* DBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBModel.h; sourceTree = "<group>"; };
@@ -302,6 +309,11 @@
 		8AC8725C1CED9CD5002CC063 /* SqlDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlDataBase.m; sourceTree = "<group>"; };
 		8AC8725D1CED9CD5002CC063 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		8AC8725E1CED9CD5002CC063 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		8AD6C8CA1CF58F8100CE8107 /* ZangLiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZangLiModel.h; path = calendar/liSuan/model/ZangLiModel.h; sourceTree = "<group>"; };
+		8AD6C8CB1CF58F8100CE8107 /* ZangLiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZangLiModel.m; path = calendar/liSuan/model/ZangLiModel.m; sourceTree = "<group>"; };
+		8AD6C8CD1CF59C6F00CE8107 /* zangli.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = zangli.db; path = calendar/SystemFile/zangli.db; sourceTree = "<group>"; };
+		8ADEE58A1CF402F8008EF34E /* NarrowCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NarrowCalendarView.h; sourceTree = "<group>"; };
+		8ADEE58B1CF402F8008EF34E /* NarrowCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NarrowCalendarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,8 +359,6 @@
 		3E32F8C41CEB0A42009376FC /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				3E32F8C91CEB0AB0009376FC /* CalendarViewController1.h */,
-				3E32F8CA1CEB0AB0009376FC /* CalendarViewController1.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -375,6 +385,8 @@
 		3E32F8C61CEB0A72009376FC /* model */ = {
 			isa = PBXGroup;
 			children = (
+				8AD6C8CA1CF58F8100CE8107 /* ZangLiModel.h */,
+				8AD6C8CB1CF58F8100CE8107 /* ZangLiModel.m */,
 				3E32F8E01CEB0AF2009376FC /* calendarDBModel.h */,
 				3E32F8E11CEB0AF2009376FC /* calendarDBModel.m */,
 				3E32F8E21CEB0AF2009376FC /* Calendary.h */,
@@ -390,16 +402,20 @@
 		3E32F8C71CEB0A79009376FC /* view */ = {
 			isa = PBXGroup;
 			children = (
-				3E32F8EC1CEB0B2A009376FC /* calendarBtnView.h */,
-				3E32F8ED1CEB0B2A009376FC /* calendarBtnView.m */,
+				8ADEE58A1CF402F8008EF34E /* NarrowCalendarView.h */,
+				8ADEE58B1CF402F8008EF34E /* NarrowCalendarView.m */,
+				8A749E051CEEDC4D00F66BCD /* calendarBtnView.h */,
+				8A749E061CEEDC4D00F66BCD /* calendarBtnView.m */,
 				3E32F8EE1CEB0B2A009376FC /* calendarDateView.h */,
 				3E32F8EF1CEB0B2A009376FC /* calendarDateView.m */,
 				3E32F8F01CEB0B2A009376FC /* calendarYiJiView.h */,
 				3E32F8F11CEB0B2A009376FC /* calendarYiJiView.m */,
 				3E32F8F21CEB0B2A009376FC /* liSuanCalendarView.h */,
 				3E32F8F31CEB0B2A009376FC /* liSuanCalendarView.m */,
-				3E32F8F41CEB0B2A009376FC /* timeCell.h */,
 				3E32F8F51CEB0B2A009376FC /* timeCell.m */,
+				3E32F8F41CEB0B2A009376FC /* timeCell.h */,
+				8A749E141CEF126500F66BCD /* WeekView.h */,
+				8A749E151CEF126500F66BCD /* WeekView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -495,6 +511,9 @@
 		3E32F9421CEB1169009376FC /* SystemFile */ = {
 			isa = PBXGroup;
 			children = (
+				8AD6C8CD1CF59C6F00CE8107 /* zangli.db */,
+				8A749E171CEF13DA00F66BCD /* SimHei.ttf */,
+				8A749E031CEECFE100F66BCD /* Kaiti.ttf */,
 				3E32F9431CEB1183009376FC /* falvcalendar.zip */,
 			);
 			name = SystemFile;
@@ -570,9 +589,9 @@
 				3E4E0C521CE48826003FCFAE /* NarrowCalendarCollectionViewCell.xib */,
 				3EFDAF911CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.h */,
 				3EFDAF921CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.m */,
-				3ECA0C571CEC387D00BF377E /* CalendarDateView.h */,
-				3ECA0C581CEC387D00BF377E /* CalendarDateView.m */,
-				3ECA0C5A1CEC389600BF377E /* CalendarDateView.xib */,
+				3ECA0C571CEC387D00BF377E /* AlmanacView.h */,
+				3ECA0C581CEC387D00BF377E /* AlmanacView.m */,
+				3ECA0C5A1CEC389600BF377E /* AlmanacView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -580,8 +599,8 @@
 		3E4E0BF91CE463AB003FCFAE /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				3E017EAD1CE998F1005EBCCB /* CalendarVC.h */,
-				3E017EAE1CE998F1005EBCCB /* CalendarVC.m */,
+				8A749E111CEF01FA00F66BCD /* CalendarViewController1.h */,
+				8A749E121CEF01FA00F66BCD /* CalendarViewController1.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -833,7 +852,7 @@
 				TargetAttributes = {
 					3E52F5CD1C7EA98C00E48BD2 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = FQ3BGX7X76;
+						DevelopmentTeam = 8VAGFB8JPU;
 					};
 					3E52F5E61C7EA98C00E48BD2 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -874,13 +893,16 @@
 				3E017EBE1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib in Resources */,
 				3E017EB41CE99EC7005EBCCB /* IndexViewController.xib in Resources */,
 				3E4E0C561CE48826003FCFAE /* NarrowCalendarCollectionViewCell.xib in Resources */,
+				8AD6C8CE1CF59C6F00CE8107 /* zangli.db in Resources */,
 				3E32F8DC1CEB0ACF009376FC /* month.plist in Resources */,
 				3E32F8DF1CEB0ACF009376FC /* year.plist in Resources */,
 				3EFDAF981CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib in Resources */,
 				3E4E0BF61CE45420003FCFAE /* tubiao_03.png in Resources */,
+				8A749E041CEECFE100F66BCD /* Kaiti.ttf in Resources */,
 				3E4E0BF41CE42B7A003FCFAE /* NarrowWeatherCollectionViewCell.xib in Resources */,
 				3E52F5E11C7EA98C00E48BD2 /* LaunchScreen.storyboard in Resources */,
-				3ECA0C5B1CEC389600BF377E /* CalendarDateView.xib in Resources */,
+				8A749E181CEF13DA00F66BCD /* SimHei.ttf in Resources */,
+				3ECA0C5B1CEC389600BF377E /* AlmanacView.xib in Resources */,
 				3E4E0C541CE48826003FCFAE /* CalendarCollectionViewCell.xib in Resources */,
 				3E017EB91CE99F36005EBCCB /* LimitNumberVC.xib in Resources */,
 				3E32F9441CEB1183009376FC /* falvcalendar.zip in Resources */,
@@ -918,13 +940,15 @@
 				3EFDAF971CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m in Sources */,
 				3E32F8EB1CEB0AF2009376FC /* timeModel.m in Sources */,
 				3E74E7081CE2C9DB0075659F /* LocationController.m in Sources */,
-				3ECA0C591CEC387D00BF377E /* CalendarDateView.m in Sources */,
+				3ECA0C591CEC387D00BF377E /* AlmanacView.m in Sources */,
 				3E4E0C5E1CE4B0C6003FCFAE /* RootViewController.m in Sources */,
 				3EFDAF931CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.m in Sources */,
+				8A749E131CEF01FA00F66BCD /* CalendarViewController1.m in Sources */,
 				3E74E7191CE2CA290075659F /* WallpaperVC.m in Sources */,
 				3E017EA41CE96DD3005EBCCB /* IndexTableViewCell.m in Sources */,
 				3E32F8DE1CEB0ACF009376FC /* Tool_ChineseCalendar.m in Sources */,
 				3E32F92C1CEB0F83009376FC /* FMDatabase.m in Sources */,
+				8ADEE58C1CF402F8008EF34E /* NarrowCalendarView.m in Sources */,
 				3E32F9331CEB0FA9009376FC /* ZipArchive.mm in Sources */,
 				3E32F92D1CEB0F83009376FC /* FMDatabaseAdditions.m in Sources */,
 				3E4E0BF31CE42B7A003FCFAE /* NarrowWeatherCollectionViewCell.m in Sources */,
@@ -935,6 +959,7 @@
 				3E32F90B1CEB0B41009376FC /* DateSource.m in Sources */,
 				3E32F9411CEB0FC7009376FC /* zip.c in Sources */,
 				3E52F5D61C7EA98C00E48BD2 /* AppDelegate.m in Sources */,
+				8AD6C8CC1CF58F8100CE8107 /* ZangLiModel.m in Sources */,
 				3E4E0C5A1CE4886D003FCFAE /* WeatherCollectionViewCell.m in Sources */,
 				8AC872571CED9BCA002CC063 /* WeatherModel.m in Sources */,
 				3E32F8F81CEB0B2A009376FC /* calendarYiJiView.m in Sources */,
@@ -944,13 +969,12 @@
 				3EFDAF9B1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m in Sources */,
 				3E3FA8851C8FC1450068CFBD /* ASNetworking.m in Sources */,
 				3E017EB81CE99F36005EBCCB /* LimitNumberVC.m in Sources */,
-				3E017EAF1CE998F1005EBCCB /* CalendarVC.m in Sources */,
 				3E017EAC1CE97681005EBCCB /* IndexButton.m in Sources */,
 				3E32F9121CEB0B41009376FC /* XBControl.m in Sources */,
 				3E32F9111CEB0B41009376FC /* wanNianLiTool.m in Sources */,
 				3E32F92E1CEB0F83009376FC /* FMDatabasePool.m in Sources */,
-				3E32F8F61CEB0B2A009376FC /* calendarBtnView.m in Sources */,
 				3E32F92F1CEB0F83009376FC /* FMDatabaseQueue.m in Sources */,
+				8A749E071CEEDC4D00F66BCD /* calendarBtnView.m in Sources */,
 				3E32F8FA1CEB0B2A009376FC /* timeCell.m in Sources */,
 				3E32F8F91CEB0B2A009376FC /* liSuanCalendarView.m in Sources */,
 				3E1A9DFD1CEE0EE700C9471B /* AboutUsViewController.m in Sources */,
@@ -967,7 +991,6 @@
 				3EFDAF841CE57C3F0060CAA3 /* BaseTableViewCell.m in Sources */,
 				3E32F9211CEB0F66009376FC /* UIView+WhenTappedBlocks.m in Sources */,
 				3E74E7111CE2CA1B0075659F /* BelowToolbar.m in Sources */,
-				3E32F8CB1CEB0AB0009376FC /* CalendarViewController1.m in Sources */,
 				3E32F90C1CEB0B41009376FC /* Datetime.m in Sources */,
 				3E74E7181CE2CA290075659F /* SinglePaperVC.m in Sources */,
 				3E74E7EC1CE3224E0075659F /* WeekCollectionCell.m in Sources */,
@@ -981,6 +1004,7 @@
 				3E74E7581CE2F4F60075659F /* ToolVC.m in Sources */,
 				3E32F90E1CEB0B41009376FC /* JBCalendar.m in Sources */,
 				3E32F90F1CEB0B41009376FC /* LunarCalendar.m in Sources */,
+				8A749E161CEF126500F66BCD /* WeekView.m in Sources */,
 				3E32F8D81CEB0ACF009376FC /* ConvertLunarOrSolar.m in Sources */,
 				3E32F8F71CEB0B2A009376FC /* calendarDateView.m in Sources */,
 				3EFDAF9E1CE5E4120060CAA3 /* WallpaperTableViewCell.m in Sources */,
@@ -1133,7 +1157,7 @@
 				INFOPLIST_FILE = JYJSWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JiYuanJingShe.JYJSWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = "fqy.UIViewcontroller------------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1150,7 +1174,7 @@
 				INFOPLIST_FILE = JYJSWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JiYuanJingShe.JYJSWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = "fqy.UIViewcontroller------------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

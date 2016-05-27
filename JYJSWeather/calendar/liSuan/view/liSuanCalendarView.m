@@ -10,31 +10,30 @@
 #import "Datetime.h"
 #import "DateSource.h"
 #import "ConvertLunarOrSolar.h"
-#define TOPBUTTONHEIGHT 20
 @interface  liSuanCalendarView(){
-    int _strYear;
-    int _strMonth;
-    int _strDay;
+
     NSMutableArray * _dayArray;
     NSMutableArray * _lunarDayArray;
-    NSMutableArray * _selectedDayArray;
-    int blockNr;
     NSMutableArray * colorArray;
     NSMutableArray * lunarColorArray;
     UILabel * _dayLabel;
 
+    int  blockNr;
+    int strYear;
+    int strMonth;
+    int strDay;
+   int selectedYear;
+   int selectedMonth;
+   int selectedDay;
+       NSString *fresh1Date;
+    NSString *fresh2Date;
     BOOL selected;//这个决定是否
     BOOL isAnimating;
     UIImageView *animationView_A;
     UIImageView *animationView_B;
-    /**
-     * 日历图片边上的那个Label的数据
-     */
-    int selectedYear;
-    int selectedMonth;
-    int selectedDay;
-    
     NSInteger indexDay;
+    float currentImageOriginY;
+    float currentImageFrameHeight;
 }
 @end
 @implementation liSuanCalendarView
@@ -42,55 +41,12 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-
-        self.backgroundColor = [UIColor clearColor];
-//        UIImage * todayImage = [UIImage imageNamed:@"LiSuantoday.png"];
-//
-//        UIButton *todayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [todayBtn setImage:[UIImage imageNamed:@"today"] forState:UIControlStateHighlighted];
-//        [todayBtn setImage:[UIImage imageNamed:@"todayHighit"] forState:0];
-//        [todayBtn addTarget:self action:@selector(backTodayAction)
-//       forControlEvents:UIControlEventTouchUpInside];
-//        todayBtn.frame = CGRectMake(ScreenWidth * 0.5 - 35, 5, todayImage.size.width * 0.5, todayImage.size.height * 0.5);
-//        [self addSubview:todayBtn];
-//        
-//        //距今天多少天的label
-//        CGFloat width = ScreenWidth * 0.4;
-//        _dayLabel = [XBControl createLabelWithFrame:CGRectMake(todayBtn.frame.origin.x - PADDING - width, 12.5, width, 14) text:@"今天" textColor:UIColorFromRGB(0x303030) font:TEXTNUMBERFOUR];
-//        _dayLabel.backgroundColor = [UIColor clearColor];
-//        
-//        _dayLabel.font = [UIFont boldSystemFontOfSize:TEXTNUMBERFOUR];
-//        
-//        _dayLabel.textAlignment = NSTextAlignmentRight;
-//        
-//        [self addSubview:_dayLabel];
-//        
-//        //日期按钮
-//        _dateBtn = [XBControl createBtnWithFrame:CGRectMake(todayBtn.frame.origin.x + todayBtn.frame.size.width + PADDING *0.5, 5, ScreenWidth * 0.4, 27) title:nil image:nil target:self action:@selector(dateBtnClick)];
-//        
-//        _dateBtn.titleLabel.font = [UIFont boldSystemFontOfSize:TEXTNUMBERFOUR];
-//
-//        [_dateBtn setTitleColor:UIColorFromRGB(0x303030) forState:UIControlStateNormal];
-//        
-//        [_dateBtn setImage:[UIImage imageNamed:@"date"] forState:UIControlStateNormal];
-//        [_dateBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -_dateBtn.frame.size.width*0.1, 0 , 0)];
-//        
-//        [self addSubview:_dateBtn];
         //存储字体颜色的数组
         colorArray = [[NSMutableArray alloc] init];
         lunarColorArray = [[NSMutableArray alloc] init];
         for (int i = 0; i < [self numRows] * 7; i++) {
-            [colorArray addObject:UIColorFromRGB(0x303030)];
+            [colorArray addObject:UIColorFromRGB(0x000000)];
         }
-//        //得到当前的 年 月 日
-//        _strYear = [[Datetime GetYear] intValue];
-//        _strMonth = [[Datetime GetMonth] intValue];
-//        _strDay = [[Datetime GetDay] intValue];
-//        /**
-//         *  得到待办和生日在数据库中的存储
-//         */
-//        [self relodDaiBanAndBirthdayFromDB];
-        
         //得到当前天在日历上的位置,以便初始时变为选中状态
         [self backTodayAction];
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftHandleSwipe:)];
@@ -111,32 +67,28 @@
     }
     return self;
 }
+
 /**
  *  今天按钮点击事件,回到当前日期
  */
 -(void)backTodayAction
 {
     //得到当前的 年 月 日
-    _strYear = [[Datetime GetYear] intValue];
-    _strMonth = [[Datetime GetMonth] intValue];
-    _strDay = [[Datetime GetDay] intValue];
-    blockNr = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth];
-    [self reloadDataWithDate:_strDay andMonth:_strMonth andYear:_strYear andIsSelected:YES ];
+    strYear = [[Datetime GetYear] intValue];
+    strMonth = [[Datetime GetMonth] intValue];
+    strDay = [[Datetime GetDay] intValue];
+    blockNr = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth];
+    [self reloadDataWithDate:strDay andMonth:strMonth andYear:strYear andIsSelected:YES andIsSwipe:NO];
     
 }
--(void)dateBtnClick
-{
-    if ([self.delegate respondsToSelector:@selector(dateBtnClick)]) {
-        [self.delegate dateBtnClick];
-    }
-}
+
 /**
  *  计算某个月在日历中占几行
  *
  *  @return 返回行数
  */
 -(int)numRows {
-    int lastBlock = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth]+([Datetime GetNumberOfDayByYera:_strYear andByMonth:_strMonth]);
+    int lastBlock = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth]+([Datetime GetNumberOfDayByYera:strYear andByMonth:strMonth]);
     int chu = lastBlock / 7;
     int yu = lastBlock % 7;
     if (yu == 0) {
@@ -148,34 +100,16 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
-    
-//    [[UIColor blueColor] setFill];
-//    UIRectFill(rect);
-    
-    _dayArray = (NSMutableArray *)[Datetime GetDayArrayByYear:_strYear andMonth:_strMonth];
-    _lunarDayArray = (NSMutableArray *)[Datetime GetLunarDayArrayByYear:_strYear andMonth:_strMonth];
+    _dayArray = (NSMutableArray *)[Datetime GetDayArrayByYear:strYear andMonth:strMonth];
+//    NSLog(@"//获取指定年份指定月份的星期排列表:_dayArray:%@,strYear:%d,strMonth:%d",_dayArray,strYear,strMonth);
+    _lunarDayArray = (NSMutableArray *)[Datetime GetLunarDayArrayByYear:strYear andMonth:strMonth];
+//    NSLog(@"//获取指定年份指定月份的农历排列表:_lunarDayArray:%@,strYear:%d,strMonth:%d",_dayArray,strYear,strMonth);
 
-    [self selectColor:blockNr + _strDay];
+    [self selectColor:blockNr + strDay];
     int row = [self numRows];
     NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
     [style setAlignment:NSTextAlignmentCenter];
     CGContextRef context = UIGraphicsGetCurrentContext();
-    /**
-     星期列表label
-     */
-    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects:@"日",@"一",@"二",@"三",@"四",@"五",@"六", nil];
-    for (int i = 0; i < 7; i++) {
-        
-        CGContextSetFillColorWithColor(context,
-                                       [UIColor blackColor].CGColor);
-        for (int i =0; i<[array count]; i++) {
-            NSString *weekdayValue = (NSString *)[array objectAtIndex:i];
-            UIColor *weekdayValueColor = UIColorFromRGB(0xb3b3b3);// 星期颜色
-            [weekdayValueColor set];
-            [weekdayValue drawInRect:CGRectMake(i*CALENDARBTNPADDING * 2 + 0.5 * CALENDARBTNPADDING, CALENDARBTNPADDING , CALENDARBTNPADDING, CALENDARBTNPADDING) withFont:[UIFont systemFontOfSize:TEXTNUMBERLEAST] lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
-        }
-    }
     /**
      *  画出日历主体
      */
@@ -185,40 +119,29 @@
         int targetColumn = i%7;
         int targetRow = i/7;
         int targetX = targetColumn * 2 * CALENDARBTNPADDING+ 0.5 * CALENDARBTNPADDING;
-        int targetY = 2 *CALENDARBTNPADDING+ targetRow *CALENDARBTNPADDING*2 / row * 5 + TOPBUTTONHEIGHT;
+        int targetY = CALENDARBTNPADDING+ targetRow *CALENDARBTNPADDING*2 / row * 5 + TOPBUTTONHEIGHT;
+        if (i==0) {
+            currentImageOriginY = targetY;
+        }
+        if ((i+1)/7==row) {
+            currentImageFrameHeight = targetY+0.8*CALENDARBTNPADDING;
+        }
        CGContextSetFillColorWithColor(context,[UIColor blackColor].CGColor);
-        
-        if(_strDay + blockNr == i + 1 && selected) {
+
+        if(strDay + blockNr == i + 1 && selected){
                 UIImage * today = [UIImage imageNamed:@"圈 - Assistor.png"];
                 [today drawInRect:CGRectMake(targetX -0.4 * CALENDARBTNPADDING, targetY , CALENDARBTNPADDING * 1.8,CALENDARBTNPADDING * 1.8 ) blendMode:kCGBlendModeNormal alpha:1.0];
         }
-
         if (targetDate != 0) {
-            if (([_dayArray[i] intValue] == [[Datetime GetDay] intValue]) &&(_strMonth == [[Datetime GetMonth] intValue] && (_strYear == [[Datetime GetYear] intValue]))) {
-                
-                //灰色的图片
-                UIImage * image = [UIImage imageNamed:@"todayBackground"];
-                [image drawInRect:CGRectMake(targetX -0.4 * CALENDARBTNPADDING, targetY, CALENDARBTNPADDING * 1.8,CALENDARBTNPADDING * 1.8)];
-            }
-            
-            //红色的图片
-            if (([_dayArray[i] intValue] == [[Datetime GetDay] intValue]) &&(_strMonth == [[Datetime GetMonth] intValue] && (_strYear == [[Datetime GetYear] intValue])) && _strDay + blockNr == i + 1){
-                
-                UIImage * image = [UIImage imageNamed:@"chonghe"];
-                [image drawInRect:CGRectMake(targetX -0.4 * CALENDARBTNPADDING, targetY, CALENDARBTNPADDING * 1.8,CALENDARBTNPADDING * 1.8)];
-            }
-            
-            
             //zhouxuewen /藏历日历字体大小
-            UIFont * fontName;
-            if (row == 4) {
-                fontName = [UIFont systemFontOfSize:TEXTNUMBERLEAST];
-            }else if (row == 5){
-                fontName = [UIFont systemFontOfSize:TEXTNUMBERLEAST];
-            }else{
-                fontName = [UIFont systemFontOfSize:TEXTNUMBERLEAST];
-            }
-            
+            UIFont * fontName1;
+            UIFont * fontName2;
+            UIFont * fontName3;
+            UIFont * fontName4;
+                fontName1 = [UIFont fontWithName:CALENDARFONTHEITI size:TEXTNUMBERONE];
+                fontName2 = [UIFont fontWithName:CALENDARFONTHEITI size:TEXTNUMBERFOUR];//14号
+                fontName3 = [UIFont fontWithName:CALENDARFONTHEITI size:TEXTNUMBERFIVE];//8号
+                fontName4 = [UIFont fontWithName:CALENDARFONTHEITI size:TEXTNUMBERLEAST];//12号
             NSString *date = [NSString stringWithFormat:@"%i",targetDate];
             NSString * lunar = [NSString stringWithFormat:@"%@",_lunarDayArray[i]];
             //7月1日做特殊处理，显示  建党节
@@ -226,30 +149,21 @@
                 lunar = @"建党节";
             }
             /* 长度大于3的做省略显示处理 */
-            if (lunar.length>=4) {
-                lunar = [NSString stringWithFormat:@"%@...",[lunar substringToIndex:2]];
+            if (lunar.length>=5) {
+                lunar = [NSString stringWithFormat:@"%@",[lunar substringToIndex:5]];
+                  [lunar drawInRect:CGRectMake(targetX - 0.5 * CALENDARBTNPADDING, targetY+1.1*CALENDARBTNPADDING  , CALENDARBTNPADDING * 2, CALENDARBTNPADDING * 0.5) withAttributes:@{NSFontAttributeName:fontName3,NSForegroundColorAttributeName:lunarColorArray[i],NSParagraphStyleAttributeName:style}];
+            }else if (lunar.length>=4){
+                 [lunar drawInRect:CGRectMake(targetX - 0.5 * CALENDARBTNPADDING, targetY+1.1*CALENDARBTNPADDING  , CALENDARBTNPADDING * 2, CALENDARBTNPADDING * 0.5) withAttributes:@{NSFontAttributeName:fontName4,NSForegroundColorAttributeName:lunarColorArray[i],NSParagraphStyleAttributeName:style}];
             }
-//            NSLog(@"%@  %@",date,lunar);
-            
-            [date drawInRect:CGRectMake(targetX, targetY + 2 , CALENDARBTNPADDING , CALENDARBTNPADDING * 0.8) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:TEXTNUMBERTHREE],NSForegroundColorAttributeName:colorArray[i],NSParagraphStyleAttributeName:style}];
-            
-            if (([_dayArray[i] intValue] == [[Datetime GetDay] intValue]) &&(_strMonth == [[Datetime GetMonth] intValue] && (_strYear == [[Datetime GetYear] intValue]))) {
-                        [date drawInRect:CGRectMake(targetX, targetY + 2 , CALENDARBTNPADDING , CALENDARBTNPADDING * 0.8) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:TEXTNUMBERTHREE],NSForegroundColorAttributeName:[UIColor whiteColor],NSParagraphStyleAttributeName:style}];
+            else{
+                //节日,节气
+                [lunar drawInRect:CGRectMake(targetX - 0.5 * CALENDARBTNPADDING, targetY+CALENDARBTNPADDING  , CALENDARBTNPADDING * 2, CALENDARBTNPADDING * 0.7) withAttributes:@{NSFontAttributeName:fontName2,NSForegroundColorAttributeName:lunarColorArray[i],NSParagraphStyleAttributeName:style}];
             }
-
+            [date drawInRect:CGRectMake(targetX, targetY + 2 , CALENDARBTNPADDING , CALENDARBTNPADDING * 0.8) withAttributes:@{NSFontAttributeName:fontName1,NSForegroundColorAttributeName:colorArray[i],NSParagraphStyleAttributeName:style}];
             UIColor *dataColor = colorArray[i];
             [dataColor set];
-        
-            [lunar drawInRect:CGRectMake(targetX - 0.5 * CALENDARBTNPADDING, targetY+CALENDARBTNPADDING  , CALENDARBTNPADDING * 2, CALENDARBTNPADDING * 0.7) withAttributes:@{NSFontAttributeName:fontName,NSForegroundColorAttributeName:lunarColorArray[i],NSParagraphStyleAttributeName:style}];
-            
-            if (([_dayArray[i] intValue] == [[Datetime GetDay] intValue]) &&(_strMonth == [[Datetime GetMonth] intValue] && (_strYear == [[Datetime GetYear] intValue]))){
-                
-                [lunar drawInRect:CGRectMake(targetX - 0.5 * CALENDARBTNPADDING, targetY+CALENDARBTNPADDING  , CALENDARBTNPADDING * 2, CALENDARBTNPADDING * 0.7) withAttributes:@{NSFontAttributeName:fontName,NSForegroundColorAttributeName:[UIColor whiteColor],NSParagraphStyleAttributeName:style}];// 被选中的农历颜色
-            }
-            
             UIColor *lunarColor = lunarColorArray[i];
             [lunarColor set];
-
             }
         }
 }
@@ -262,53 +176,54 @@
  */
 -(void)leftHandleSwipe:(UISwipeGestureRecognizer *)gestureRecognizer {
     if (isAnimating) return;
-    isAnimating = YES;
-    UIImage *imageCurrentMonth = [self drawCurrentState];
-    _strMonth = _strMonth+1;
-    if(_strMonth == 13){
-        _strYear++;
-        _strMonth = 1;
-    }
-    blockNr = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth];
-    BOOL isTemp = nil;
+            isAnimating = YES;
+            UIImage *imageCurrentMonth = [self drawCurrentState];
+            strMonth = strMonth+1;
+            if(strMonth == 13){
+                strYear++;
+                strMonth = 1;
+            }
+            blockNr = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth];
+            BOOL isTemp = nil;
 
-    isTemp = ((_strMonth==selectedMonth) &&(_strYear == selectedYear))?YES:NO;
-    if (isTemp) {
-        _strDay = selectedDay;
-    }
-    [self reloadDataWithDate:_strDay  andMonth:_strMonth andYear:_strYear andIsSelected:isTemp];
-    UIImage * imagePreviousMonth = [self drawCurrentState];
-    UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 2 * CALENDARBTNPADDING + TOPBUTTONHEIGHT - 2, self.frame.size.width , self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2)];
-    [animationHolder setClipsToBounds:YES];
-    [self addSubview:animationHolder];
-    
-    animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
-    animationView_A.backgroundColor = UIColorFromRGB(0xf6f6f6);
-    animationView_B = [[UIImageView alloc] initWithImage:imagePreviousMonth];
-    animationView_B.backgroundColor = UIColorFromRGB(0xf6f6f6);
-    [animationHolder addSubview:animationView_A];
-    [animationHolder addSubview:animationView_B];
-    
-    animationView_A.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);
-    animationView_B.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);
-    [UIView animateWithDuration:0.35f
-                     animations:^{
-                         CGRect frameA = animationView_A.frame;
-                         frameA.origin.x -= self.frame.size.width;
-                         animationView_A.frame = frameA;
-                         
-                         CGRect frameB = animationView_B.frame;
-                         frameB.origin.x -= self.frame.size.width;
-                         animationView_B.frame = frameB;
-                     }
-                     completion:^(BOOL finished) {
-                         [animationView_A removeFromSuperview];
-                         [animationView_B removeFromSuperview];
-                         isAnimating=NO;
-                         [animationHolder removeFromSuperview];
-                     }
-     ];
+            isTemp = ((strMonth==selectedMonth) &&(strYear == selectedYear))?YES:NO;
+            
+            if (isTemp) {
+                strDay = selectedDay;
+            }
+            [self reloadDataWithDate:strDay  andMonth:strMonth andYear:strYear andIsSelected:isTemp andIsSwipe:YES];
+            UIImage * imagePreviousMonth = [self drawCurrentState];
+            UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0,currentImageOriginY , self.frame.size.width , currentImageFrameHeight)];
+            [animationHolder setClipsToBounds:YES];
+            [self addSubview:animationHolder];
+            
+            animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
+            animationView_B = [[UIImageView alloc] initWithImage:imagePreviousMonth];
+            animationView_A.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"底图（上） - Assistor.png"]];
+            animationView_B.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"底图（上） - Assistor.png"]];
 
+            [animationHolder addSubview:animationView_A];
+            [animationHolder addSubview:animationView_B];
+            
+            animationView_A.frame = CGRectMake(0, 0, self.frame.size.width, currentImageFrameHeight );
+            animationView_B.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, currentImageFrameHeight );
+            [UIView animateWithDuration:0.35f
+                             animations:^{
+                                 CGRect frameA = animationView_A.frame;
+                                 frameA.origin.x -= self.frame.size.width;
+                                 animationView_A.frame = frameA;
+                                 
+                                 CGRect frameB = animationView_B.frame;
+                                 frameB.origin.x -= self.frame.size.width;
+                                 animationView_B.frame = frameB;
+                             }
+                             completion:^(BOOL finished) {
+                                 [animationView_A removeFromSuperview];
+                                 [animationView_B removeFromSuperview];
+                                 isAnimating=NO;
+                                 [animationHolder removeFromSuperview];
+                             }
+             ];
 }
 /**
  *  右滑动作事件
@@ -320,32 +235,33 @@
     isAnimating = YES;
     UIImage *imageCurrentMonth = [self drawCurrentState];
 
-    _strMonth = _strMonth-1;
-    if(_strMonth == 0){
-        _strYear--;_strMonth = 12;
+    strMonth = strMonth-1;
+    if(strMonth == 0){
+        strYear--;strMonth = 12;
     }
-    blockNr = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth];
+    blockNr = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth];
     BOOL isTemp = nil;
-    isTemp = ((_strMonth==selectedMonth) && (_strYear==selectedYear))?YES:NO;
+    isTemp = ((strMonth==selectedMonth) && (strYear==selectedYear))?YES:NO;
     if (isTemp) {
-        _strDay = selectedDay;
+        strDay = selectedDay;
     }
-    [self reloadDataWithDate:_strDay andMonth:_strMonth andYear:_strYear andIsSelected:isTemp];
-    
+    [self reloadDataWithDate:strDay andMonth:strMonth andYear:strYear andIsSelected:isTemp andIsSwipe:YES];
+
     UIImage * imagePreviousMonth = [self drawCurrentState];
-    UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 2 * CALENDARBTNPADDING + TOPBUTTONHEIGHT - 2, self.frame.size.width , self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2)];
+//    NSLog(@"%@",imagePreviousMonth);
+    UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0, currentImageOriginY , self.frame.size.width , currentImageFrameHeight)];
     [animationHolder setClipsToBounds:YES];
     [self addSubview:animationHolder];
     
     animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
-    animationView_A.backgroundColor = UIColorFromRGB(0xf6f6f6);
     animationView_B = [[UIImageView alloc] initWithImage:imagePreviousMonth];
-    animationView_B.backgroundColor = UIColorFromRGB(0xf6f6f6);
+    animationView_A.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"底图（上） - Assistor.png"]];
+    animationView_B.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"底图（上） - Assistor.png"]];
     [animationHolder addSubview:animationView_A];
     [animationHolder addSubview:animationView_B];
     
-    animationView_A.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);
-    animationView_B.frame = CGRectMake(-self.frame.size.width, 0, self.frame.size.width, self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);
+    animationView_A.frame = CGRectMake(0, 0, self.frame.size.width, currentImageFrameHeight);
+    animationView_B.frame = CGRectMake(-self.frame.size.width, 0, self.frame.size.width,currentImageFrameHeight);
     [UIView animateWithDuration:0.35f
                      animations:^{
                          CGRect frameA = animationView_A.frame;
@@ -363,13 +279,15 @@
                          [animationHolder removeFromSuperview];
                      }
      ];
-
 }
+
 -(UIImage *)drawCurrentState {
-    CGSize s = CGSizeMake(self.frame.size.width, self.frame.size.height - 2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);
+//    NSLog(@"currentImageFrameHeight:%f",currentImageFrameHeight);
+//    NSLog(@"currentImageOriginY:%f",currentImageOriginY);
+    CGSize s = CGSizeMake(self.frame.size.width, currentImageFrameHeight );
     UIGraphicsBeginImageContextWithOptions(s, NO, self.layer.contentsScale);
     CGContextRef c = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(c, 0, -2 * CALENDARBTNPADDING - TOPBUTTONHEIGHT + 2);    // <-- shift everything up by 40px when drawing.
+    CGContextTranslateCTM(c, 0, -currentImageOriginY );    // <-- shift everything up by 40px when drawing.
     [self.layer renderInContext:c];
     UIImage* viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -384,25 +302,24 @@
 -(void)selectOneDay:(UITapGestureRecognizer *)tap{
     CGPoint touchPoint = [tap locationInView:self];
     int numRow = [self numRows];
-    int day = [Datetime GetNumberOfDayByYera:_strYear andByMonth:_strMonth];
+    int day = [Datetime GetNumberOfDayByYera:strYear andByMonth:strMonth];
     //单击一天,计算出point所处日期的位置
-    if ((touchPoint.y > CALENDARBTNPADDING * 2 + TOPBUTTONHEIGHT) && (touchPoint.y < 12 * CALENDARBTNPADDING+ TOPBUTTONHEIGHT) && (touchPoint.x > + 0.5 * CALENDARBTNPADDING) && (touchPoint.x <  ScreenWidth - CALENDARBTNPADDING)){
-        
+    if ((touchPoint.y > CALENDARBTNPADDING  + TOPBUTTONHEIGHT) && (touchPoint.y < 12 * CALENDARBTNPADDING+ TOPBUTTONHEIGHT) && (touchPoint.x > + 0.5 * CALENDARBTNPADDING) && (touchPoint.x <  ScreenWidth - CALENDARBTNPADDING)){
         float xLocation = touchPoint.x;
-        float yLocation = touchPoint.y-CALENDARBTNPADDING * 2- TOPBUTTONHEIGHT;
+        float yLocation = touchPoint.y-CALENDARBTNPADDING - TOPBUTTONHEIGHT;
         
         int column = floorf(xLocation/( 2 * CALENDARBTNPADDING));
         int row = floorf(yLocation/(CALENDARBTNPADDING*2 / numRow * 5));
         
         int block = (column+1)+row*7;
-        int firstWeekDay = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth]; //-1 because weekdays begin at 1, not 0
+        int firstWeekDay = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth]; //-1 because weekdays begin at 1, not 0
         int date = block-firstWeekDay;
         if (date > 0 && date <= day) {
-            _strDay = date;
-            selectedDay = _strDay;
-            selectedMonth = _strMonth;
-            selectedYear  = _strYear;
-           [self reloadDataWithDate:_strDay andMonth:_strMonth andYear:_strYear  andIsSelected:YES];
+            strDay = date;
+            selectedDay = strDay;
+            selectedMonth = strMonth;
+            selectedYear  = strYear;
+           [self reloadDataWithDate:strDay andMonth:strMonth andYear:strYear  andIsSelected:YES andIsSwipe:NO];
         }
         return;
     }
@@ -414,105 +331,83 @@
  */
 -(void)selectColor:(int)num
 {
-    for (int i = 0; i < [self numRows] * 7; i++) {
-        colorArray[i] = [UIColor blackColor]; //日历在未被选中的数字字体颜色
-        lunarColorArray[i] = [UIColor blackColor]; // 日历在未被选中的数字下面的字体颜色
-        int targetDate = [_dayArray[i] intValue];
-        if (targetDate != 0) {
-#pragma mark 崩溃地方
-            calendarDBModel * model = _calendarArray[targetDate -1];
+        for (int i = 0; i < [self numRows] * 7; i++) {
+            calendarDBModel * model;
+            colorArray[i] = UIColorFromRGB(0x000000); //日历在未被选中的数字字体颜色
+            lunarColorArray[i] = UIColorFromRGB(0x000000); // 日历在未被选中的数字下面的字体颜色
+            if ( i<[Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth]) {
+                 model = _calendarArray[0][i];
+                 colorArray[i] = UIColorFromRGB(0xcccccc);
+                 lunarColorArray[i] = UIColorFromRGB(0xcccccc);
+            }else if (  i>=[Datetime GetNumberOfDayByYera:strYear andByMonth:strMonth]+[Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth]){
+                int count = (int)[_calendarArray[0] count]+(int)[_calendarArray[1] count];
+                 model = _calendarArray[2][i-count];
+                colorArray[i] = UIColorFromRGB(0xcccccc);
+                lunarColorArray[i] = UIColorFromRGB(0xcccccc);
+            }else{
+                int count = (int)[_calendarArray[0] count];
+                model = _calendarArray[1][i-count];
+            }
 
+            if ([model.lDayName isEqualToString:@"初一"]) {
+                NSArray * monthArray = @[@"一",@"二",@"三",@"四",@"五",@"六",@"七",@"八",@"九",@"十",@"十一",@"十二"];
+                NSString * lunarMonth;
+                int lunarIndex;
+                if (model.lMonth.intValue == 0) {
+                    lunarIndex = [[[model.lMonth componentsSeparatedByString:@"闰"] objectAtIndex:1] intValue] - 1;
+                    lunarMonth = [NSString stringWithFormat:@"闰%@",[monthArray objectAtIndex:lunarIndex]];
+                }else {
+                    lunarIndex = [model.lMonth intValue] - 1;
+                    lunarMonth = [monthArray objectAtIndex:lunarIndex];
+                }
+                _lunarDayArray[i] = [NSString stringWithFormat:@"%@月",lunarMonth];
+                 lunarColorArray[i] = UIColorFromRGB(0xd20000);
+            }
             /* 显示优先权：节气 > 阴历 > 阳历 */
-//            if (model.gongLiJieRi.length > 0 && model.gongLiJieRi.length < 4) {
             if (model.gongLiJieRi.length > 0) {
                 _lunarDayArray[i] = model.gongLiJieRi;
                 //zhouxuewen /藏历今天日期下面公历节日label的颜色//未选中状态
                 lunarColorArray[i] = UIColorFromRGB(0xd20000);
             }
-//            if (model.nongLIjieRi.length > 0 && model.nongLIjieRi.length < 4) {
             if (model.nongLIjieRi.length > 0 ) {
                 _lunarDayArray[i] = model.nongLIjieRi;
                 lunarColorArray[i] = UIColorFromRGB(0xd20000);
             }
-            
             if (model.jieQi.length != 0) {
                 _lunarDayArray[i] = model.jieQi;
                 lunarColorArray[i] = UIColorFromRGB(0xd20000);
             }
-            
-            if (i + 1 == num && selected) {
-                colorArray[i] = UIColorFromRGB(0xd20000);
-                lunarColorArray[i] = UIColorFromRGB(0xd20000);
-                
-            }
-            
-            //zhouxuewen   藏历字体颜色
-            if (([_dayArray[i] intValue] == [[Datetime GetDay] intValue]) &&(_strMonth == [[Datetime GetMonth] intValue] && (_strYear == [[Datetime GetYear] intValue]))) {
-                lunarColorArray[i] = [UIColor whiteColor];
-            }
         }
-    }
 }
 
--(void)markDataWithYear:(int)year month:(int)month day:(int)day
+-(void)markDataWithYear:(int)year month:(int)month day:(int)day andIsSwipe:(BOOL)isSwipe
 {
-    _strYear = year;
-    _strMonth = month;
-    _strDay = day;
-    blockNr = [Datetime GetTheWeekOfDayByYera:_strYear andByMonth:_strMonth];
-    selectedYear = _strYear;
-    selectedMonth = _strMonth;
-    selectedDay = _strDay;
-    [self reloadDataWithDate:_strDay andMonth:_strMonth andYear:_strYear andIsSelected:YES];
+    strYear = year;
+    strMonth = month;
+    strDay = day;
+    NSLog(@"%s,_strYear,_strMonth,_strDay:%d,%d,%d",__func__,strYear,strMonth,strDay);
+    NSLog(@"%s,strYear,strMonth,strDay:%d,%d,%d",__func__,year,month,day);
+    blockNr = [Datetime GetTheWeekOfDayByYera:strYear andByMonth:strMonth];
+    selectedYear = strYear;
+    selectedMonth = strMonth;
+    selectedDay = strDay;
+    [self reloadDataWithDate:strDay andMonth:strMonth andYear:strYear andIsSelected:YES andIsSwipe:NO];
 }
 
--(void)reloadDataWithDate:(int)date andMonth:(int)month andYear:(int)year andIsSelected:(BOOL)isSelected
+-(void)reloadDataWithDate:(int)date andMonth:(int)month andYear:(int)year andIsSelected:(BOOL)isSelected andIsSwipe:(BOOL)isSwipe;
+
 {
-    if (isSelected) {
-        /**
-         *  更新日历上方距今天多少天  跟当前选择日期的数据
-         */
-        NSString * newDate;
-        NSString * newDate1;
-        if (selectedDay < 10) {
-
-            newDate = [NSString stringWithFormat:@"%d-%d-0%d",year,month,date];
-            [_dateBtn setTitle:newDate forState:UIControlStateNormal];
-             NSLog(@"%@",newDate);
-        }else{
-            newDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,date];
-            [_dateBtn setTitle:newDate forState:UIControlStateNormal];
-             NSLog(@"%@",newDate);
-        }
-        if (date < 10) {
-
-            newDate1 = [NSString stringWithFormat:@"%d-%d-0%d",year,month,date];
-            [_dateBtn setTitle:newDate forState:UIControlStateNormal];
-            NSLog(@"%@",newDate);
-        }else{
-            newDate1 = [NSString stringWithFormat:@"%d-%d-%d",year,month,date];
-            [_dateBtn setTitle:newDate forState:UIControlStateNormal];
-            NSLog(@"%@",newDate);
-        }
-        newDate = [DateSource getUTCFormateDate:newDate1];
-        _dayLabel.text = newDate;
-        //无用,可删
-        if ([self.delegate respondsToSelector:@selector(updateBtnTitleWithArray:dateArr:year:month:day:)]){
-            [self.delegate updateBtnTitleWithArray:_birArr dateArr:_dateArr year:year month:month day:date];
-        }
-    }
     /**
      *  从数据库读取新数据 更新整个界面数据
      *
      *  @param reloadDataWithYear:month:day: 根据选中日期更新数据
      */
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self.delegate respondsToSelector:@selector(reloadDataWithYear:month:day:andIsSelected:)]) {
-                [self.delegate reloadDataWithYear:year month:month day:date andIsSelected:isSelected];
+            if ([self.delegate respondsToSelector:@selector(reloadDataWithYear:month:day:andIsSelected: andIsSwipe:)]) {
+                [self.delegate reloadDataWithYear:year month:month day:date andIsSelected:isSelected andIsSwipe:isSwipe];
             }
-            NSLog(@"isSelected:%d",isSelected);
+           NSLog(@"isSelected:%d",isSelected);
             //直接调用setNeedsDisplay，或者setNeedsDisplayInRect:触发drawRect:，但是有个前提条件是rect不能为0.
             if (isSelected) {
                 selected = YES;
@@ -524,8 +419,6 @@
             
         });
     });
-    
-
 
 }
 

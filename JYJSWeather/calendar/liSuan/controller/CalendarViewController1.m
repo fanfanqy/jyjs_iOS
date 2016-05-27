@@ -248,7 +248,7 @@
     /**
      *  刷新dateView的数据
      */
-    [_dateView calendarDateViewReloadData:model  year:newYear month:newMonth day:newDay];
+    [_dateView calendarDateViewReloadData:model  year:_strYear month:_strMonth day:_strDay];
   
     if (isSelected) {
 
