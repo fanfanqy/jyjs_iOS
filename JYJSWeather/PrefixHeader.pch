@@ -12,11 +12,15 @@
 #define wallpaperInfoNumber 9
 
 
-#define LeftWidth 300.0
+#define LeftWidth ScreenWidth * 0.8
 
 // 首页壁纸缩略图尺寸
 #define narrowImage_width 360.0
 #define narrowImage_height 354.0
+
+// 加载的壁纸尺寸
+#define WallPaper_width 1080
+#define WallPaper_height 1920
 
 // 显示未来几天的天气
 #define weatherDays 10
@@ -53,14 +57,25 @@
 // location 城市管理
 #define EditHeight 40
 #define EditWidth (ScreenWidth / 3)
+// 当前城市代号
+#define LocationCity @"当前城市"
 
+#define Token @"asdf1234"
 
-
+// 根据经纬度获取天气数据
 #define WeatherUrl @"https://api.wunderground.com/api/b41af3a86f950211/geolookup/conditions/forecast10day/q/%f,%f.json"
+// 根据经纬度获取一个城市一天的天气数据
 #define WeatherUrlForOneCity @"https://api.wunderground.com/api/b41af3a86f950211/geolookup/q/%f,%f.json"
+// 反馈接口
+#define FeedbackUrl @"http://192.168.10.6:800/service/sq/feedback.asmx/setNewFeedBack"
 
+// 获取日出日落时间的接口
+#define SunTimesInPeriod @"http://192.168.10.6:800/service/sq/Weather.asmx"
 
-
+// 获取图片列表的接口
+#define WallPaperList @"http://192.168.10.6:800/service/sq/wellpaper.asmx/getWellPaperList"
+// 获取单张图片
+#define wallPaperImage @"http://192.168.10.6:800/service/sq/wellpaper.asmx/getImage"
 
 #endif /* PrefixHeader_pch */
 

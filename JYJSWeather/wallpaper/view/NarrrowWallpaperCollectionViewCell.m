@@ -14,5 +14,4 @@
     [super awakeFromNib];
     self.imageview.userInteractionEnabled = YES;
 }
-
 @end

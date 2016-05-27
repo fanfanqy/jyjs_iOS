@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DBModel;
 
 @interface RootViewController : UIViewController
-
+@property (nonatomic, strong) DBModel             * locationCityModel;
+@property (strong, nonatomic) NSMutableArray      * cityArray; // 城市名称
+@property (strong, nonatomic) NSMutableArray      * userCityArray;
 @end

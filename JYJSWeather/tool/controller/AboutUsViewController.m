@@ -7,6 +7,9 @@
 //
 
 #import "AboutUsViewController.h"
+#import "SoftwareVersionViewController.h"
+#import "FeedbackViewController.h"
+
 
 @interface AboutUsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -19,7 +22,7 @@
 - (NSMutableArray *)array
 {
     if (!_array) {
-        _array = [@[@"软件介绍", @"帮助中心", @"反馈"] mutableCopy] ;
+        _array = [@[@"软件介绍", @"软件版本",@"反馈"] mutableCopy] ;
     }
     return _array;
 }
@@ -34,11 +37,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self creatTableView];
+    self.title = @"关于我们";
 }
-
 - (void)creatTableView
 {
-    self.tableview = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height)];
+    self.tableview = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height) style:UITableViewStyleGrouped];
+
     [self.view addSubview:self.tableview];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -56,6 +60,18 @@
     }
     cell.textLabel.text = [self.array objectAtIndex:indexPath.row];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.textLabel.text isEqualToString:@"软件版本"]) {
+        SoftwareVersionViewController *softwareVC = [[SoftwareVersionViewController alloc]init];
+        [self.navigationController pushViewController:softwareVC animated:YES];
+    }
+    if ([cell.textLabel.text isEqualToString:@"反馈"]) {
+        FeedbackViewController *feedbackVC = [[FeedbackViewController alloc]init];
+        [self.navigationController pushViewController:feedbackVC animated:YES];
+    }
 }
 
 @end

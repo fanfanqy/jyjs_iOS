@@ -10,6 +10,9 @@
 #import "NarrrowWallpaperCollectionViewCell.h"
 #import "WallpaperCollectionViewCell.h"
 #import "WallpaperVC.h"
+#import "Image_Model.h"
+#import "UIImageView+WebImage.h"
+
 
 #define Image_height 354.0
 #define Image_width 360.0
@@ -24,29 +27,29 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundArray = [NSMutableArray array];
-        self.footerArray = [NSMutableArray array];
+        self.array = [NSMutableArray array];
+        self.otherArray = [NSMutableArray array];
         
         UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
-        self.backgroundCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flow];
-        [self.contentView addSubview:self.backgroundCollectionView];
-        self.backgroundCollectionView.backgroundColor = [UIColor redColor];
-        self.backgroundCollectionView.delegate = self;
-        self.backgroundCollectionView.dataSource = self;
+        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flow];
+        [self.contentView addSubview:self.collectionView];
+ 
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
         
-        [self.backgroundCollectionView registerClass:[WallpaperCollectionViewCell class] forCellWithReuseIdentifier:@"WALLPAPERTABLEVIEWCELL"];
+        [self.collectionView registerClass:[WallpaperCollectionViewCell class] forCellWithReuseIdentifier:@"WALLPAPERCOLLECTIONVIEWCELL"];
         flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        self.backgroundCollectionView.pagingEnabled = YES;
+        self.collectionView.pagingEnabled = YES;
         
         // footerImage 主页壁纸模块下方的小图
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-        self.footerCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
-        [self.contentView addSubview:self.footerCollectionView];
-        self.footerCollectionView.backgroundColor = [UIColor whiteColor];
-        self.footerCollectionView.delegate = self;
-        self.footerCollectionView.dataSource = self;
+        self.otherCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
+        [self.contentView addSubview:self.otherCollectionView];
+        self.otherCollectionView.backgroundColor = [UIColor greenColor];
+        self.otherCollectionView.delegate = self;
+        self.otherCollectionView.dataSource = self;
 
-        [self.footerCollectionView registerClass:[WallpaperCollectionViewCell class] forCellWithReuseIdentifier:@"WALLPAPERTABLEVIEWCELLlittle"];
+        [self.otherCollectionView registerClass:[WallpaperCollectionViewCell class] forCellWithReuseIdentifier:@"WALLPAPERCOLLECTIONVIEWCELLlittle"];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
     }
@@ -56,34 +59,48 @@
 {
     [super layoutSubviews];
     CGRect frame = [UIScreen mainScreen].bounds;
-    self.backgroundCollectionView.frame = CGRectMake(0, 0, frame .size.width, self.contentView.frame.size.height);
-    UICollectionViewFlowLayout *flow  = (UICollectionViewFlowLayout *)self.backgroundCollectionView.collectionViewLayout;
-    flow.itemSize = CGSizeMake(self.backgroundCollectionView.frame.size.width, self.backgroundCollectionView.frame.size.height);
+    self.collectionView.frame = CGRectMake(0, 0, frame .size.width, self.contentView.frame.size.height);
+    UICollectionViewFlowLayout *flow  = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    flow.itemSize = CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
     flow.minimumLineSpacing = 0;
     
     
     CGFloat height = Image_height/Image_width * self.contentView.frame.size.width/4.0;
-    self.footerCollectionView.frame = CGRectMake(0, self.contentView.frame.size.height - height, self.contentView.frame.size.width, height);
-    UICollectionViewFlowLayout *flowLayout  = (UICollectionViewFlowLayout *)self.footerCollectionView.collectionViewLayout;
+    self.otherCollectionView.frame = CGRectMake(0, self.contentView.frame.size.height - height, self.contentView.frame.size.width, height);
+    UICollectionViewFlowLayout *flowLayout  = (UICollectionViewFlowLayout *)self.otherCollectionView.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(self.contentView.frame.size.width/4.0, height);
     flowLayout.minimumLineSpacing = 0;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return wallpaperInfoNumber;
+    if ([collectionView isEqual:self.collectionView]) {
+        return self.array.count;
+    } else {
+        return self.otherArray.count;
+    }
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NarrrowWallpaperCollectionViewCell * cell = nil;
-    if ([collectionView isEqual:self.backgroundCollectionView]) {
+    if ([collectionView isEqual:self.collectionView]) {
         
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WALLPAPERTABLEVIEWCELL" forIndexPath:indexPath];
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WALLPAPERCOLLECTIONVIEWCELL" forIndexPath:indexPath];
         cell.imageview.image = [UIImage imageNamed:@"4.png"];
-        NSLog(@"%lu", indexPath.row);
+        Image_Model * model = [self.array objectAtIndex:indexPath.row];
+        NSLog(@"%@", model.url);
+        NSString * str = [NSString stringWithFormat:@"%@?token=%@&url=%@", wallPaperImage,Token,model.url];
+        NSURL * url = [NSURL URLWithString:str];
+        [cell.imageview setImageWithURL:url placeholderImage:nil];
+
     } else {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WALLPAPERTABLEVIEWCELLlittle" forIndexPath:indexPath];
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WALLPAPERCOLLECTIONVIEWCELLlittle" forIndexPath:indexPath];
         cell.imageview.image = [UIImage imageNamed:@"little_4.png"];
-        NSLog(@"%lu", indexPath.row);
+        Image_Model * model = [self.otherArray objectAtIndex:indexPath.row];
+        NSString * str = [NSString stringWithFormat:@"%@?token=%@&url=%@", wallPaperImage,Token,model.url];
+        NSURL * url = [NSURL URLWithString:str];
+        
+        [cell.imageview setImageWithURL:url placeholderImage:nil];
+
 
     }
     
@@ -92,6 +109,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WallpaperVC *wallpaper = [[WallpaperVC alloc]init];
+    wallpaper.pictureArray = self.array;
     [self.viewControllerDelegate.navigationController pushViewController:wallpaper animated:YES];
 }
 @end

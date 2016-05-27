@@ -45,7 +45,7 @@
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
     // 收藏,预览,下载
-    self.belowToolbar = [[BelowToolbar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 104, self.view.frame.size.width, 40)];
+    self.belowToolbar = [[BelowToolbar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 64, self.view.frame.size.width, 40)];
     [self.view addSubview:self.belowToolbar];
     self.belowToolbar.delegate = self;
     
@@ -75,7 +75,7 @@
 }
 - (void)creatImageView
 {
-    self.wallpaper = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
+    self.wallpaper = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:self.wallpaper];
     self.wallpaper.image = self.image;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewTapAction:)];

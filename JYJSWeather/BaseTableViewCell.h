@@ -14,4 +14,10 @@
 
 @property (nonatomic , strong) UIViewController *viewControllerDelegate;
 
+@property (nonatomic , strong) UICollectionView *collectionView;
+@property (nonatomic , strong) UICollectionView * otherCollectionView;
+
+@property (nonatomic , strong) NSMutableArray *array;
+@property (nonatomic , strong) NSMutableArray *otherArray;
+
 @end

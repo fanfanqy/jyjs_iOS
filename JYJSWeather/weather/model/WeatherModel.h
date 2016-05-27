@@ -22,7 +22,7 @@
 @property (nonatomic , copy) NSString * weather_txt; // 天气描述
 @property (nonatomic , copy) NSString * pollution; // 污染
 @property (nonatomic , copy) NSString * mirror; // 准提镜
-@property (nonatomic , copy) NSString * wind; // 风向
+@property (nonatomic , copy) NSString * wind; // 风力
 @property (nonatomic , copy) NSString * directionOfwind; // 风向
 @property (nonatomic , assign) NSInteger humidity; //湿度
 @property (nonatomic , copy) NSString * icon;

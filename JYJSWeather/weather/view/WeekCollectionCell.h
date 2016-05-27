@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface WeekCollectionCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UILabel *date; // 日期
+@property (weak, nonatomic) IBOutlet UILabel *week;
+@property (weak, nonatomic) IBOutlet UILabel *date;
+
 @property (weak, nonatomic) IBOutlet UIImageView *weather_image; // 天气图标
 @property (weak, nonatomic) IBOutlet UILabel *weather_txt; // 天气描述文字
 @property (weak, nonatomic) IBOutlet UILabel *maxtemp; // 最高温度

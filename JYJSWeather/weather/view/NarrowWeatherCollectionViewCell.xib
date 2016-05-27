@@ -234,12 +234,14 @@
                 <outlet property="date_left" destination="RiU-f9-Kac" id="WsX-ex-C49"/>
                 <outlet property="date_right" destination="IqY-Cn-Fed" id="8nP-bv-xn5"/>
                 <outlet property="icon_dwn_left" destination="hwq-UQ-dCU" id="SZu-Ou-Ml4"/>
+                <outlet property="icon_dwn_right" destination="hwq-UQ-dCU" id="d6Y-Q4-lrE"/>
                 <outlet property="icon_up" destination="ddf-Io-PPR" id="tZm-XG-a7h"/>
                 <outlet property="max_mintemp" destination="e8x-ln-lP1" id="fdR-1Q-TIc"/>
                 <outlet property="max_mintemp_left" destination="geX-Jf-IDp" id="HTT-UB-Wwx"/>
                 <outlet property="max_mintemp_right" destination="Yhk-IC-EuM" id="Aa6-ut-NNm"/>
                 <outlet property="nowtemp" destination="eZz-hH-CBN" id="RmE-lu-FR2"/>
                 <outlet property="pollution" destination="oCw-LO-mTG" id="dLj-Zb-JTZ"/>
+                <outlet property="weather_txt" destination="Ic6-6G-d6R" id="b80-2q-kW5"/>
                 <outlet property="windAndwet" destination="5kP-ZG-RpI" id="aF2-qC-5vi"/>
             </connections>
             <point key="canvasLocation" x="726.5" y="430"/>

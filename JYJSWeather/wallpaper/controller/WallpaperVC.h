@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WallpaperVC : UIViewController
-
+@property (nonatomic , strong) NSMutableArray *pictureArray; // 图片数组
 @end

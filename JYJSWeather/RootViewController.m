@@ -7,17 +7,24 @@
 //
 
 #import "RootViewController.h"
-#import "WeatherTableViewCell.h"
-#import "NarrowWeatherTableViewCell.h"
-#import "CalendarTableViewCell.h"
-#import "NarrowCalendarTableViewCell.h"
-#import "WallpaperVC.h"
 #import "ToolVC.h"
-#import "WallpaperTableViewCell.h"
-#import "LocationController.h"
+#import "DBModel.h"
+#import "Image_Model.h"
+#import "AppDelegate.h"
+#import "WallpaperVC.h"
+#import "SqlDataBase.h"
 #import "ASNetworking.h"
 #import "WeatherModel.h"
-#import "AppDelegate.h"
+#import "LocationController.h"
+#import "WeatherTableViewCell.h"
+#import "WallpaperTableViewCell.h"
+#import "CalendarTableViewCell.h"
+#import "NarrowWeatherTableViewCell.h"
+#import "NarrowCalendarTableViewCell.h"
+#import "CityTitleCollectionViewCell.h"
+
+#import <CoreLocation/CoreLocation.h>
+
 #define SH [UIScreen mainScreen].bounds.size.height
 #define SW [UIScreen mainScreen].bounds.size.width
 #define RefreshDelayInterval 1.1
@@ -29,44 +36,92 @@ typedef enum {
 
 #define moduleNumber 3 // 模块数量
 
-@interface RootViewController ()<UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate>
+@interface RootViewController ()<UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate, UIScrollViewDelegate ,CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+{
+   NSString * weatherKey;
+   NSString * calendarKey;
+   NSString * wallpaperkey;
+}
+@property (nonatomic, strong) CLGeocoder          * geocoder;
+@property (retain)            CLLocationManager   * locationManager;
+@property (nonatomic, strong) UITableView         * table;
+@property (strong, nonatomic) NSMutableArray      * weatherArray;              // 天气数据
+@property (strong, nonatomic) NSMutableDictionary * dictionary;                //cell 的一些信息
+@property (strong, nonatomic) NSMutableArray      * cellNameArray;             // 模块顺序
+@property (strong, nonatomic) UIImageView         * navigationImageView;
+@property (strong, nonatomic) UIImageView         * headBackImageView;
+@property (nonatomic, strong) CADisplayLink       * displayLink;
 
-@property (nonnull , strong) UITableView *table;
-@property (strong, nonatomic) NSMutableArray      * weatherArray; // 天气数据
-@property (strong, nonatomic) NSMutableDictionary *dictionary; //cell 的一些信息
-@property (strong, nonatomic) NSMutableArray *cellNameArray; // 模块顺序
-@property (strong, nonatomic) UIImageView *navigationImageView;
-@property (strong, nonatomic) UIImageView *headBackImageView;
-@property (nonatomic, strong) CADisplayLink *displayLink;
 /**
  *  press 变量记录,是否点按开始,点按开始,刷新tabview 数据,以模块方式进行展示
  */
-@property(nonatomic,assign)BOOL press;
-@property(nonatomic,assign)BOOL isBegan;
-@property (nonatomic, strong) UIImageView *cellImageView;
-@property (nonatomic, assign) AutoScroll autoScroll;
-@property (nonatomic, strong) UIView * leftView;
-@property (nonatomic, strong) UIView * mainView;
-@property (nonatomic, strong) ToolVC *leftViewController;
+@property (nonatomic,assign) BOOL                   press;
+@property (nonatomic,assign) BOOL                   isBegan;
+@property (nonatomic, assign) AutoScroll            autoScroll;
+@property (nonatomic, strong) UIImageView         * cellImageView;
+@property (nonatomic, strong) UIView              * leftView;
+@property (nonatomic, strong) UIView              * mainView;
+@property (nonatomic, strong) ToolVC              * leftViewController;
+@property (nonatomic, strong) UIView              * navigationBackView;       // 渐变导航栏背景view
+@property (nonatomic, strong) UIButton            * leftButton;               // 左侧抽屉按钮
+@property (nonatomic, strong) UIButton            * rightButton;              // 右侧分享按钮
+@property (nonatomic, strong) UICollectionView    * titleCollectionView;      //导航栏上面滚动城市
+@property (nonatomic, strong) NSMutableArray      * wallpaperArray_big;       // 壁纸大图数组
+@property (nonatomic, strong) NSMutableArray      * wallpaperArray_little;    // 壁纸缩略图数组
+
 @end
 
 @implementation RootViewController
 static NSIndexPath  *fromIndexPath = nil;//点按cell
 static NSIndexPath  *sourceIndexPath = nil; //目标cell
-
-- (NSMutableArray *)cellNameArray
+- (instancetype)init
 {
-   if (!_cellNameArray) {
-      _cellNameArray = [@[@"天气", @"日历", @"壁纸"] mutableCopy] ;
+   self = [super init];
+   if (self) {
+      self.cityArray = [NSMutableArray array];
+      self.userCityArray = [NSMutableArray array];
+      self.locationCityModel = [[DBModel alloc]init];
+      self.locationCityModel.cityCC = LocationCity;
+      self.wallpaperArray_big = [NSMutableArray array];
+      self.wallpaperArray_little = [NSMutableArray array];
+      self.weatherArray = [NSMutableArray array];
+      self.cellNameArray = [NSMutableArray array];
+      
+      weatherKey = @"天气";
+      calendarKey = @"日历";
+      wallpaperkey = @"壁纸";
+      
    }
-   return _cellNameArray;
+   return self;
+}
+- (void)saveUserDefaults:(NSMutableArray *)array ToKey:(NSString *)key
+{
+   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+   [userDefaults setObject:array forKey:key];
 }
 
+- (NSMutableArray *)readUserDefaultsWithKey:(NSString *)key
+{
+   NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+   NSMutableArray *array = [ NSMutableArray arrayWithArray:[userDefaultes arrayForKey:key]];
+   return array;
+}
+- (void)saveUserDefaults
+{
+   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+   [userDefaults setObject:self.userCityArray forKey:@"userCityArray"];
+}
+
+- (void)readUserDefaults
+{
+   NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+   self.userCityArray = [ NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"userCityArray"]];
+}
 - (NSMutableDictionary *)dictionary
 {
    if (!_dictionary) {
       _dictionary = [@{
-                       @"天气":@{@"header_height":@"500",
+                       weatherKey:@{@"header_height":@"500",
                          @"narrow_height":@"150",
                          @"header_class":@"WeatherTableViewCell",
                          @"header_identifier":@"WEATHERTABLEVIEWCELL",
@@ -74,14 +129,14 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
                          @"narrow_identifier":@"NARROWWEATHERTABLEVIEWCELL"
                            },
                        
-                      @"日历":@{@"header_height":@"600",
+                      calendarKey:@{@"header_height":@"600",
                         @"narrow_height":@"300",
                         @"header_class":@"CalendarTableViewCell",
                         @"header_identifier":@"CALENDARTABLEVIEWCELL",
                         @"narrow_class":@"NarrowCalendarTableViewCell",
                      @"narrow_identifier":@"NARROWCALENDARTABLEVIEWCELL"
                         },
-                       @"壁纸":@{@"header_height":@"500",
+                       wallpaperkey:@{@"header_height":@"500",
                          @"narrow_height":@"150",
                          @"header_class":@"WallpaperTableViewCell",
                          @"header_identifier":@"WALLPAPERTABLEVIEWCELL",
@@ -92,7 +147,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    }
    return _dictionary;
 }
-#pragma mark 抽屉试图
+#pragma mark 视图初始化
 - (void)initLeftView
 {
    self.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, LeftWidth, self.view.frame.size.height)];
@@ -108,14 +163,13 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
 - (void)initMainView
 {
    self.mainView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-   NSLog(@"bounds:%f,%f",self.view.frame.origin.x,self.view.frame.origin.y);
    [self.view addSubview:self.mainView];
    self.mainView.backgroundColor = [UIColor whiteColor];
 }
 - (void)creatTable
 {
 
-   self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+   self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
    _table.showsHorizontalScrollIndicator = NO;
    _table.showsVerticalScrollIndicator = NO;
    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressGestureRecognized:)];
@@ -124,14 +178,26 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    self.table.delegate = self;
    self.table.dataSource = self;
    
+   UIView * vv = [[UIView alloc]initWithFrame:CGRectMake(100, -100, 100, 100)];
+   [self.table addSubview:vv];
+   vv.backgroundColor = [UIColor redColor];
+   
+   
+   self.navigationBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+   [self.mainView addSubview:self.navigationBackView];
+   self.navigationBackView.backgroundColor = [UIColor grayColor];
+   self.navigationBackView.alpha = 0;
+   
 }
 #pragma mark - 抽屉效果
 // 返回根视图
 - (void)goToRootViewController:(UIButton *)sender
 {
    if (sender.selected) {
+      self.mainView.userInteractionEnabled = YES;
       [self setmainViewX:0];
    } else {
+      self.mainView.userInteractionEnabled = NO;
       [self setmainViewX:LeftWidth];
    }
    sender.selected = !sender.selected;
@@ -164,6 +230,14 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    self.navigationController.navigationBar.frame = naviFrame;
    ////去掉背景图片,去掉底部线条
    self.navigationImageView.hidden = YES;
+
+   // 防止在tool界面直接跳转到第三个界面后,返回root,点击抽屉按钮,按钮迟钝
+   self.leftButton.selected = NO;
+   self.mainView.userInteractionEnabled = YES;
+
+   [self.titleCollectionView reloadData];
+   
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -177,7 +251,14 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.weatherArray = [NSMutableArray array];
+   
+   self.cellNameArray = [self readUserDefaultsWithKey:@"moduleNameArray"];
+   if (self.cellNameArray.count == 0) {
+      NSMutableArray * array = [@[wallpaperkey ,weatherKey,calendarKey] mutableCopy];
+      [self saveUserDefaults:array ToKey:@"moduleNameArray"];
+      self.cellNameArray = array;
+   }
+
    [self initLeftView];
    [self initMainView];
    [self setNavigationIteam];
@@ -185,18 +266,98 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    [self handleData];
 
 }
+#pragma mark - 加载数据
 - (void)handleData
 {
    // 请求天气数据
-   [ASNetworking ASNetURLconnectionWith:WeatherUrl type:@"GET" Parmaters:nil FinishBlock:^(NSData *data) {
+   [self handleWeatherData];
+   // 请求壁纸数据
+   [self handleWallpaperData];
+
+   // 城市数据
+   [self handleCityData];
+
+}
+// 藏历数据
+- (void)handleCaldsfData
+{
+   
+}
+- (NSMutableArray *)sortOutDataWith:(NSArray *)array
+{
+   NSMutableArray * testArray = [NSMutableArray array];
+   for (NSDictionary * dictionary in array) {
+      Image_Model * model = [[Image_Model alloc]init];
+      model.thumbUrl = [dictionary objectForKey:@"ThumbUrl"];
+      model.iD = [[dictionary objectForKey:@"ID"] integerValue];
+      model.nameHash = [[dictionary objectForKey:@"NameHash"] integerValue];
+      model.name = [dictionary objectForKey:@"Name"];
+      model.publishDateUtc = [dictionary objectForKey:@"PublishDateUtc"];
+      model.createDateUtc = [dictionary objectForKey:@"CreateDateUtc"];
+      model.url = [dictionary objectForKey:@"Url"];
+      model.width = [[dictionary objectForKey:@"Width"] integerValue];
+      model.height = [[dictionary objectForKey:@"Height"]integerValue];
+      model.isPortrait = [dictionary objectForKey:@"IsPortrait"];
+      model.type = [dictionary objectForKey:@"__type"];
+      model.categories = [dictionary objectForKey:@"Categories"];
+      model.itdescription = [dictionary objectForKey:@"Description"];
+      model.Labels = [dictionary objectForKey:@"Labels"];
+      model.stat_Download = [[[dictionary objectForKey:@"Stat"] objectForKey:@"Download"]integerValue];
+      model.stat_Rate = [[[dictionary objectForKey:@"Stat"] objectForKey:@"Rate"]integerValue];
+      model.stat_Vote = [[[dictionary objectForKey:@"Stat"] objectForKey:@"Vote"]integerValue];
+      [testArray addObject:model];
+   }
+   return testArray;
+}
+// 请求壁纸数据
+- (void)handleWallpaperData
+{
+   // 请求壁纸大数据
+   ASNetworking * asn_big = [[ASNetworking alloc]init];
+   [asn_big handleWallPaperListWith:WallPaperList minWidth:WallPaper_width maxWidth:WallPaper_width minHeight:WallPaper_height maxHeight:WallPaper_height hash:0 token:Token dateUtc:nil FinishBlock:^(NSData *data) {
+      NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
+      NSArray *array = [dic objectForKey:@"d"];
+      self.wallpaperArray_big = [self sortOutDataWith:array];
+      NSLog(@"大壁纸个数%lu", (unsigned long)self.wallpaperArray_big.count);
+      dispatch_async(dispatch_get_main_queue(), ^{
+         NSLog(@"开始刷新");
+         [self.table reloadData];
+         
+      });
+      
+   }];
+   
+   // 请求壁纸缩略图数据
+   ASNetworking * asn_little = [[ASNetworking alloc]init];
+   [asn_little handleWallPaperListWith:WallPaperList minWidth:narrowImage_width maxWidth:narrowImage_width minHeight:narrowImage_height maxHeight:narrowImage_height hash:0 token:Token dateUtc:nil FinishBlock:^(NSData *data) {
+      NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
+      
+      NSArray *array = [dic objectForKey:@"d"];
+      self.wallpaperArray_little = [self sortOutDataWith:array];
+      NSLog(@"缩略壁纸个数%lu", (unsigned long)self.wallpaperArray_little.count);
+      dispatch_async(dispatch_get_main_queue(), ^{
+         NSLog(@"开始刷新");
+         [self.table reloadData];
+         
+      });
+      
+   }];
+
+}
+// 请求天气数据
+- (void)handleWeatherData
+{
+   NSString * url = [NSString stringWithFormat:WeatherUrl,30.22999954,120.16999817];
+   
+   [ASNetworking ASNetURLconnectionWith:url type:@"GET" Parmaters:nil FinishBlock:^(NSData *data) {
       if (data != nil) {
          NSLog(@"请求成功");
          NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
-
-         NSLog(@"%@", dic);
-
+         
          NSArray *array = [[[dic objectForKey:@"forecast"] objectForKey:@"simpleforecast"]objectForKey:@"forecastday"];
-
+         
+         
+         NSMutableArray * testArray = [NSMutableArray array];
          for (NSDictionary * dictionary in array) {
             WeatherModel * model = [[WeatherModel alloc]init];
             model.nowtemp = nil;
@@ -210,30 +371,147 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
             model.mirror = [dictionary objectForKey:@"icon"]; // 准提镜
             model.icon = [dictionary objectForKey:@"icon"];
             model.pollution = @"未找到"; // 污染
-            model.wind = [[dictionary objectForKey:@"maxwind"] objectForKey:@"dir"];
-            model.directionOfwind = @"无";
+            model.wind = @"无";
+            model.directionOfwind = [[dictionary objectForKey:@"maxwind"] objectForKey:@"dir"];
             model.humidity = [[dictionary objectForKey:@"avehumidity"] integerValue];
-            [self.weatherArray addObject:model];
+            [testArray addObject:model];
          }
-
-         NSLog(@"%lu", (unsigned long)self.weatherArray.count);
+         
+         [self.weatherArray removeAllObjects];
+         self.weatherArray = testArray;
+         NSLog(@"天气数据个数%lu", (unsigned long)self.weatherArray.count);
          // 今天的当前天气
          WeatherModel * model = [self.weatherArray objectAtIndex:0];
          model.nowtemp = [NSString stringWithFormat:@"%@",[[dic objectForKey:@"current_observation"] objectForKey:@"temp_c"]];
          dispatch_async(dispatch_get_main_queue(), ^{
-
-
+            NSLog(@"开始刷新");
+            [self.table reloadData];
+            
          });
-
+         
       }else{
          NSLog(@"请求失败");
       }
-
+      
    }];
-   // 请求壁纸数据
+}
+#pragma mark - 定位获取城市信息等
+- (void)handleCityData
+{
+   // 先从userdefault中读取城市顺序,在从数据库中读取城市信息,比较排序,如果有我的定位,则定位开始,先用self.locationCityModel 占位
+   [self readUserDefaults];
+   SqlDataBase *sqldata = [[SqlDataBase alloc]init];
+   NSArray * arr = [sqldata searchAllSaveCity];
+//   NSString * str = [self.userCityArray firstObject];
+   for (NSString * cityname in self.userCityArray) {
+      // 如果已选择城市中含有当前定位城市
+      if ([cityname isEqualToString:LocationCity]) {
+         
+         [self.cityArray addObject:self.locationCityModel];
+         // 如果当前已经定位过了,locationCityModel中有内容,则不再定位
+         if (!self.locationCityModel.cityPinyin) {
+            NSLog(@"开始定位");
+            [self startLocation];
+         }else{
+            NSLog(@"定位过,不再定位");
+         }
+      }
+      for (DBModel *model in arr) {
+         // 按顺序给城市排序
+         if ([cityname isEqualToString:model.cityCC]) {
+            [self.cityArray addObject:model];
+            
+         }
+      }
+   }
    
 }
 
+- (void)startLocation
+{
+   self.locationManager = [[CLLocationManager alloc]init];
+   self.locationManager.delegate = self;
+   if (![CLLocationManager locationServicesEnabled]) {
+      NSLog(@"定位服务尚未打开");
+      return;
+   }
+   //如果没有授权则请求用户授权
+   if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+      NSLog(@"shahsasha");
+   }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
+      NSLog(@"tantanatan");
+   }
+   [_locationManager requestWhenInUseAuthorization];
+   
+   //设置代理
+   _locationManager.delegate=self;
+   //设置定位精度
+   _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+   //    //定位频率,每隔多少米定位一次
+   //    CLLocationDistance distance=10;//十米定位一次
+   //    _locationManager.distanceFilter=distance;
+   //启动跟踪定位
+   [_locationManager startUpdatingLocation];
+   self.geocoder=[[CLGeocoder alloc]init];
+}
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+   CLLocation *location=[locations firstObject];
+   [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+      if (error) {
+         NSLog(@"出错啦%@",error);
+         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+         [alert show];
+         return;
+      }
+      CLPlacemark *placemark=[placemarks firstObject];
+      NSString * url = [NSString stringWithFormat:WeatherUrlForOneCity, placemark.location.coordinate.latitude,placemark.location.coordinate.longitude];
+      [ASNetworking ASNetURLconnectionWith:url type:@"GET" Parmaters:nil FinishBlock:^(NSData *data) {
+         if (data != nil) {
+            NSLog(@"请求成功");
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
+            NSDictionary *dictionary = [dic objectForKey:@"location"];
+            
+            NSString *citiname = [dictionary objectForKey:@"city"];
+            NSArray *cityNameArr = [citiname componentsSeparatedByString:@" "];
+            NSString * cityName = [cityNameArr firstObject];
+            //                NSString * cityName = @"Hangzhou";
+            
+            SqlDataBase *sqldata = [[SqlDataBase alloc]init];
+            DBModel * model = [sqldata searchWithCityName:cityName];
+            dispatch_async(dispatch_get_main_queue(), ^{
+               if (model.cityCC) {
+                  self.locationCityModel = model;
+                  [self saveUserDefaults];
+                  [self.cityArray removeAllObjects];
+                  [self handleData];
+                  [self.titleCollectionView reloadData];
+               } else {
+                  NSLog(@"未找到当前定位城市");
+               }
+            });
+            
+         }else{
+            NSLog(@"请求失败");
+         }
+      }];
+      NSLog(@"当前城市信息:%@",[placemark.addressDictionary objectForKey:@"City"]);
+      [self.locationManager stopUpdatingLocation];
+      
+   }];
+   
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+   [alert show];
+   
+   NSLog(@"error.localizedDescription:%@",error.localizedDescription);
+}
+
+
+#pragma mark - tableview的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return moduleNumber;
@@ -242,14 +520,15 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    BaseTableViewCell*    cell = nil;
-    NSString * moduleName = [self.cellNameArray objectAtIndex:indexPath.row];
+   NSString * moduleName = [self.cellNameArray objectAtIndex:indexPath.row];
    NSString * className = nil;
    NSString * identifier = nil;
    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.selectionStyle =UITableViewCellSelectionStyleNone;
-
+   cell.selectionStyle =UITableViewCellSelectionStyleNone;
+   
    if (!_press) {
       cell.contentView.alpha = 1.0;
+      // 非移动状态,获取当前cell的类型
       if (indexPath.row == 0) {
          className = [[self.dictionary objectForKey:moduleName] objectForKey:@"header_class"];
          identifier = [[self.dictionary objectForKey:moduleName] objectForKey:@"header_identifier"];
@@ -257,29 +536,69 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
          className = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_class"];
          identifier = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_identifier"];
       }
+      cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+      // 创建cell
       if (!cell) {
          Class class = NSClassFromString(className);
          cell = [[class alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
       }
-
+      // 对cell进行赋值
+      if ([moduleName isEqualToString:weatherKey]) {
+         cell.array = self.weatherArray;
+         [cell.collectionView reloadData];
+      }
+      if ([moduleName isEqualToString:wallpaperkey]) {
+         if (indexPath.row == 0) {
+            
+            cell.otherArray = self.wallpaperArray_little;
+            cell.array = self.wallpaperArray_big;
+            
+            [cell.otherCollectionView reloadData];
+            [cell.collectionView reloadData];
+            
+         } else {
+            
+            cell.otherArray = self.wallpaperArray_big;
+            cell.array = self.wallpaperArray_little;
+            [cell.collectionView reloadData];
+            
+         }
+         
+      }
+      
    }else{
-            if (!cell) {
-               className = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_class"];
-               identifier = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_identifier"];
-               Class class = NSClassFromString(className);
-               cell = [[class alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            }
-            if (indexPath.row == fromIndexPath.item) {
-               cell.contentView.alpha = 0.5;
+      className = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_class"];
+      identifier = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_identifier"];
+      cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+      if (!cell) {
+         Class class = NSClassFromString(className);
+         cell = [[class alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+      }
+      
+      if (indexPath.row == fromIndexPath.item) {
+         cell.contentView.alpha = 0.5;
+         
+      }else{
+         cell.contentView.alpha = 1.0;
+      }
+      // 对cell进行赋值
+      if ([moduleName isEqualToString:weatherKey]) {
+         cell.array = self.weatherArray;
+         [cell.collectionView reloadData];
+      }
+      if ([moduleName isEqualToString:wallpaperkey]) {
+         
+            cell.otherArray = self.wallpaperArray_big;
+            cell.array = self.wallpaperArray_little;
+            [cell.collectionView reloadData];
 
-            }else{
-               cell.contentView.alpha = 1.0;
-            }
-
+      }
+      
    }
+   
    cell.viewControllerDelegate = self;
    return cell;
-
+   
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,62 +606,108 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
 
    if (!_press) {
       if (indexPath.row == 0) {
-            if ([_cellNameArray[indexPath.row] isEqualToString:@"天气"]) {
+            if ([_cellNameArray[indexPath.row] isEqualToString:weatherKey]) {
                return 500;
-            }else if ([_cellNameArray[indexPath.row] isEqualToString:@"日历"] ){
+            }else if ([_cellNameArray[indexPath.row] isEqualToString:calendarKey] ){
                return 600;
-            }else if ([_cellNameArray[indexPath.row] isEqualToString:@"壁纸"] ){
+            }else if ([_cellNameArray[indexPath.row] isEqualToString:wallpaperkey] ){
                return 500;
             }
 
       }else{
-            if ([_cellNameArray[indexPath.row] isEqualToString:@"天气"]) {
+            if ([_cellNameArray[indexPath.row] isEqualToString:weatherKey]) {
                return 150;
-            }else if ([_cellNameArray[indexPath.row] isEqualToString:@"日历"] ){
+            }else if ([_cellNameArray[indexPath.row] isEqualToString:calendarKey] ){
                return 300;
-            }else if ([_cellNameArray[indexPath.row] isEqualToString:@"壁纸"] ){
+            }else if ([_cellNameArray[indexPath.row] isEqualToString:wallpaperkey] ){
                return 150;
             }
       }
    }else{
-         if ([_cellNameArray[indexPath.row] isEqualToString:@"天气"]) {
+         if ([_cellNameArray[indexPath.row] isEqualToString:weatherKey]) {
             return 150;
-         }else if ([_cellNameArray[indexPath.row] isEqualToString:@"日历"] ){
+         }else if ([_cellNameArray[indexPath.row] isEqualToString:calendarKey] ){
             return 300;
-         }else if ([_cellNameArray[indexPath.row] isEqualToString:@"壁纸"] ){
+         }else if ([_cellNameArray[indexPath.row] isEqualToString:wallpaperkey] ){
             return 150;
          }
    }
    return 0.1;
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+   // 当模块顺序已经固定好了, 上下滑动tableview,顶部类似navigationbar效果渐变
+   if (!_press && [scrollView isEqual:self.table]) {
 
+      if (scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 64) {
+         self.navigationBackView.alpha = scrollView.contentOffset.y / 64;
+      }
+      if (scrollView.contentOffset.y <= 0) {
+         self.navigationBackView.alpha = 0;
+      }
+      if (scrollView.contentOffset.y >= 64) {
+         self.navigationBackView.alpha = 1;
+      }
+      
+   }
+   
+}
+#pragma mark - 导航栏
 - (void)setNavigationIteam
 {
    UIImageView *navigationImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
    self.navigationImageView = navigationImageView;
    self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
-
    [self applyTransparentBackgroundToTheNavigationBar:1.0];
 
-   UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 65)];
-   view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"晴 - 主页Assistor.png"]];
-   [self.mainView addSubview:view];
 
    UIImage *leftimage = [UIImage imageNamed:@"用户 （白） - Assistor.png"];
-   UIButton *leftButton = [[UIButton alloc]init];
-   leftButton.frame = CGRectMake(0, 0, 33, 24.7);
-   [leftButton setImage:leftimage forState:UIControlStateNormal];
-   [leftButton addTarget:self action:@selector(goToRootViewController:) forControlEvents:UIControlEventTouchUpInside];
-   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+   self.leftButton = [[UIButton alloc]init];
+   _leftButton.frame = CGRectMake(0, 0, 33, 24.7);
+   [_leftButton setImage:leftimage forState:UIControlStateNormal];
+   [_leftButton addTarget:self action:@selector(goToRootViewController:) forControlEvents:UIControlEventTouchUpInside];
+   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_leftButton];
 
    UIImage *rightimage = [UIImage imageNamed:@"分享 - （白）Assistor.png"];
-   UIButton *rightButton = [[UIButton alloc]init];
-   rightButton.frame = CGRectMake(0, 0, 18, 24);
-   [rightButton setImage:rightimage forState:UIControlStateNormal];
-   [rightButton addTarget:self action:@selector(shareBtnClick) forControlEvents:UIControlEventTouchUpInside];
-   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+   self.rightButton = [[UIButton alloc]init];
+   _rightButton.frame = CGRectMake(0, 0, 18, 24);
+   [_rightButton setImage:rightimage forState:UIControlStateNormal];
+   [_rightButton addTarget:self action:@selector(shareBtnClick) forControlEvents:UIControlEventTouchUpInside];
+   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightButton];
+   
+   UICollectionViewFlowLayout * flow = [[UICollectionViewFlowLayout alloc]init];
+   self.titleCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 150, 44) collectionViewLayout:flow];
+   self.navigationItem.titleView = _titleCollectionView;
+   _titleCollectionView.delegate = self;
+   _titleCollectionView.dataSource = self;
+   _titleCollectionView.backgroundColor = [UIColor whiteColor];
+   [_titleCollectionView registerClass:[CityTitleCollectionViewCell class] forCellWithReuseIdentifier:@"TITLECOLLECTIONVIEWCELL"];
+   _titleCollectionView.pagingEnabled = YES;
+   flow.itemSize = self.titleCollectionView.frame.size;
+   flow.minimumLineSpacing = 0;
+   flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+   _titleCollectionView.backgroundColor = [UIColor clearColor];
 
 #pragma mark 待修改1
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   CityTitleCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TITLECOLLECTIONVIEWCELL" forIndexPath:indexPath];
+
+   DBModel * model = [self.cityArray objectAtIndex:indexPath.row];
+   cell.textLabel.text = model.cityCC;
+   cell.backgroundColor = [UIColor redColor];
+   return cell;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+   return _cityArray.count;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   [self location];
+   
+   
 }
 // 导航栏全透明
 - (void)applyTransparentBackgroundToTheNavigationBar:(CGFloat)opacity
@@ -372,10 +737,11 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    return nil;
 }
 
-// 定位
+// 城市管理
 - (void)location
 {
    LocationController *location = [[LocationController alloc]init];
+   location.locationCityModel = self.locationCityModel;
    [self.navigationController pushViewController:location animated:YES];
 }
 
@@ -390,7 +756,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    avc.completionHandler = myblock;
 }
 
-#pragma mark 长按拖动
+#pragma mark -长按拖动
 -(void)longPressGestureRecognized:(UILongPressGestureRecognizer *)sender{
    UILongPressGestureRecognizer *longPress = sender;
    UIGestureRecognizerState state = longPress.state;
@@ -464,7 +830,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
          } completion:^(BOOL finished) {
             sourceIndexPath = nil;
             _cellImageView = nil;
-            [_cellImageView removeFromSuperview];
+            [self.cellImageView removeFromSuperview];
 
          }];
 
@@ -573,4 +939,6 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    }
    return nil;
 }
+
+
 @end

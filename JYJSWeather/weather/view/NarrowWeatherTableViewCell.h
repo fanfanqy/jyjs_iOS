@@ -10,7 +10,6 @@
 
 
 @interface NarrowWeatherTableViewCell : BaseTableViewCell<UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic , strong) UICollectionView *collectionView;
-@property (nonatomic , strong) NSMutableArray *array;
+
 
 @end

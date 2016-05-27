@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WeatherCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *mirror; // 准提镜你
+@property (weak, nonatomic) IBOutlet UIImageView *mirror; // 准提镜
 @property (weak, nonatomic) IBOutlet UILabel *nowtemp; // 当前温度
 @property (weak, nonatomic) IBOutlet UILabel *date; // 日期
 @property (weak, nonatomic) IBOutlet UILabel *week; // 星期

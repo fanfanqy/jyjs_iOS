@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DBModel;
 
 @interface LocationController : UIViewController
+@property (nonatomic, strong) DBModel           * locationCityModel;
 
 @end

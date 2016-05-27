@@ -9,8 +9,5 @@
 #import "BaseTableViewCell.h"
 
 @interface WeekTableViewCell : BaseTableViewCell<UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic , strong) UICollectionView *collectionView;
-@property (nonatomic , strong) NSMutableArray *array;
-
 
 @end

@@ -10,8 +10,8 @@
 #import "RootViewController.h"
 #import "WanNianLiDate.h"
 #import "ToolVC.h"
-@interface AppDelegate ()
 
+@interface AppDelegate ()
 @end
 
 @implementation AppDelegate
@@ -23,10 +23,11 @@
     // Override point for customization after application launch.
     [WanNianLiDate getDataBase];
     // 状态栏字体白色
+
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     RootViewController *rtVC = [[RootViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rtVC];
-
+    
     self.window.rootViewController = nav;
     return YES;
 }

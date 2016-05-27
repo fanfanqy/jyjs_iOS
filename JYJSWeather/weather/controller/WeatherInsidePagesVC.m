@@ -24,7 +24,14 @@
 @end
 
 @implementation WeatherInsidePagesVC
-
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.array = [NSMutableArray array];
+    }
+    return self;
+}
 - (NSMutableArray *)heightForRowArr
 {
     if (!_heightForRowArr) {
@@ -40,7 +47,7 @@
 }
 - (void)creatTable
 {
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     self.table.delegate = self;
     self.table.dataSource = self;
@@ -59,6 +66,7 @@
         cell = [[WeatherTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WEATHERTABLEVIEWCELL"];
         cell.viewControllerDelegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.array = self.array;
         return cell;
 
     } else if (indexPath.row == 1){
@@ -68,6 +76,7 @@
 
         cell.viewControllerDelegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.array = self.array;
         return cell;
 
 

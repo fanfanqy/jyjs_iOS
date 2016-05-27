@@ -18,6 +18,9 @@
 		3E017EB91CE99F36005EBCCB /* LimitNumberVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E017EB71CE99F36005EBCCB /* LimitNumberVC.xib */; };
 		3E017EBD1CE9B146005EBCCB /* IndexCollectionViewCell_down.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E017EBB1CE9B146005EBCCB /* IndexCollectionViewCell_down.m */; };
 		3E017EBE1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E017EBC1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib */; };
+		3E1865C91CEED4F600D8E608 /* SoftwareVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1865C81CEED4F600D8E608 /* SoftwareVersionViewController.m */; };
+		3E1865CC1CEED96200D8E608 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1865CB1CEED96200D8E608 /* FeedbackViewController.m */; };
+		3E1865D11CEF098400D8E608 /* CityTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1865CF1CEF098400D8E608 /* CityTitleCollectionViewCell.m */; };
 		3E1A9DFD1CEE0EE700C9471B /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1A9DFC1CEE0EE700C9471B /* AboutUsViewController.m */; };
 		3E32F8CB1CEB0AB0009376FC /* CalendarViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8CA1CEB0AB0009376FC /* CalendarViewController1.m */; };
 		3E32F8D81CEB0ACF009376FC /* ConvertLunarOrSolar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F8CD1CEB0ACF009376FC /* ConvertLunarOrSolar.m */; };
@@ -78,6 +81,11 @@
 		3E52F5E11C7EA98C00E48BD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E52F5DF1C7EA98C00E48BD2 /* LaunchScreen.storyboard */; };
 		3E52F5EC1C7EA98C00E48BD2 /* JYJSWeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52F5EB1C7EA98C00E48BD2 /* JYJSWeatherTests.m */; };
 		3E52F5F71C7EA98C00E48BD2 /* JYJSWeatherUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52F5F61C7EA98C00E48BD2 /* JYJSWeatherUITests.m */; };
+		3E55C5521CF69487007A3EDD /* Image_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E55C5511CF69487007A3EDD /* Image_Model.m */; };
+		3E55C5581CF6AA54007A3EDD /* ImageNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E55C5551CF6AA54007A3EDD /* ImageNetWorking.m */; };
+		3E55C5591CF6AA54007A3EDD /* UIImageView+WebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E55C5571CF6AA54007A3EDD /* UIImageView+WebImage.m */; };
+		3E5F10051CF7EC99008432F4 /* day_weather.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E5F10041CF7EC99008432F4 /* day_weather.plist */; };
+		3E5F10071CF81629008432F4 /* night_weather.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E5F10061CF81629008432F4 /* night_weather.plist */; };
 		3E74E7081CE2C9DB0075659F /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7051CE2C9DB0075659F /* LocationController.m */; };
 		3E74E7111CE2CA1B0075659F /* BelowToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E70C1CE2CA1B0075659F /* BelowToolbar.m */; };
 		3E74E7131CE2CA1B0075659F /* WallpaperCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7101CE2CA1B0075659F /* WallpaperCVCell.m */; };
@@ -87,6 +95,7 @@
 		3E74E7581CE2F4F60075659F /* ToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7571CE2F4F60075659F /* ToolVC.m */; };
 		3E74E7EC1CE3224E0075659F /* WeekCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74E7EA1CE3224E0075659F /* WeekCollectionCell.m */; };
 		3E74E7ED1CE3224E0075659F /* WeekCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E74E7EB1CE3224E0075659F /* WeekCollectionCell.xib */; };
+		3E97F3A71CF6EE78007CC434 /* NarrrowWallpaperCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E97F3A61CF6EE78007CC434 /* NarrrowWallpaperCollectionViewCell.xib */; };
 		3ECA0C591CEC387D00BF377E /* CalendarDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA0C581CEC387D00BF377E /* CalendarDateView.m */; };
 		3ECA0C5B1CEC389600BF377E /* CalendarDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ECA0C5A1CEC389600BF377E /* CalendarDateView.xib */; };
 		3ECEA7731C86CDDC003C1343 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECEA7721C86CDDB003C1343 /* PhotosUI.framework */; };
@@ -96,7 +105,6 @@
 		3EFDAF901CE5AB060060CAA3 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF8F1CE5AB060060CAA3 /* CalendarTableViewCell.m */; };
 		3EFDAF931CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF921CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.m */; };
 		3EFDAF971CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF951CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m */; };
-		3EFDAF981CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFDAF961CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib */; };
 		3EFDAF9B1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF9A1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m */; };
 		3EFDAF9E1CE5E4120060CAA3 /* WallpaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAF9D1CE5E4120060CAA3 /* WallpaperTableViewCell.m */; };
 		3EFDAFB61CE609560060CAA3 /* WallpaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDAFB41CE609560060CAA3 /* WallpaperCollectionViewCell.m */; };
@@ -143,6 +151,12 @@
 		3E017EBA1CE9B146005EBCCB /* IndexCollectionViewCell_down.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndexCollectionViewCell_down.h; path = weather/view/IndexCollectionViewCell_down.h; sourceTree = "<group>"; };
 		3E017EBB1CE9B146005EBCCB /* IndexCollectionViewCell_down.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndexCollectionViewCell_down.m; path = weather/view/IndexCollectionViewCell_down.m; sourceTree = "<group>"; };
 		3E017EBC1CE9B146005EBCCB /* IndexCollectionViewCell_down.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IndexCollectionViewCell_down.xib; path = weather/view/IndexCollectionViewCell_down.xib; sourceTree = "<group>"; };
+		3E1865C71CEED4F600D8E608 /* SoftwareVersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoftwareVersionViewController.h; path = tool/controller/SoftwareVersionViewController.h; sourceTree = "<group>"; };
+		3E1865C81CEED4F600D8E608 /* SoftwareVersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoftwareVersionViewController.m; path = tool/controller/SoftwareVersionViewController.m; sourceTree = "<group>"; };
+		3E1865CA1CEED96200D8E608 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = tool/controller/FeedbackViewController.h; sourceTree = "<group>"; };
+		3E1865CB1CEED96200D8E608 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = tool/controller/FeedbackViewController.m; sourceTree = "<group>"; };
+		3E1865CE1CEF098400D8E608 /* CityTitleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTitleCollectionViewCell.h; sourceTree = "<group>"; };
+		3E1865CF1CEF098400D8E608 /* CityTitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTitleCollectionViewCell.m; sourceTree = "<group>"; };
 		3E1A9DFB1CEE0EE700C9471B /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutUsViewController.h; path = tool/controller/AboutUsViewController.h; sourceTree = "<group>"; };
 		3E1A9DFC1CEE0EE700C9471B /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutUsViewController.m; path = tool/controller/AboutUsViewController.m; sourceTree = "<group>"; };
 		3E32F8C91CEB0AB0009376FC /* CalendarViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController1.h; path = calendar/liSuan/controller/CalendarViewController1.h; sourceTree = "<group>"; };
@@ -253,6 +267,14 @@
 		3E52F5F21C7EA98C00E48BD2 /* JYJSWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JYJSWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E52F5F61C7EA98C00E48BD2 /* JYJSWeatherUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJSWeatherUITests.m; sourceTree = "<group>"; };
 		3E52F5F81C7EA98C00E48BD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E55C5501CF69487007A3EDD /* Image_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image_Model.h; sourceTree = "<group>"; };
+		3E55C5511CF69487007A3EDD /* Image_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image_Model.m; sourceTree = "<group>"; };
+		3E55C5541CF6AA54007A3EDD /* ImageNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageNetWorking.h; sourceTree = "<group>"; };
+		3E55C5551CF6AA54007A3EDD /* ImageNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageNetWorking.m; sourceTree = "<group>"; };
+		3E55C5561CF6AA54007A3EDD /* UIImageView+WebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebImage.h"; sourceTree = "<group>"; };
+		3E55C5571CF6AA54007A3EDD /* UIImageView+WebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebImage.m"; sourceTree = "<group>"; };
+		3E5F10041CF7EC99008432F4 /* day_weather.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = day_weather.plist; path = weather/day_weather.plist; sourceTree = "<group>"; };
+		3E5F10061CF81629008432F4 /* night_weather.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = night_weather.plist; path = weather/night_weather.plist; sourceTree = "<group>"; };
 		3E74E7041CE2C9DB0075659F /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationController.h; path = weather/controller/LocationController.h; sourceTree = "<group>"; };
 		3E74E7051CE2C9DB0075659F /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationController.m; path = weather/controller/LocationController.m; sourceTree = "<group>"; };
 		3E74E70B1CE2CA1B0075659F /* BelowToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BelowToolbar.h; path = wallpaper/view/BelowToolbar.h; sourceTree = "<group>"; };
@@ -271,6 +293,7 @@
 		3E74E7E91CE3224E0075659F /* WeekCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeekCollectionCell.h; path = weather/view/WeekCollectionCell.h; sourceTree = "<group>"; };
 		3E74E7EA1CE3224E0075659F /* WeekCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeekCollectionCell.m; path = weather/view/WeekCollectionCell.m; sourceTree = "<group>"; };
 		3E74E7EB1CE3224E0075659F /* WeekCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeekCollectionCell.xib; path = weather/view/WeekCollectionCell.xib; sourceTree = "<group>"; };
+		3E97F3A61CF6EE78007CC434 /* NarrrowWallpaperCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NarrrowWallpaperCollectionViewCell.xib; path = wallpaper/view/NarrrowWallpaperCollectionViewCell.xib; sourceTree = "<group>"; };
 		3ECA0C571CEC387D00BF377E /* CalendarDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarDateView.h; path = calendar/view/CalendarDateView.h; sourceTree = "<group>"; };
 		3ECA0C581CEC387D00BF377E /* CalendarDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarDateView.m; path = calendar/view/CalendarDateView.m; sourceTree = "<group>"; };
 		3ECA0C5A1CEC389600BF377E /* CalendarDateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CalendarDateView.xib; path = calendar/view/CalendarDateView.xib; sourceTree = "<group>"; };
@@ -287,7 +310,6 @@
 		3EFDAF921CE5B45C0060CAA3 /* NarrowCalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NarrowCalendarTableViewCell.m; path = calendar/view/NarrowCalendarTableViewCell.m; sourceTree = "<group>"; };
 		3EFDAF941CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NarrrowWallpaperCollectionViewCell.h; path = wallpaper/view/NarrrowWallpaperCollectionViewCell.h; sourceTree = "<group>"; };
 		3EFDAF951CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NarrrowWallpaperCollectionViewCell.m; path = wallpaper/view/NarrrowWallpaperCollectionViewCell.m; sourceTree = "<group>"; };
-		3EFDAF961CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NarrrowWallpaperCollectionViewCell.xib; path = wallpaper/view/NarrrowWallpaperCollectionViewCell.xib; sourceTree = "<group>"; };
 		3EFDAF991CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NarrowWallpaperTableViewCell.h; sourceTree = "<group>"; };
 		3EFDAF9A1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NarrowWallpaperTableViewCell.m; sourceTree = "<group>"; };
 		3EFDAF9C1CE5E4120060CAA3 /* WallpaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WallpaperTableViewCell.h; path = wallpaper/view/WallpaperTableViewCell.h; sourceTree = "<group>"; };
@@ -332,6 +354,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E1865CD1CEF090E00D8E608 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E0C5C1CE4B0C6003FCFAE /* RootViewController.h */,
+				3E4E0C5D1CE4B0C6003FCFAE /* RootViewController.m */,
+				3E1865CE1CEF098400D8E608 /* CityTitleCollectionViewCell.h */,
+				3E1865CF1CEF098400D8E608 /* CityTitleCollectionViewCell.m */,
+			);
+			name = root;
+			sourceTree = "<group>";
+		};
 		3E32F8C31CEB0A31009376FC /* Lisuan */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +463,7 @@
 		3E32F9171CEB0EE6009376FC /* ThirdLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				3E55C5531CF6AA54007A3EDD /* ImageNetWorking */,
 				3E32F91A1CEB0F39009376FC /* ZipArchive */,
 				3E32F9191CEB0F26009376FC /* FMDB */,
 				3E32F9181CEB0F02009376FC /* PersonalEXPasion */,
@@ -616,14 +650,13 @@
 		3E52F5D01C7EA98C00E48BD2 /* JYJSWeather */ = {
 			isa = PBXGroup;
 			children = (
+				3E1865CD1CEF090E00D8E608 /* root */,
 				3E32F9421CEB1169009376FC /* SystemFile */,
 				3E74E7501CE2F42A0075659F /* tool */,
 				3E52F5D41C7EA98C00E48BD2 /* AppDelegate.h */,
 				3E52F5D51C7EA98C00E48BD2 /* AppDelegate.m */,
 				3E3FA8831C8FC1450068CFBD /* ASNetworking.h */,
 				3E3FA8841C8FC1450068CFBD /* ASNetworking.m */,
-				3E4E0C5C1CE4B0C6003FCFAE /* RootViewController.h */,
-				3E4E0C5D1CE4B0C6003FCFAE /* RootViewController.m */,
 				3EFDAF821CE57C3F0060CAA3 /* BaseTableViewCell.h */,
 				3EFDAF831CE57C3F0060CAA3 /* BaseTableViewCell.m */,
 				3E4E0BF71CE46330003FCFAE /* calendar */,
@@ -671,6 +704,8 @@
 				8AC872541CED9BCA002CC063 /* model */,
 				3E3FA88B1C8FCDD60068CFBD /* view */,
 				3E3FA8891C8FCDB80068CFBD /* controller */,
+				3E5F10041CF7EC99008432F4 /* day_weather.plist */,
+				3E5F10061CF81629008432F4 /* night_weather.plist */,
 			);
 			name = weather;
 			sourceTree = "<group>";
@@ -678,10 +713,33 @@
 		3E52F6111C7ED7C000E48BD2 /* wallpaper */ = {
 			isa = PBXGroup;
 			children = (
+				3E55C54F1CF69487007A3EDD /* model */,
 				3E74E70A1CE2CA000075659F /* view */,
 				3EF21A1C1C8019F600E87631 /* controller */,
 			);
 			name = wallpaper;
+			sourceTree = "<group>";
+		};
+		3E55C54F1CF69487007A3EDD /* model */ = {
+			isa = PBXGroup;
+			children = (
+				3E55C5501CF69487007A3EDD /* Image_Model.h */,
+				3E55C5511CF69487007A3EDD /* Image_Model.m */,
+			);
+			name = model;
+			path = wallpaper/model;
+			sourceTree = "<group>";
+		};
+		3E55C5531CF6AA54007A3EDD /* ImageNetWorking */ = {
+			isa = PBXGroup;
+			children = (
+				3E55C5541CF6AA54007A3EDD /* ImageNetWorking.h */,
+				3E55C5551CF6AA54007A3EDD /* ImageNetWorking.m */,
+				3E55C5561CF6AA54007A3EDD /* UIImageView+WebImage.h */,
+				3E55C5571CF6AA54007A3EDD /* UIImageView+WebImage.m */,
+			);
+			name = ImageNetWorking;
+			path = calendar/ThirdLibrary/ImageNetWorking;
 			sourceTree = "<group>";
 		};
 		3E74E70A1CE2CA000075659F /* view */ = {
@@ -693,7 +751,7 @@
 				3E74E7101CE2CA1B0075659F /* WallpaperCVCell.m */,
 				3EFDAF941CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.h */,
 				3EFDAF951CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m */,
-				3EFDAF961CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib */,
+				3E97F3A61CF6EE78007CC434 /* NarrrowWallpaperCollectionViewCell.xib */,
 				3EFDAF991CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.h */,
 				3EFDAF9A1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m */,
 				3EFDAFB31CE609560060CAA3 /* WallpaperCollectionViewCell.h */,
@@ -727,6 +785,10 @@
 				3E74E7571CE2F4F60075659F /* ToolVC.m */,
 				3E1A9DFB1CEE0EE700C9471B /* AboutUsViewController.h */,
 				3E1A9DFC1CEE0EE700C9471B /* AboutUsViewController.m */,
+				3E1865C71CEED4F600D8E608 /* SoftwareVersionViewController.h */,
+				3E1865C81CEED4F600D8E608 /* SoftwareVersionViewController.m */,
+				3E1865CA1CEED96200D8E608 /* FeedbackViewController.h */,
+				3E1865CB1CEED96200D8E608 /* FeedbackViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -876,16 +938,18 @@
 				3E4E0C561CE48826003FCFAE /* NarrowCalendarCollectionViewCell.xib in Resources */,
 				3E32F8DC1CEB0ACF009376FC /* month.plist in Resources */,
 				3E32F8DF1CEB0ACF009376FC /* year.plist in Resources */,
-				3EFDAF981CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.xib in Resources */,
 				3E4E0BF61CE45420003FCFAE /* tubiao_03.png in Resources */,
 				3E4E0BF41CE42B7A003FCFAE /* NarrowWeatherCollectionViewCell.xib in Resources */,
 				3E52F5E11C7EA98C00E48BD2 /* LaunchScreen.storyboard in Resources */,
+				3E5F10051CF7EC99008432F4 /* day_weather.plist in Resources */,
 				3ECA0C5B1CEC389600BF377E /* CalendarDateView.xib in Resources */,
+				3E5F10071CF81629008432F4 /* night_weather.plist in Resources */,
 				3E4E0C541CE48826003FCFAE /* CalendarCollectionViewCell.xib in Resources */,
 				3E017EB91CE99F36005EBCCB /* LimitNumberVC.xib in Resources */,
 				3E32F9441CEB1183009376FC /* falvcalendar.zip in Resources */,
 				3E52F5DE1C7EA98C00E48BD2 /* Assets.xcassets in Resources */,
 				3E32F8DB1CEB0ACF009376FC /* lunarcalenda.plist in Resources */,
+				3E97F3A71CF6EE78007CC434 /* NarrrowWallpaperCollectionViewCell.xib in Resources */,
 				3E52F5DC1C7EA98C00E48BD2 /* Main.storyboard in Resources */,
 				3E74E7ED1CE3224E0075659F /* WeekCollectionCell.xib in Resources */,
 				3E32F8DA1CEB0ACF009376FC /* day.plist in Resources */,
@@ -916,6 +980,7 @@
 				3E74E74F1CE2F13F0075659F /* UIImage+ChangeSize.m in Sources */,
 				8AC872601CED9CD6002CC063 /* SqlDataBase.m in Sources */,
 				3EFDAF971CE5E26F0060CAA3 /* NarrrowWallpaperCollectionViewCell.m in Sources */,
+				3E55C5591CF6AA54007A3EDD /* UIImageView+WebImage.m in Sources */,
 				3E32F8EB1CEB0AF2009376FC /* timeModel.m in Sources */,
 				3E74E7081CE2C9DB0075659F /* LocationController.m in Sources */,
 				3ECA0C591CEC387D00BF377E /* CalendarDateView.m in Sources */,
@@ -928,6 +993,7 @@
 				3E32F9331CEB0FA9009376FC /* ZipArchive.mm in Sources */,
 				3E32F92D1CEB0F83009376FC /* FMDatabaseAdditions.m in Sources */,
 				3E4E0BF31CE42B7A003FCFAE /* NarrowWeatherCollectionViewCell.m in Sources */,
+				3E55C5581CF6AA54007A3EDD /* ImageNetWorking.m in Sources */,
 				3E017EA01CE969C4005EBCCB /* WeekTableViewCell.m in Sources */,
 				3EFDAFB61CE609560060CAA3 /* WallpaperCollectionViewCell.m in Sources */,
 				3EFDAF8D1CE5A8F00060CAA3 /* NarrowWeatherTableViewCell.m in Sources */,
@@ -941,10 +1007,13 @@
 				3E32F93F1CEB0FC7009376FC /* mztools.c in Sources */,
 				3E017EBD1CE9B146005EBCCB /* IndexCollectionViewCell_down.m in Sources */,
 				3E32F90D1CEB0B41009376FC /* dbTool.m in Sources */,
+				3E55C5521CF69487007A3EDD /* Image_Model.m in Sources */,
 				3EFDAF9B1CE5E2FF0060CAA3 /* NarrowWallpaperTableViewCell.m in Sources */,
 				3E3FA8851C8FC1450068CFBD /* ASNetworking.m in Sources */,
+				3E1865D11CEF098400D8E608 /* CityTitleCollectionViewCell.m in Sources */,
 				3E017EB81CE99F36005EBCCB /* LimitNumberVC.m in Sources */,
 				3E017EAF1CE998F1005EBCCB /* CalendarVC.m in Sources */,
+				3E1865C91CEED4F600D8E608 /* SoftwareVersionViewController.m in Sources */,
 				3E017EAC1CE97681005EBCCB /* IndexButton.m in Sources */,
 				3E32F9121CEB0B41009376FC /* XBControl.m in Sources */,
 				3E32F9111CEB0B41009376FC /* wanNianLiTool.m in Sources */,
@@ -959,6 +1028,7 @@
 				3E74E7131CE2CA1B0075659F /* WallpaperCVCell.m in Sources */,
 				3E32F93E1CEB0FC7009376FC /* ioapi.c in Sources */,
 				8AC872611CED9CD6002CC063 /* Utils.m in Sources */,
+				3E1865CC1CEED96200D8E608 /* FeedbackViewController.m in Sources */,
 				3EFDAF871CE59C110060CAA3 /* WeatherTableViewCell.m in Sources */,
 				3E32F8E81CEB0AF2009376FC /* calendarDBModel.m in Sources */,
 				3E32F9301CEB0F83009376FC /* FMResultSet.m in Sources */,

@@ -9,6 +9,9 @@
 #import "NarrowWallpaperTableViewCell.h"
 #import "NarrrowWallpaperCollectionViewCell.h"
 #import "WallpaperVC.h"
+#import "UIImageView+WebImage.h"
+#import "Image_Model.h"
+
 
 @implementation NarrowWallpaperTableViewCell
 
@@ -17,6 +20,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.array = [NSMutableArray array];
+        self.otherArray = [NSMutableArray array];
         UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
         self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flow];
         [self.contentView addSubview:self.collectionView];
@@ -41,16 +45,24 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return wallpaperInfoNumber;
+    return self.array.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NarrrowWallpaperCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NARROWWALLPAPERCOLLECTIONCELL" forIndexPath:indexPath];
+    Image_Model * model = [self.array objectAtIndex:indexPath.row];
+    NSString * str = [NSString stringWithFormat:@"%@?token=%@&url=%@", wallPaperImage,Token,model.url];
+    NSURL * url = [NSURL URLWithString:str];
+    NSLog(@"%@==%@", model.name, model.url);
+      
+    [cell.imageview setImageWithURL:url placeholderImage:nil];
+    
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WallpaperVC *wallpaper = [[WallpaperVC alloc]init];
+    wallpaper.pictureArray = self.array;
     [self.viewControllerDelegate.navigationController pushViewController:wallpaper animated:YES];
 }
 @end

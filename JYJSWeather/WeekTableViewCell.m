@@ -8,6 +8,7 @@
 
 #import "WeekTableViewCell.h"
 #import "WeekCollectionCell.h"
+#import "WeatherModel.h"
 
 
 
@@ -47,6 +48,14 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WeekCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WEEKCOLLECTIONCELL" forIndexPath:indexPath];
+    WeatherModel * model = [self.array objectAtIndex:indexPath.row];
+    cell.maxtemp.text = [NSString stringWithFormat:@"%@˚", model.maxtemp];
+    cell.mintemp.text = [NSString stringWithFormat:@"%@˚", model.mintemp];
+    cell.week.text = model.week;
+    cell.date.text = [NSString stringWithFormat:@"%ld/%ld", model.month, model.day];
+    cell.weather_txt.text = model.weather_txt;
+    cell.directionOfwind.text = model.directionOfwind;
+    
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

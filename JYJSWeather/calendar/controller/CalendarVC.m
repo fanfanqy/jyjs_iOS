@@ -74,7 +74,7 @@
 //    [leftBarButton setImage:[UIImage imageNamed:@"箭头 - Assistor.png"] forState:UIControlStateNormal];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
 //    leftBarButton.imageView.frame = CGRectMake(0, 0, leftBarButton.frame.size.width/2, leftBarButton.frame.size.height/2);
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"导航栏 - Assistor.png"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"导航栏 - Assistor.png"] forBarMetrics:UIBarMetricsDefault];
     UIButton *titleButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
     self.navigationItem.titleView = titleButton;
     [titleButton addTarget:self action:@selector(dateBtnClick) forControlEvents:UIControlEventTouchUpInside];

@@ -10,12 +10,7 @@
 
 @interface WallpaperTableViewCell : BaseTableViewCell<UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic , strong) UICollectionView * backgroundCollectionView;
 
-@property (nonatomic , strong) UICollectionView * footerCollectionView;
 
-@property (nonatomic , strong) NSMutableArray *backgroundArray;
-
-@property (nonatomic , strong) NSMutableArray *footerArray;
 
 @end

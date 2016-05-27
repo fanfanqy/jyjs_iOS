@@ -22,7 +22,7 @@
 {
     self = [super init];
     if (self) {
-        self.textArray = [NSMutableArray arrayWithObjects:@"城市管理", @"壁纸管理", @"国外气象源", @"关于我们", nil];
+        self.textArray = [NSMutableArray arrayWithObjects:@"城市管理", @"壁纸管理", @"优先使用国外气象源", @"关于我们", nil];
     }
     return self;
 }
@@ -34,7 +34,7 @@
 }
 - (void)creatTableView
 {
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, LeftWidth, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self.view addSubview:self.table];
     self.table.delegate = self;
     self.table.dataSource = self;
@@ -56,13 +56,13 @@
     cell.textLabel.text = [self.textArray objectAtIndex:indexPath.row];
     
     if (indexPath.row == 2) {
-        UISwitch * switchView = [[UISwitch alloc]initWithFrame:CGRectMake(cell.contentView.frame.size.width - 100, 0, 40, cell.contentView.frame.size.height)];
+        UISwitch * switchView = [[UISwitch alloc]initWithFrame:CGRectMake(LeftWidth - 50, 0, 40, cell.contentView.frame.size.height)];
         [cell addSubview:switchView];
         switchView.on = YES;
         [switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }
 
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (void)switchAction:(UISwitch *)switchView

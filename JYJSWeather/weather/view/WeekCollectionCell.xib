@@ -70,8 +70,8 @@
                         <color key="textColor" red="0.98823529409999999" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周四 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-fm-b5o">
-                        <rect key="frame" x="85" y="8" width="39" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="周四 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-fm-b5o">
+                        <rect key="frame" x="89" y="8" width="35" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="8kR-CS-xxL"/>
                         </constraints>
@@ -119,7 +119,7 @@
             </constraints>
             <size key="customSize" width="209" height="410"/>
             <connections>
-                <outlet property="date" destination="hf5-fm-b5o" id="n0e-Sf-Noh"/>
+                <outlet property="date" destination="oXj-oL-T3X" id="l71-MT-EMi"/>
                 <outlet property="directionOfwind" destination="lgN-qD-Icg" id="Uqn-SH-ITJ"/>
                 <outlet property="link_image" destination="3pI-Az-1ZZ" id="VB8-zC-PXZ"/>
                 <outlet property="maxtemp" destination="NOJ-Ck-Ggj" id="y07-xj-LBK"/>
@@ -128,6 +128,7 @@
                 <outlet property="sizeOfwind" destination="Gnw-Xw-bqx" id="dXL-AQ-YsF"/>
                 <outlet property="weather_image" destination="8LU-bI-1o0" id="pNz-py-Wjv"/>
                 <outlet property="weather_txt" destination="vcd-gl-QAn" id="Imb-53-XrL"/>
+                <outlet property="week" destination="hf5-fm-b5o" id="9gj-1r-EWd"/>
             </connections>
             <point key="canvasLocation" x="268.5" y="269"/>
         </collectionViewCell>

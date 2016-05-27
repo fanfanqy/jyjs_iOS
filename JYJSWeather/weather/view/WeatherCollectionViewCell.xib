@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10102" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10080"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -34,17 +34,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晴" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uk-1L-V5o">
-                        <rect key="frame" x="22" y="428" width="17" height="21"/>
+                        <rect key="frame" x="22" y="428" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Rpe-bF-ppR"/>
-                            <constraint firstAttribute="width" constant="17" id="aTd-Cr-9B0"/>
+                            <constraint firstAttribute="width" constant="40" id="aTd-Cr-9B0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="0.99607843139999996" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="优 - 天气主页Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="1rm-FL-Bax">
-                        <rect key="frame" x="49" y="432" width="32" height="17"/>
+                        <rect key="frame" x="72" y="432" width="32" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17.300000000000001" id="5qf-j7-9wZ"/>
                             <constraint firstAttribute="width" constant="32" id="D2M-uX-f8q"/>
@@ -64,10 +64,9 @@
                             <constraint firstAttribute="width" constant="134.69999999999999" id="rC2-6J-UkU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周四" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5j2-eM-ywW">
-                        <rect key="frame" x="117" y="366" width="34" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周四" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5j2-eM-ywW">
+                        <rect key="frame" x="97" y="366" width="114" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="34" id="Smw-f8-vNR"/>
                             <constraint firstAttribute="height" constant="20" id="V3Y-5T-r8e"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -91,11 +90,11 @@
                 <constraint firstItem="1rm-FL-Bax" firstAttribute="top" secondItem="NJA-Bd-vRg" secondAttribute="bottom" constant="13" id="QcD-R6-Lls"/>
                 <constraint firstItem="8uk-1L-V5o" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21.960000000000001" id="UhB-tU-S7d"/>
                 <constraint firstItem="uam-5n-tGs" firstAttribute="centerX" secondItem="rdY-3G-9FW" secondAttribute="centerX" id="Xkp-U9-oqa"/>
-                <constraint firstItem="5j2-eM-ywW" firstAttribute="leading" secondItem="KZU-ai-KfV" secondAttribute="trailing" constant="25" id="YIZ-Fy-IG2"/>
+                <constraint firstItem="5j2-eM-ywW" firstAttribute="leading" secondItem="KZU-ai-KfV" secondAttribute="trailing" constant="5" id="YIZ-Fy-IG2"/>
                 <constraint firstItem="rdY-3G-9FW" firstAttribute="width" secondItem="uam-5n-tGs" secondAttribute="width" id="Yel-wr-FIu"/>
-                <constraint firstItem="uam-5n-tGs" firstAttribute="centerY" secondItem="rdY-3G-9FW" secondAttribute="centerY" id="Ygr-BW-pik"/>
                 <constraint firstItem="rdY-3G-9FW" firstAttribute="height" secondItem="uam-5n-tGs" secondAttribute="height" id="Z9k-wE-SnJ"/>
                 <constraint firstAttribute="bottom" secondItem="8uk-1L-V5o" secondAttribute="bottom" constant="25.760000000000002" id="ZIX-oJ-gc5"/>
+                <constraint firstItem="Ah7-jg-38D" firstAttribute="leading" secondItem="5j2-eM-ywW" secondAttribute="trailing" constant="10" id="bl8-XZ-hcJ"/>
                 <constraint firstItem="5j2-eM-ywW" firstAttribute="centerY" secondItem="KZU-ai-KfV" secondAttribute="centerY" id="hU5-zA-7QV"/>
                 <constraint firstItem="NJA-Bd-vRg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21.960000000000001" id="hn2-hM-gfD"/>
                 <constraint firstItem="uam-5n-tGs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="95.150000000000006" id="oz0-75-3IG"/>

@@ -11,5 +11,6 @@
  *  天气内页
  */
 @interface WeatherInsidePagesVC : UIViewController
+@property (nonatomic , strong) NSMutableArray *array;
 
 @end

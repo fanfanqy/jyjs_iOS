@@ -10,6 +10,7 @@
 #import "WeatherCollectionViewCell.h"
 #import "WeatherInsidePagesVC.h"
 #import "RootViewController.h"
+#import "WeatherModel.h"
 
 
 @implementation WeatherTableViewCell
@@ -21,6 +22,7 @@
         self.array = [NSMutableArray array];
         UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
         self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flow];
+
         [self.contentView addSubview:self.collectionView];
         self.collectionView.backgroundColor = [UIColor whiteColor];
         self.collectionView.delegate = self;
@@ -44,12 +46,25 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    NSLog(@"%ld", self.array.count);
+    return self.array.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     WeatherCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WEATHERCOLLECTIONCELL" forIndexPath:indexPath];
     cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"晴 - 主页Assistor.png"]];
+    WeatherModel * model = [self.array objectAtIndex:indexPath.row];
+    cell.max_mintemp.text = [NSString stringWithFormat:@"%@/%@˚", model.maxtemp, model.mintemp];
+    cell.week.text = model.week;
+    cell.date.text = [NSString stringWithFormat:@"%ld月%ld日", model.month, model.day];
+    cell.weather_txt.text = model.weather_txt;
+    if (model.nowtemp) {
+        cell.nowtemp.text = [NSString stringWithFormat:@"%@˚", model.nowtemp];
+    }else{
+        cell.nowtemp.text = @"";
+    }
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -57,6 +72,7 @@
     if ([self.viewControllerDelegate isKindOfClass:[RootViewController class]]) {
         
         WeatherInsidePagesVC * weatherInsidePagesVC = [[WeatherInsidePagesVC alloc]init];
+        weatherInsidePagesVC.array = self.array;
         [self.viewControllerDelegate.navigationController pushViewController:weatherInsidePagesVC animated:YES];
     }
 }

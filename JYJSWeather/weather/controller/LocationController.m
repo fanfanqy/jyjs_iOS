@@ -7,18 +7,14 @@
 //
 
 #import "LocationController.h"
+#import "Utils.h"
+#import "DBModel.h"
+#import "SqlDataBase.h"
+#import "ASNetworking.h"
+#import "RootViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-
-#import "ASNetworking.h"
-#import "DBModel.h"
-
-#import "SqlDataBase.h"
-#import "DBModel.h"
-#import "Utils.h"
-
 #define UserLocationManager @"userLocationManager"
-
 @interface LocationController ()<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate>
 {
     /*
@@ -34,116 +30,105 @@
      */
     BOOL change;
 }
-@property (nonatomic, strong) CLGeocoder *geocoder;
-@property (nonatomic, strong) UITableView *table;
-@property (nonatomic, strong) NSMutableArray *dataArr;
-@property (nonatomic, strong) NSMutableArray *resultArr; // 搜索结果数组
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (retain) CLLocationManager *locationManager;
-
-@property (nonatomic, strong) UIButton * myLocation;
-@property (nonatomic, strong) UIButton * editBut;
-
+@property (nonatomic, strong) CLGeocoder        * geocoder;
+@property (retain)            CLLocationManager * locationManager;
+@property (nonatomic, strong) UITableView       * table;
+@property (nonatomic, strong) NSMutableArray    * resultArr; // 搜索结果数组
+@property (nonatomic, strong) UISearchBar       * searchBar;
+@property (nonatomic, strong) UIButton          * myLocation;
+@property (nonatomic, strong) UIButton          * editBut;
+@property (nonatomic, strong) NSMutableArray    * userCityArray; // 用来存储添加的城市顺序
+@property (nonatomic, strong) NSMutableArray    * dataArr;
 
 @end
 
 @implementation LocationController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.userCityArray = [NSMutableArray array];
+        self.locationCityModel = [[DBModel alloc]init];
+        self.locationCityModel.cityCC = LocationCity;
+        self.dataArr = [NSMutableArray array];
+        self.resultArr = [NSMutableArray array];
+        
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"城市管理";
     [self handleData];
     [self creatTable];
-    
+    [self setNavigationIteam];
+
 }
 - (void)handleData
 {
+    // 先从userdefault中读取城市顺序,在从数据库中读取城市信息,比较排序,如果有我的定位,则定位开始,先用self.locationCityModel 占位
+    [self readUserDefaults];
     SqlDataBase *sqldata = [[SqlDataBase alloc]init];
-    self.dataArr = [sqldata searchAllSaveCity];
+    NSArray * arr = [sqldata searchAllSaveCity];
+    NSString * str = [self.userCityArray firstObject];
+    for (NSString * cityname in self.userCityArray) {
+        // 如果已选择城市中含有当前定位城市
+        if ([cityname isEqualToString:LocationCity]) {
+            
+            [self.dataArr addObject:self.locationCityModel];
+            // 如果当前已经定位过了,locationCityModel中有内容,则不再定位
+            if (!self.locationCityModel.cityPinyin) {
+                NSLog(@"开始定位");
+                [self startLocation];
+            }else{
+                NSLog(@"定位过,不再定位");
+            }
+        }
+        for (DBModel *model in arr) {
+            // 按顺序给城市排序
+            if ([cityname isEqualToString:model.cityCC]) {
+                [self.dataArr addObject:model];
+                
+            }
+        }
+    }
     
 }
 - (void)creatTable
 {
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-20) style:UITableViewStyleGrouped];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self.view addSubview:self.table];
     _table.delegate = self;
     _table.dataSource = self;
     [self.table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"LOCATIONCELL"];
-    
     [self createSearchBar];
-}
+   
 
-#pragma mark - 定位
-// 正则表达式
-- (NSArray *)regex:(NSString *)regex text:(NSString *)text
-{
-    NSError *error;
-    NSRegularExpression *regexnew = [NSRegularExpression regularExpressionWithPattern:regex options:0 error:&error];
-    if (regex != nil) {
-        NSArray *array = [regexnew matchesInString:text options:0 range:NSMakeRange(0, [text length])];
-        return array;
-    }else{
-        return nil;
-    }
 }
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+#pragma mark - 导航栏
+- (void)setNavigationIteam
 {
-    CLLocation *location=[locations firstObject];
-    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (error) {
-            NSLog(@"出错啦%@",error);
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alert show];
-            return;
-        }
-        CLPlacemark *placemark=[placemarks firstObject];
-        NSString * url = [NSString stringWithFormat:WeatherUrlForOneCity, placemark.location.coordinate.latitude,placemark.location.coordinate.longitude];
-        [ASNetworking ASNetURLconnectionWith:url type:@"GET" Parmaters:nil FinishBlock:^(NSData *data) {
-            if (data != nil) {
-                NSLog(@"请求成功");
-                NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
-                NSDictionary *dictionary = [dic objectForKey:@"location"];
-                
-                NSString *citiname = [dictionary objectForKey:@"city"];
-                NSArray *cityNameArr = [citiname componentsSeparatedByString:@" "];
-                //                NSString * cityName = [cityNameArr firstObject];
-                NSString * cityName = @"Hangzhou";
-                
-                SqlDataBase *sqldata = [[SqlDataBase alloc]init];
-                DBModel * model = [sqldata searchWithCityName:cityName];
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (model.cityCC) {
-                        [self saveCityToDB:model];
-                    } else {
-                        NSLog(@"未找到当前定位城市");
-                    }
-                    
-                    
-                });
-                
-            }else{
-                NSLog(@"请求失败");
-            }
-            
-        }];
-        
-        
-        NSLog(@"当前城市信息:%@",[placemark.addressDictionary objectForKey:@"City"]);
-        [self.locationManager stopUpdatingLocation];
-        
-    }];
-    
-}
+    UIView * navigationBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    [self.view addSubview:navigationBackView];
+    navigationBackView.backgroundColor = [UIColor grayColor];
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+    UIImage *leftimage = [UIImage imageNamed:@"箭头 - Assistor.png"];
+    UIButton * leftButton = [[UIButton alloc]init];
+    leftButton.frame = CGRectMake(0, 0, 10, 22);
+    [leftButton setImage:leftimage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(goBackViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+}
+- (void)goBackViewController
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alert show];
+    RootViewController * root = (RootViewController *)[self.navigationController.viewControllers firstObject];
+    root.locationCityModel = self.locationCityModel;
+    root.cityArray = self.dataArr;
+    root.userCityArray = self.userCityArray;
     
-    NSLog(@"error.localizedDescription:%@",error.localizedDescription);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - 搜索
 - (void)createSearchBar
@@ -217,11 +202,247 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     change = NO;
+    self.searchBar.text = nil;
     [searchBar resignFirstResponder];
     // 点击取消
 }
+// 判断这个城市是否已经添加过,如果未添加过则添加到表中
+- (void)saveCityToDB:(DBModel *)model
+{
+    SqlDataBase *sqldata = [[SqlDataBase alloc]init];
+    
+    if ([sqldata searchOneCity:model] != nil) {
+        [self.table reloadData];
+        
+    }else{
+        
+        [sqldata saveCityToDB:model];
+        [self.userCityArray addObject:model.cityCC];
+        [self saveUserDefaults];
+        [self.dataArr removeAllObjects];
+        [self handleData];
+        [self.table reloadData];
+    }
+    
+}
+#pragma mark - 滚动键盘退出
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_searchBar resignFirstResponder];
+}
 
-#pragma mark - table
+// 编辑 / 完成 点击事件
+- (void)editAction:(UIButton *)button
+{
+    [_searchBar resignFirstResponder];
+    
+    button.selected = !button.selected;
+    if (button.selected) {
+        
+        [self.table setEditing:YES animated:YES];
+    }else{
+        
+        // 将当前城市顺序存到本地
+        [self saveUserDefaults];
+        [self.table setEditing:NO animated:YES];
+    }
+    
+}
+- (void)locationAction
+{
+    // 如果当前城市在列表中,则不添加,否则,添加到列表中,并存到本地
+    for (NSString * cityname in self.userCityArray) {
+        if ([cityname isEqualToString:LocationCity]) {
+            NSLog(@"已经添加过当前城市,不再定位");
+            return ;
+        }
+    }
+    NSLog(@"开始定位");
+    [self.userCityArray addObject:LocationCity];
+    [self startLocation];
+}
+#pragma mark - 定位
+- (void)startLocation
+{
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSLog(@"定位服务尚未打开");
+        return;
+    }
+    //如果没有授权则请求用户授权
+    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+        NSLog(@"shahsasha");
+    }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
+        NSLog(@"tantanatan");
+    }
+    [_locationManager requestWhenInUseAuthorization];
+    
+    //设置代理
+    _locationManager.delegate=self;
+    //设置定位精度
+    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+    //    //定位频率,每隔多少米定位一次
+    //    CLLocationDistance distance=10;//十米定位一次
+    //    _locationManager.distanceFilter=distance;
+    //启动跟踪定位
+    [_locationManager startUpdatingLocation];
+    self.geocoder=[[CLGeocoder alloc]init];
+}
+// 正则表达式
+- (NSArray *)regex:(NSString *)regex text:(NSString *)text
+{
+    NSError *error;
+    NSRegularExpression *regexnew = [NSRegularExpression regularExpressionWithPattern:regex options:0 error:&error];
+    if (regex != nil) {
+        NSArray *array = [regexnew matchesInString:text options:0 range:NSMakeRange(0, [text length])];
+        return array;
+    }else{
+        return nil;
+    }
+}
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location=[locations firstObject];
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"出错啦%@",error);
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+        CLPlacemark *placemark=[placemarks firstObject];
+        NSString * url = [NSString stringWithFormat:WeatherUrlForOneCity, placemark.location.coordinate.latitude,placemark.location.coordinate.longitude];
+        [ASNetworking ASNetURLconnectionWith:url type:@"GET" Parmaters:nil FinishBlock:^(NSData *data) {
+            if (data != nil) {
+                NSLog(@"请求成功");
+                NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
+                NSDictionary *dictionary = [dic objectForKey:@"location"];
+                
+                NSString *citiname = [dictionary objectForKey:@"city"];
+                NSArray *cityNameArr = [citiname componentsSeparatedByString:@" "];
+                NSString * cityName = [cityNameArr firstObject];
+                //                NSString * cityName = @"Hangzhou";
+                
+                SqlDataBase *sqldata = [[SqlDataBase alloc]init];
+                DBModel * model = [sqldata searchWithCityName:cityName];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (model.cityCC) {
+                        
+                        self.locationCityModel = model;
+                        // 顺序中含有当前城市
+//                        if ([self.userCityArray containsObject:@"当前城市"]) {
+//                            
+//                            for (int i = 0; i < self.userCityArray.count; i ++) {
+//                                NSString *str = [self.userCityArray objectAtIndex:i];
+//                                if ([str isEqualToString:@"当前城市"]) {
+//                                    [self.dataArr replaceObjectAtIndex:i withObject:self.locationManager];
+//                                }
+//                            }
+//                            
+//                        } else {// 顺序中没有当前城市
+//                            [self.userCityArray addObject:@"当前城市"];
+                            [self saveUserDefaults];
+//                            [self.dataArr addObject:model];
+//                        }
+
+                        [self.dataArr removeAllObjects];
+                        [self handleData];
+                        
+                        [self.table reloadData];
+                        
+                    } else {
+                        NSLog(@"未找到当前定位城市");
+                    }
+                });
+                
+            }else{
+                NSLog(@"请求失败");
+            }
+        }];
+        NSLog(@"当前城市信息:%@",[placemark.addressDictionary objectForKey:@"City"]);
+        [self.locationManager stopUpdatingLocation];
+        
+    }];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"定位失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+    
+    NSLog(@"error.localizedDescription:%@",error.localizedDescription);
+}
+#pragma mark - tableview
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, EditHeight)];
+    
+    
+    self.myLocation = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, EditWidth, EditHeight)];
+    [view addSubview:_myLocation];
+    [_myLocation setTitle:@"当前位置" forState:UIControlStateNormal];
+    [_myLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_myLocation addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView *titleImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"定位图标_天气指数页.png"]];
+    [view addSubview:titleImageView];
+    titleImageView.frame = CGRectMake(EditWidth, (EditHeight-19.5)/2, 15, 19.5);
+    
+    
+    self.editBut = [[UIButton alloc]initWithFrame:CGRectMake(view.frame.size.width - EditWidth, 0, EditWidth, EditHeight)];
+    [view addSubview:_editBut];
+    [_editBut setTitle:@"编辑" forState:UIControlStateNormal];
+    [_editBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_editBut addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_editBut setTitle:@"完成" forState:UIControlStateSelected];
+    
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return EditHeight;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return UITableViewCellEditingStyleDelete;
+}
+// 删除城市
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.userCityArray removeObjectAtIndex:indexPath.row];
+    [self saveUserDefaults];
+    SqlDataBase *sqldata = [[SqlDataBase alloc]init];
+    [sqldata deleateCityFromSaveCity:[self.dataArr objectAtIndex:indexPath.row]];
+    [self.dataArr removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
+// 交换城市位置
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(nonnull NSIndexPath *)sourceIndexPath toIndexPath:(nonnull NSIndexPath *)destinationIndexPath
+{
+    NSUInteger fromRow = [sourceIndexPath row];
+    NSUInteger toRow = [destinationIndexPath row];
+    
+    id object = [self.dataArr objectAtIndex:fromRow];
+    [self.dataArr removeObjectAtIndex:fromRow];
+    [self.dataArr insertObject:object atIndex:toRow];
+    
+    id cityname = [self.userCityArray objectAtIndex:fromRow];
+    [self.userCityArray removeObjectAtIndex:fromRow];
+    [self.userCityArray insertObject:cityname atIndex:toRow];
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -271,130 +492,16 @@
     
     //    [self.navigationController popViewControllerAnimated:YES];
 }
-// 判断这个城市是否已经添加过,如果未添加过则添加到表中
-- (void)saveCityToDB:(DBModel *)model
+- (void)saveUserDefaults
 {
-    SqlDataBase *sqldata = [[SqlDataBase alloc]init];
-    
-    if ([sqldata searchOneCity:model] != nil) {
-        [self.table reloadData];
-        return;
-    }else{
-        
-        [sqldata saveCityToDB:model];
-        
-        [self.dataArr removeAllObjects];
-        self.dataArr = [sqldata searchAllSaveCity];
-        [self.table reloadData];
-    }
-    
-}
-#pragma mark - 滚动键盘退出
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [_searchBar resignFirstResponder];
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, EditHeight)];
-    
-    
-    self.myLocation = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, EditWidth, EditHeight)];
-    [view addSubview:_myLocation];
-    [_myLocation setTitle:@"当前位置" forState:UIControlStateNormal];
-    [_myLocation setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_myLocation addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *titleImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"定位图标_天气指数页.png"]];
-    [view addSubview:titleImageView];
-    titleImageView.frame = CGRectMake(EditWidth, (EditHeight-19.5)/2, 15, 19.5);
-    
-    
-    self.editBut = [[UIButton alloc]initWithFrame:CGRectMake(view.frame.size.width - EditWidth, 0, EditWidth, EditHeight)];
-    [view addSubview:_editBut];
-    [_editBut setTitle:@"编辑" forState:UIControlStateNormal];
-    [_editBut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_editBut addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_editBut setTitle:@"完成" forState:UIControlStateSelected];
-    
-    return view;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.userCityArray forKey:@"userCityArray"];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (void)readUserDefaults
 {
-    return EditHeight;
-}
-// 编辑 / 完成 点击事件
-- (void)editAction:(UIButton *)button
-{
-    [_searchBar resignFirstResponder];
-    
-    button.selected = !button.selected;
-    if (button.selected) {
-        
-        [self.table setEditing:YES animated:YES];
-    }else{
-        [self.table setEditing:NO animated:YES];
-    }
-    
-}
-- (void)locationAction
-{
-    self.locationManager = [[CLLocationManager alloc]init];
-    self.locationManager.delegate = self;
-    if (![CLLocationManager locationServicesEnabled]) {
-        NSLog(@"定位服务尚未打开");
-        return;
-    }
-    //如果没有授权则请求用户授权
-    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
-        NSLog(@"shahsasha");
-    }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
-        NSLog(@"tantanatan");
-    }
-    [_locationManager requestWhenInUseAuthorization];
-    
-    //设置代理
-    _locationManager.delegate=self;
-    //设置定位精度
-    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    //    //定位频率,每隔多少米定位一次
-    //    CLLocationDistance distance=10;//十米定位一次
-    //    _locationManager.distanceFilter=distance;
-    //启动跟踪定位
-    [_locationManager startUpdatingLocation];
-    self.geocoder=[[CLGeocoder alloc]init];
-}
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    return UITableViewCellEditingStyleDelete;
-}
-// 删除城市
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SqlDataBase *sqldata = [[SqlDataBase alloc]init];
-    [sqldata deleateCityFromSaveCity:[self.dataArr objectAtIndex:indexPath.row]];
-    [self.dataArr removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-}
-// 交换城市位置
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(nonnull NSIndexPath *)sourceIndexPath toIndexPath:(nonnull NSIndexPath *)destinationIndexPath
-{
-    NSUInteger fromRow = [sourceIndexPath row];
-    NSUInteger toRow = [destinationIndexPath row];
-    
-    id object = [self.dataArr objectAtIndex:fromRow];
-    [self.dataArr removeObjectAtIndex:fromRow];
-    [self.dataArr insertObject:object atIndex:toRow];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    self.userCityArray = [ NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"userCityArray"]];
 }
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "LimitNumberVC.h"
+#import "ASNetworking.h"
+
 #import "IndexCollectionViewCell_down.h"
 
 
@@ -24,7 +26,17 @@
 
     [self setFlowLayout];
     [self setbackgroundImage];
+    [self handleSunTime];
 
+}
+- (void)handleSunTime
+{
+//    NSDate * date = [NSDate date];
+    NSTimeInterval  interval = [[NSDate date] timeIntervalSince1970];
+    long long int date = (long long int)interval;
+//    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+//    [ASNetworking ASNetURLconnectionWith:<#(NSString *)#> type:<#(NSString *)#> Parmaters:<#(NSDictionary *)#> FinishBlock:<#^(NSData *data)block#>]
+//    NSLog(@"%lld", date);
 }
 - (void)setbackgroundImage
 {

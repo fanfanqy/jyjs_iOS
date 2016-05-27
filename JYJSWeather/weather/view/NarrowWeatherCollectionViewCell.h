@@ -11,7 +11,8 @@
 @interface NarrowWeatherCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nowtemp;
 @property (weak, nonatomic) IBOutlet UIImageView *icon_up; // 上部天气图标
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weather_txt; // 天气描述
+@property (weak, nonatomic) IBOutlet UILabel *weather_txt; // 天气描述
+
 @property (weak, nonatomic) IBOutlet UILabel *max_mintemp; // 最高最低气温
 @property (weak, nonatomic) IBOutlet UIImageView *pollution; // 污染,空气质量
 @property (weak, nonatomic) IBOutlet UILabel *city;
@@ -21,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *date_left;
 @property (weak, nonatomic) IBOutlet UILabel *max_mintemp_left;
 // 下部右侧
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *icon_dwn_right;
+
+@property (weak, nonatomic) IBOutlet UIImageView *icon_dwn_right;
 @property (weak, nonatomic) IBOutlet UILabel *date_right;
 @property (weak, nonatomic) IBOutlet UILabel *max_mintemp_right;
 
