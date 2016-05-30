@@ -59,8 +59,8 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         
     }];
     [dataTask resume];
-
 }
+
 //开始
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
 {
@@ -85,6 +85,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSLog(@"%s", __func__);
     
 }
+
 - (NSData *)dataWithBase64EncodedString:(NSString *)string
 {
     if (string == nil)

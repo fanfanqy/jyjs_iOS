@@ -47,7 +47,7 @@
         lunarIndex = [model.lMonth intValue] - 1;
         lunarMonth = [monthArray objectAtIndex:lunarIndex];
     }
-//    _LunarLabel.text = [NSString stringWithFormat:@"%@年%@月%@",model.lYearName,lunarMonth,model.lDayName];
+
      _LunarLabel.text = [NSString stringWithFormat:@"%@月%@",lunarMonth,model.lDayName];
     /**
      *  星期四 UILabel *WeekLabel
@@ -159,23 +159,6 @@
     NSString *badStr;
     luckyStr = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ ",jiArr[0],jiArr[1],jiArr[2],jiArr[3],jiArr[4],jiArr[5]];
      badStr = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ ",xiongArr[0],xiongArr[1],xiongArr[2],xiongArr[3],xiongArr[4],xiongArr[5]];
-//    for (int i = 1; i <7; i++) {
-//        [luckyStr stringByAppendingString:jiArr[i-1]];
-//        luckyStr = [luckyStr stringByAppendingString:[NSString stringWithFormat:@"%@",jiArr[i-1]]];
-//         badStr = [badStr stringByAppendingString:[NSString stringWithFormat:@"%@",xiongArr[i-1]]];
-//         _LuckyhourLabel.text = jiArr[i - 1];
-//        if ([_LuckyhourLabel.text isEqualToString:oldHour]) {
-//            _LuckyhourLabel.textColor = UIColorFromRGB(0xd20000);
-//        }else {
-//            _LuckyhourLabel.textColor = UIColorFromRGB(0xaa4322);
-//        }
-//        _BadhourLabel.text = xiongArr[i - 1];
-//        if ([_BadhourLabel.text isEqualToString:oldHour]) {
-//            _BadhourLabel.textColor = UIColorFromRGB(0xd20000);
-//        }else {
-//            _BadhourLabel.textColor = UIColorFromRGB(0x33497a);
-//        }
-//    }
     NSLog(@"%@,%@",luckyStr,badStr);
      _LuckyhourLabel.text = luckyStr;
     _BadhourLabel.text = badStr;

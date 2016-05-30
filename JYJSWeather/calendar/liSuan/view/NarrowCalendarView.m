@@ -355,7 +355,7 @@ NSInteger indexDay;
  */
 -(void)selectOneDay:(UITapGestureRecognizer *)tap{
     CGPoint touchPoint = [tap locationInView:self];
-    NSArray *array = [Datetime GetDayDicByYear:_strYear andMonth:_strMonth andDay:_strDay];
+    NSArray *array = [Datetime GetDayDicByYear:_strYear andMonth:_strMonth andDay:_strDay andCountsDay:7];
     
       //单击一天,计算出point所处日期的位置
     if ((touchPoint.y > 0.1*CALENDARBTNPADDING ) && (touchPoint.y < 1.9 * CALENDARBTNPADDING) && (touchPoint.x > + 0.5 * CALENDARBTNPADDING) && (touchPoint.x <  ScreenWidth - CALENDARBTNPADDING)){

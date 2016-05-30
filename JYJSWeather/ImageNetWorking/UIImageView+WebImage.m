@@ -28,7 +28,6 @@
     
     NSLog(@"path = %@", path);
     
-    
     BOOL isHasFile=[manager fileExistsAtPath:path];
     if (isHasFile) {
         NSData * data = [self getimageWithUrl:url]; //为真表示已经请求过这个文件,可以直接读取

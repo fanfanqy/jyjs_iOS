@@ -51,8 +51,6 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     WeatherCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WEATHERCOLLECTIONCELL" forIndexPath:indexPath];
     cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"晴 - 主页Assistor.png"]];
     WeatherModel * model = [self.array objectAtIndex:indexPath.row];

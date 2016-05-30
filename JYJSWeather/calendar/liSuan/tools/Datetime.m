@@ -83,7 +83,7 @@
     return dayArray1;
 }
 
-//获取指定年份指定月份指定日子的一周排列
+//获取指定年份指定月份指定日子的一周排列,数组中只有day 
 +(NSMutableArray *)GetDayArrayByYear:(int) year andMonth:(int) month andDay:(int) day{
     NSMutableArray * dayArray2 = [[NSMutableArray alloc]init];
     //某一天是周几
@@ -117,11 +117,11 @@
             }
         }
     }
-//    NSLog(@"dayArray2:%@",dayArray2);
     return dayArray2;
 }
 
-+(NSMutableArray *)GetDayDicByYear:(int) year andMonth:(int) month andDay:(int) day{
++(NSMutableArray *)GetDayDicByYear:(int) year andMonth:(int) month andDay:(int) day andCountsDay:(int)countsDay;
+{
      NSMutableArray * dayArrayDay = [[NSMutableArray alloc]init];
      NSMutableArray * dayArrayMonth = [[NSMutableArray alloc]init];
      NSMutableArray * dayArrayYear = [[NSMutableArray alloc]init];
@@ -130,7 +130,7 @@
     int index1 = [self GetTheWeekOfDayByYera:year andByMonth:month andByDay:day];
     //月首日是周几
     int index = [self GetTheWeekOfDayByYera:year andByMonth:month];
-    for (int i = 0; i< 7; i++) {
+    for (int i = 0; i< countsDay; i++) {
         if (i<index1) {
             if ((day - index1+i)>0) {//大于1号
                 [dayArrayDay addObject:[NSString stringWithFormat:@"%d",day-index1+i]];
@@ -255,6 +255,59 @@
     
 }
 
++(NSMutableArray *)GetThreeMonthDicByYear:(int) year
+                                   andMonth:(int) month{
+    NSMutableArray * dayArray3 = [[NSMutableArray alloc]init];
+    NSMutableArray * dayArrayYear = [[NSMutableArray alloc]init];
+    NSMutableArray * dayArrayMonth = [[NSMutableArray alloc]init];
+    NSMutableArray * dayArrayDay = [[NSMutableArray alloc]init];
+    int yearTemp = year;
+    int monthTemp = month;
+    int yearTemp1 = year;
+    int monthTemp1 = month;
+    if (monthTemp==1) {
+        yearTemp--;monthTemp=12;
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp andByMonth:monthTemp]; i++) {
+            [dayArrayYear addObject:[NSString stringWithFormat:@"%d",yearTemp]];
+             [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",monthTemp]];
+            [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i+1]];
+
+        }
+    }else {
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp  andByMonth:(monthTemp-1)]; i++) {
+            [dayArrayYear addObject:[NSString stringWithFormat:@"%d",yearTemp]];
+            [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",monthTemp-1]];
+            [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }
+
+    for (int i=0; i<[self GetNumberOfDayByYera:year andByMonth:month]; i++) {
+        [dayArrayYear addObject:[NSString stringWithFormat:@"%d",year]];
+        [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",month]];
+        [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
+
+    if (monthTemp1==12) {
+        yearTemp1++;monthTemp1=1;
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp1 andByMonth:monthTemp1]; i++) {
+            [dayArrayYear addObject:[NSString stringWithFormat:@"%d",yearTemp]];
+            [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",monthTemp]];
+            [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }else{
+        for (int i=0; i<[self GetNumberOfDayByYera:yearTemp1 andByMonth:monthTemp1+1]; i++) {
+            [dayArrayYear addObject:[NSString stringWithFormat:@"%d",yearTemp]];
+            [dayArrayMonth addObject:[NSString stringWithFormat:@"%d",monthTemp+1]];
+            [dayArrayDay addObject:[NSString stringWithFormat:@"%d",i+1]];
+        }
+    }
+    [dayArray3 addObject:dayArrayYear];
+    [dayArray3 addObject:dayArrayMonth];
+    [dayArray3 addObject:dayArrayDay];
+    return dayArray3;
+    
+}
+
 //获取指定年份指定月份的星期排列表(农历)
 +(NSMutableArray *)GetLunarDayArrayByYear:(int) year andMonth:(int) month{
     NSMutableArray * dayArray5 = [[NSMutableArray alloc]init];
@@ -354,7 +407,80 @@
     return nummonth;
 }
 
+//未来10天的日期情况,数组中是 年-月-日,组成的日期
++(NSMutableArray<NSString *>*)GetTenDaysInFutureByYear:(int)year andByMonth:(int)month andByDay:(int)day{
+     NSMutableArray *array = [Datetime GetThreeMonthDicByYear:year andMonth:month];
+     NSMutableArray *arrayTemp  = [NSMutableArray array];
 
+    int count = 0;
+    for (int i=(int)[array[2] count]-1; i>=0; i--) {
+        if ([array[2][i] intValue]== day) {
+            count++;
+        }
+    }
+
+    if (count == 1) {
+        for (int i=(int)[array[2] count]-1; i>=0; i--) {
+            if ([array[2][i] intValue]== day) {
+                for (int j=i; j<i+10; j++) {
+                    for (int j=0; j<10; j++) {
+                        int year1 = [array[0][j] intValue];
+                        int month1 = [array[1][j] intValue];
+                        int day1 = [array[2][j] intValue];
+                        NSString *monthStr = nil;
+                        NSString *dayStr = nil;
+                        NSString *dateStr = nil;
+                        if (month < 10) {
+                            monthStr = [NSString stringWithFormat:@"0%d",month1];
+                        }else{
+                            monthStr = [NSString stringWithFormat:@"%d",month1];
+                        }
+                        if (day<10) {
+                            dayStr = [NSString stringWithFormat:@"0%d",day1];
+                        }else{
+                            dayStr = [NSString stringWithFormat:@"%d",day1];
+                        }
+                        dateStr = [NSString stringWithFormat:@"%d%@%@",year1,monthStr,dayStr];
+                        [arrayTemp addObject:dateStr];
+                    }
+                }
+            }
+        }
+
+    }else if (count == 2 || count == 3) {
+    int countTemp = 0;
+     for (int i=(int)[array[2] count]-1; i>=0; i--) {
+        if ([array[2][i] intValue]== day) {
+            if (countTemp == 1) {
+                for (int j=i; j<i+10; j++) {
+                    int year1 = [array[0][j] intValue];
+                    int month1 = [array[1][j] intValue];
+                    int day1 = [array[2][j] intValue];
+                    NSString *monthStr = nil;
+                    NSString *dayStr = nil;
+                    NSString *dateStr = nil;
+                    if (month1 < 10) {
+                        monthStr = [NSString stringWithFormat:@"0%d",month1];
+                    }else{
+                        monthStr = [NSString stringWithFormat:@"%d",month1];
+                    }
+                    if (day1<10) {
+                        dayStr = [NSString stringWithFormat:@"0%d",day1];
+                    }else{
+                        dayStr = [NSString stringWithFormat:@"%d",day1];
+                    }
+                    dateStr = [NSString stringWithFormat:@"%d%@%@",year1,monthStr,dayStr];
+                    [arrayTemp addObject:dateStr];
+                }
+                break;
+            }
+            countTemp++;
+        }
+    }
+    }
+
+    return arrayTemp;
+}
 
 +(NSString *)GetYear{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];

@@ -10,7 +10,7 @@
 #import "CalendarCollectionViewCell.h"
 //#import "CalendarVC.h"
 #import "CalendarViewController1.h"
-
+#import "CalendarMainPagesModel.h"
 @implementation CalendarTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -30,6 +30,7 @@
     }
     return self;
 }
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -39,15 +40,63 @@
     ff.itemSize = CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
     ff.minimumLineSpacing = 0;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 10;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CalendarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CALENDARCOLLECTIONVIEWCELL" forIndexPath:indexPath];
+    /*
+    right_up_image;
+    date;
+    lunarCalendar; // 阴历
+    week;
+    ruyiBar; // 如意栏
+    goodOccasion; // 吉时,时辰(丙申年 壬辰月 癸酉日 丁巳时)
+    doSomething; // 理发 精进于佛法,最好
+    appropriate; // 宜
+    avoid;// 忌
+    memorialDay; // 各种佛祖生日
+    collision; // 冲撞
+    goodTime; // 吉时
+    fierceTime; // 凶时
+    */
+
+/*
+    solarStrArray;
+    lunarStrArray;
+    weekStrArray;
+    FestivalStrArray;
+    JiNianStrArray;
+    HaircutStrArray;
+    YiStrArray;
+    JiStrArray;
+    ReligionFestivalStrArra
+    ChongAnimalStrArray;
+    LuckyhourStrArray;
+    badhouStrArray;
+ */
+
+    CalendarMainPagesModel *calendarMainPagesModel = [[CalendarMainPagesModel alloc]init];
+    calendarMainPagesModel = self.array[indexPath.row];
+//    cell.right_up_image.image = [UIImage imageNamed:<#(nonnull NSString *)#>];
+    cell.date.text = calendarMainPagesModel.solarStrArray[indexPath.row];
+   cell.lunarCalendar.text =calendarMainPagesModel.lunarStrArray[indexPath.row];
+     
+    cell.goodOccasion.text = calendarMainPagesModel.JiNianStrArray[indexPath.row];
+     cell.doSomething.text = calendarMainPagesModel.HaircutStrArray[indexPath.row];
+     cell.approprite.text = calendarMainPagesModel.YiStrArray[indexPath.row];
+     cell.avoid.text = calendarMainPagesModel.JiStrArray[indexPath.row];
+     cell.memorialDay.text = calendarMainPagesModel.ReligionFestivalStrArray[indexPath.row];
+     cell.collision.text = calendarMainPagesModel.ChongAnimalStrArray[indexPath.row];
+    cell.goodTime.text = calendarMainPagesModel.LuckyhourStrArray[indexPath.row];
+    cell.fierceTime.text = calendarMainPagesModel.badhouStrArray[indexPath.row];
     return cell;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CalendarViewController1 *calendarVC = [[CalendarViewController1 alloc]init];

@@ -60,6 +60,7 @@
     NSString * str = [NSString stringWithFormat:@"%@?token=%@&url=%@", wallPaperImage,Token,model.url];
     NSURL * url = [NSURL URLWithString:str];
     [cell.wallpaper setImageWithURL:url placeholderImage:nil];
+//    cell.wallpaper.image = [UIImage imageNamed:@"open0@2x.png"];
     return cell;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

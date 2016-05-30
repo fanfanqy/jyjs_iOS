@@ -13,4 +13,6 @@
 @property (nonatomic, strong) DBModel             * locationCityModel;
 @property (strong, nonatomic) NSMutableArray      * cityArray; // 城市名称
 @property (strong, nonatomic) NSMutableArray      * userCityArray;
+@property (nonatomic,assign)BOOL isRefreshing;
+
 @end

@@ -22,8 +22,10 @@
 #import "NarrowWeatherTableViewCell.h"
 #import "NarrowCalendarTableViewCell.h"
 #import "CityTitleCollectionViewCell.h"
-
 #import <CoreLocation/CoreLocation.h>
+#import "CalendarMainPagesModel.h"
+//刷新试图
+#import "RefreshView.h"
 
 #define SH [UIScreen mainScreen].bounds.size.height
 #define SW [UIScreen mainScreen].bounds.size.width
@@ -36,11 +38,12 @@ typedef enum {
 
 #define moduleNumber 3 // 模块数量
 
-@interface RootViewController ()<UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate, UIScrollViewDelegate ,CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RootViewController ()<UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate, UIScrollViewDelegate ,CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,RefreshViewDelegate>
 {
    NSString * weatherKey;
    NSString * calendarKey;
    NSString * wallpaperkey;
+
 }
 @property (nonatomic, strong) CLGeocoder          * geocoder;
 @property (retain)            CLLocationManager   * locationManager;
@@ -68,7 +71,10 @@ typedef enum {
 @property (nonatomic, strong) UICollectionView    * titleCollectionView;      //导航栏上面滚动城市
 @property (nonatomic, strong) NSMutableArray      * wallpaperArray_big;       // 壁纸大图数组
 @property (nonatomic, strong) NSMutableArray      * wallpaperArray_little;    // 壁纸缩略图数组
-
+@property (nonatomic, strong) NSMutableArray      * calendarArray;            //日历数组
+@property (nonatomic, strong) CalendarMainPagesModel *calemdarMainPagesModel;
+//刷新视图
+@property (nonatomic, strong) RefreshView *refreshView;
 @end
 
 @implementation RootViewController
@@ -86,7 +92,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
       self.wallpaperArray_little = [NSMutableArray array];
       self.weatherArray = [NSMutableArray array];
       self.cellNameArray = [NSMutableArray array];
-      
+      self.calendarArray = [NSMutableArray array];
       weatherKey = @"天气";
       calendarKey = @"日历";
       wallpaperkey = @"壁纸";
@@ -106,6 +112,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    NSMutableArray *array = [ NSMutableArray arrayWithArray:[userDefaultes arrayForKey:key]];
    return array;
 }
+
 - (void)saveUserDefaults
 {
    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -178,10 +185,10 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    self.table.delegate = self;
    self.table.dataSource = self;
    
-   UIView * vv = [[UIView alloc]initWithFrame:CGRectMake(100, -100, 100, 100)];
-   [self.table addSubview:vv];
-   vv.backgroundColor = [UIColor redColor];
-   
+//   UIView * vv = [[UIView alloc]initWithFrame:CGRectMake(100, -100, 100, 100)];
+//   [self.table addSubview:vv];
+//   vv.backgroundColor = [UIColor redColor];
+
    
    self.navigationBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
    [self.mainView addSubview:self.navigationBackView];
@@ -262,27 +269,48 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    [self initLeftView];
    [self initMainView];
    [self setNavigationIteam];
-    [self creatTable];
+
+   [self creatTable];
+   [self creatRefreshHeadView];
    [self handleData];
 
 }
+#pragma mark 创建刷新试图
+- (void)creatRefreshHeadView{
+   //创建下拉刷新 View
+   if (!_refreshView) {
+      RefreshView *view = [[RefreshView alloc] initWithFrame:CGRectMake(0, -300, self.view.frame.size.width, 300)];
+    
+      _refreshView = view;
+      _refreshView.delegate = self;
+      [_table addSubview:_refreshView];
+   }
+   [_refreshView refreshLastUpdatedDate];
+}
+
 #pragma mark - 加载数据
 - (void)handleData
 {
    // 请求天气数据
+   [self handleCaldsfData];
    [self handleWeatherData];
    // 请求壁纸数据
    [self handleWallpaperData];
-
    // 城市数据
    [self handleCityData];
 
 }
+
+#pragma mark 日历数据
 // 藏历数据
 - (void)handleCaldsfData
 {
-   
+   for (int i=0; i<weatherDays; i++) {
+       _calemdarMainPagesModel = [[CalendarMainPagesModel alloc]initWithReceiveData];
+      [_calendarArray addObject:_calemdarMainPagesModel];
+   }
 }
+
 - (NSMutableArray *)sortOutDataWith:(NSArray *)array
 {
    NSMutableArray * testArray = [NSMutableArray array];
@@ -376,7 +404,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
             model.humidity = [[dictionary objectForKey:@"avehumidity"] integerValue];
             [testArray addObject:model];
          }
-         
+
          [self.weatherArray removeAllObjects];
          self.weatherArray = testArray;
          NSLog(@"天气数据个数%lu", (unsigned long)self.weatherArray.count);
@@ -565,6 +593,10 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
          }
          
       }
+      if ([moduleName isEqualToString:calendarKey]) {
+         cell.array = self.calendarArray;
+         [cell.collectionView reloadData];
+      }
       
    }else{
       className = [[self.dictionary objectForKey:moduleName] objectForKey:@"narrow_class"];
@@ -593,7 +625,11 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
             [cell.collectionView reloadData];
 
       }
-      
+      if ([moduleName isEqualToString:calendarKey]) {
+         cell.array = self.calendarArray;
+         [cell.collectionView reloadData];
+      }
+
    }
    
    cell.viewControllerDelegate = self;
@@ -634,24 +670,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    }
    return 0.1;
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-   // 当模块顺序已经固定好了, 上下滑动tableview,顶部类似navigationbar效果渐变
-   if (!_press && [scrollView isEqual:self.table]) {
 
-      if (scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 64) {
-         self.navigationBackView.alpha = scrollView.contentOffset.y / 64;
-      }
-      if (scrollView.contentOffset.y <= 0) {
-         self.navigationBackView.alpha = 0;
-      }
-      if (scrollView.contentOffset.y >= 64) {
-         self.navigationBackView.alpha = 1;
-      }
-      
-   }
-   
-}
 #pragma mark - 导航栏
 - (void)setNavigationIteam
 {
@@ -748,6 +767,7 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
 //分享按钮
 - (void)shareBtnClick{
     NSLog(@" shareBtnClick");
+//   NSArray *activity = @[[]];
    UIActivityViewController *avc = [[UIActivityViewController alloc]initWithActivityItems:@[@"杭州，周四，多云转阵雨，26°C/17°C，东风2-3级，AQI:92 良；周五，阵雨转中雨，21°C/17°C，东风2-3级，AQI:57 良；周六，中雨转阵雨，20°C/17°C，东风2-3级，AQI:55 良。--5月19日 10:45 发布(来自@天气通 免费下载http://t.cn/zYaipUu )",[self captureScrollView:_table]] applicationActivities:nil];
    [self presentViewController:avc animated:YES completion:nil];
    UIActivityViewControllerCompletionHandler myblock = ^(NSString *type,BOOL completed){
@@ -908,7 +928,6 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    if ([theView isKindOfClass:[UIScrollView class]]) {
       rect.size = ((UIScrollView *)theView).contentSize;
    }
-
    UIGraphicsBeginImageContext(rect.size);
    CGContextRef context = UIGraphicsGetCurrentContext();
    [theView.layer renderInContext:context];
@@ -939,6 +958,67 @@ static NSIndexPath  *sourceIndexPath = nil; //目标cell
    }
    return nil;
 }
+#pragma mark  下面是刷新试图的代理方法
+#pragma mark scrollView Delegate
+//判断滚动方向向上还是向下
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+   [_refreshView refreshViewDidScroll:scrollView];
+   // 当模块顺序已经固定好了, 上下滑动tableview,顶部类似navigationbar效果渐变
+   if (!_press && [scrollView isEqual:self.table]) {
+
+      if (scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 64) {
+         self.navigationBackView.alpha = scrollView.contentOffset.y / 64;
+      }
+      if (scrollView.contentOffset.y <= 0) {
+         self.navigationBackView.alpha = 0;
+      }
+      if (scrollView.contentOffset.y >= 64) {
+         self.navigationBackView.alpha = 1;
+      }
+
+   }
+   
+}
+
+//松手的时候
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+   [_refreshView refreshViewDidEndDragging:scrollView];
+}
+//动画结束，删除一切
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+   [_refreshView refreshViewDidEndDragging:scrollView];
+}
+//下载数据
+- (void)UpdownloadData{
+#pragma mark //这里刷新数据
+   //这里刷新数据
+   [self handleData];
+   //刷新完成后,应该让刷新视图调用下面的方法,来结束刷新,收起刷新提示条
+   [_refreshView refreshViewDataSourceDidFinishedLoading:_table];
+   //改变标记状态
+   _isRefreshing = NO;
+}
+
+#pragma mark RefreshView Delegate
+//下拉刷新的执行方法  如果上述两个监听的滚动高度小于-65(scrollView.contentOffset.y <= - 65.0f)则执行这个代理方法改变刷新状态(出现菊花图)
+- (void)refreshViewDidTriggerRefresh{
+   NSLog(@"这里触发执行刷新操作");
+   _isRefreshing = YES;
+   [self performSelector:@selector(UpdownloadData) withObject:nil afterDelay:0];
+}
+
+//滚动过程会不断调用这个方法监听是否改变刷新状态(即是否出现菊花图转的效果),实现原理中 需要这个变量去判断请求数据是否完成
+- (BOOL)refreshViewDataIsLoading:(UIView *)view{
+   return _isRefreshing;
+}
+
+//显示刷新时间
+- (NSDate*)refreshViewDataLastUpdated{
+   return [NSDate date];
+}
+
 
 
 @end

@@ -24,9 +24,11 @@
 +(NSArray *)GetLunarDayArrayByYear:(int) year
                           andMonth:(int) month;
 
-//获取指定年份指定月份指定日子的一周排列
+//获取指定年份指定月份指定日子的一周排列,数组中只有day
 +(NSMutableArray *)GetDayArrayByYear:(int) year andMonth:(int) month andDay:(int) day;
-+(NSMutableArray *)GetDayDicByYear:(int) year andMonth:(int) month andDay:(int) day;
+//获取指定年份指定月份指定日子的自定义天数排列一般小于28天,数组中有day,month,year
++(NSMutableArray *)GetDayDicByYear:(int) year andMonth:(int) month andDay:(int) day andCountsDay:(int)countsDay;
+
 //根据传入某一天日期,获取这天前后共计一周的日子排列(农历)
 +(NSMutableArray *)GetLunarDayArrayByYear:(int) year
                           andMonth:(int) month andDay:(int)day;
@@ -36,9 +38,12 @@
                       andMonth:(int) month
                         andDay:(int) day;
 
-//获取指定年份指定月份的相邻2个月总共3个月的排列表
+//获取指定年份指定月份的相邻2个月总共3个月的排列表,只有日
 +(NSMutableArray *)GetThreeMonthArrayByYear:(int) year
                      andMonth:(int) month;
+//获取指定年份指定月份的相邻2个月总共3个月的排列表,年月日
++(NSMutableArray *)GetThreeMonthDicByYear:(int) year
+                                 andMonth:(int) month;
 //具体某一天是周几
 +(int)GetTheWeekOfDayByYera:(int)year andByMonth:(int)month andByDay:(int)day;
 //以YYYY.MM.dd格式输出年月日
@@ -64,8 +69,10 @@
 //得到year年month月的天数
 +(int)GetNumberOfDayByYera:(int)year andByMonth:(int)month;
 //得到某月第一天是周几
-+(int)GetTheWeekOfDayByYera:(int)year andByMonth:(int)month;
-+(int)GetTheWeekOfDayByYera:(int)year andByMonth:(int)month andByDay:(int)day;
++(int)GetTheWeekOfDayByYera:(int)year
+                 andByMonth:(int)month;
+//未来10天的日期情况,数组中是 年-月-日,组成的日期
++(NSMutableArray<NSString *>*)GetTenDaysInFutureByYear:(int)year andByMonth:(int)month andByDay:(int)day;
 + (NSDate *)dateFromString:(NSString *)dateString;
 
 

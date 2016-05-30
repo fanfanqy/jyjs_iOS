@@ -373,7 +373,8 @@
     self.strYear = newYear;
     #pragma mark - 从数据库读取数据
     [_narrowCalendarArray removeAllObjects];
-    NSArray *array = [Datetime GetDayDicByYear:_strYear andMonth:_strMonth andDay:_strDay];
+
+    NSArray *array = [Datetime GetDayDicByYear:_strYear andMonth:_strMonth andDay:_strDay andCountsDay:7];
     NSMutableArray *arrayTemp  = [NSMutableArray array];
     for (int j=0; j<7; j++) {
         int year = [array[0][j] intValue];
@@ -402,7 +403,6 @@
         model.ID = [setDb stringForColumn:@"id"];
         model.lid = [setDb stringForColumn:@"lid"];
         model.week = [setDb stringForColumn:@"week"];
-        //            NSLog(@"model.week:%@",model.week);
         model.weekName = [setDb stringForColumn:@"weekName"];
         model.lYear = [setDb stringForColumn:@"lYear"];
         model.lMonth = [setDb stringForColumn:@"lMonth"];
@@ -525,7 +525,6 @@
     self.strDay = newDay;
     self.strMonth = newMonth;
     self.strYear = newYear;
-//    [self readDataFromDb];
     NSString * starDate;
     NSString * endDate;
      int day=0;
