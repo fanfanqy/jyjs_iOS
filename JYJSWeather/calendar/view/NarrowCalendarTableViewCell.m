@@ -10,7 +10,7 @@
 #import "NarrowCalendarCollectionViewCell.h"
 //#import "CalendarVC.h"
 #import "CalendarViewController1.h"
-
+#import "CalendarMainPagesModel.h"
 @implementation NarrowCalendarTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -47,6 +47,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NarrowCalendarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NARROWCALENDARCOLLECTIONVIEWCELL" forIndexPath:indexPath];
+    CalendarMainPagesModel *calendarMainPagesModel = [[CalendarMainPagesModel alloc]init];
+    calendarMainPagesModel = self.array[indexPath.row];
+//吉凶平
+//  cell.luckyImageView.image = [UIImage imageNamed:<#(nonnull NSString *)#>];
+    cell.dateLabel.text = calendarMainPagesModel.solarStrArray[indexPath.row];
+    cell.lunarCalendarLabel.text =calendarMainPagesModel.lunarStrArray[indexPath.row];
+//丙申年 等等
+//  cell.goodOccasion.text = calendarMainPagesModel.JiNianStrArray[indexPath.row];
+    cell.haircutLabel.text = calendarMainPagesModel.HaircutStrArray[indexPath.row];
+    cell.appropriteLabel.text = calendarMainPagesModel.YiStrArray[indexPath.row];
+    cell.avoidLabel.text = calendarMainPagesModel.JiStrArray[indexPath.row];
+    cell.memorialDayLabel.text = calendarMainPagesModel.ReligionFestivalStrArray[indexPath.row];
+    cell.chongAnimalLabel.text = calendarMainPagesModel.ChongAnimalStrArray[indexPath.row];
+    cell.goodtimeLabel.text = calendarMainPagesModel.LuckyhourStrArray[indexPath.row];
+    cell.badtimeLabel.text = calendarMainPagesModel.badhouStrArray[indexPath.row];
+
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

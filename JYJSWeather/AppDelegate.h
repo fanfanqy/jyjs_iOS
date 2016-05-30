@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "NetWorkMonitor.h"
+#import "Reachability.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
 @property (strong, nonatomic) UIWindow *window;
-
-
+@property (strong, nonatomic) Reachability *hostReachability;
+@property (nonatomic, readonly) NSInteger reachableCount;
 @end
 

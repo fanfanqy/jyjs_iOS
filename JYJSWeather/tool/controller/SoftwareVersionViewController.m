@@ -7,7 +7,7 @@
 //
 
 #import "SoftwareVersionViewController.h"
-
+#import "Help.h"
 @interface SoftwareVersionViewController ()
 
 @property (nonatomic , strong) UILabel * software;
@@ -20,28 +20,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"软件版本";
-    [self softwareVersion];
-}
-
-
-
-//软件版本
-- (void)softwareVersion
-{
-    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion = [NSString stringWithFormat:@"当前软件版本为:%@",infoDic[@"CFBundleShortVersionString"]];
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"软件版本" message:currentVersion preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    
-    [alert addAction:action];
-    [self presentViewController:alert animated:YES completion:^{
-        
-    }];
-    
+    Help *help = [[Help alloc]init];
+    [help versionCheckUpdate];
 }
 
 - (void)didReceiveMemoryWarning {

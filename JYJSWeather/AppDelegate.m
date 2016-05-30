@@ -20,16 +20,42 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
-    // Override point for customization after application launch.
-    [WanNianLiDate getDataBase];
-    // 状态栏字体白色
 
+    [WanNianLiDate getDataBase];
+    [self initNetwork];
+    // 状态栏字体白色
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     RootViewController *rtVC = [[RootViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rtVC];
     
     self.window.rootViewController = nav;
     return YES;
+}
+- (void)initNetwork{
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    NSString *remoteHostName = @"www.baidu.com";
+    _hostReachability = [Reachability reachabilityWithHostName:remoteHostName];
+    [_hostReachability startNotifier];
+}
+
+-(void)reachabilityChanged:(NSNotification *)noti{
+    Reachability* curReach = [noti object];
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    NSLog(@"netStatusAPP:%lu",netStatus);
+    _reachableCount++;
+    if (_reachableCount == 2) {
+        _reachableCount = 0;
+        return;
+    }
+    if (netStatus == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络已断开" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

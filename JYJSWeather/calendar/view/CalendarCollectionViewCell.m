@@ -30,6 +30,12 @@
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.bounds];
+    imageView.image = [UIImage imageNamed:@"主页图- Assistor"];
+    [self.contentView addSubview:imageView];
+    [self.contentView insertSubview:imageView belowSubview:_yi_image];
+
     [self.goodTime sizeToFit];
     [self.fierceTime sizeToFit];
 }
