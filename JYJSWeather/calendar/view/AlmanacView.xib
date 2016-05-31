@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10102" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10080"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Kaiti.ttf">
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+            <string>KaiTi</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -11,116 +31,240 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="吉 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="BGw-mn-Pfw">
-                    <rect key="frame" x="45" y="35" width="57" height="68"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="吉 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="BGw-mn-Pfw">
+                    <rect key="frame" x="35" y="31" width="57" height="69"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="57" id="7Uy-uV-0gD"/>
+                        <constraint firstAttribute="height" constant="69" id="qRD-W3-DJy"/>
+                    </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="如意框 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="l2b-3G-eSQ">
-                    <rect key="frame" x="27" y="134" width="364" height="227"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="如意框 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="l2b-3G-eSQ">
+                    <rect key="frame" x="28" y="134" width="358" height="182"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="182" id="Bgi-TF-nts"/>
+                    </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="宜 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-8c-DDb">
-                    <rect key="frame" x="83" y="224" width="43" height="45"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="宜 - Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-8c-DDb">
+                    <rect key="frame" x="73" y="214" width="28" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="GX1-Lo-48T"/>
+                        <constraint firstAttribute="height" constant="24" id="wsI-22-Fpc"/>
+                    </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="{金斗执.冲兔}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ud-n2-GaN">
-                    <rect key="frame" x="168" y="412" width="103" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{金斗执.冲兔}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ud-n2-GaN">
+                    <rect key="frame" x="162" y="373" width="91" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="WjX-jv-vDf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吉时" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZK-Th-yxH">
-                    <rect key="frame" x="27" y="444" width="34" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吉时" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZK-Th-yxH">
+                    <rect key="frame" x="28" y="410" width="30" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="7wz-Yx-uye"/>
+                        <constraint firstAttribute="height" constant="21" id="jQ7-d1-7ja"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="凶时" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Da-lS-OYW">
-                    <rect key="frame" x="234" y="444" width="34" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子 丑 寅 午 未 亥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ2-IU-6bx">
+                    <rect key="frame" x="58" y="410" width="125" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="QAd-EH-2f1"/>
+                        <constraint firstAttribute="width" constant="125" id="VOE-2X-Td9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="子 丑 寅 午 未 亥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ2-IU-6bx">
-                    <rect key="frame" x="75" y="444" width="113" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子 丑 寅 午 未 亥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6q-Kr-uR1">
+                    <rect key="frame" x="268" y="410" width="125" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="R6m-xg-PF3"/>
+                        <constraint firstAttribute="width" constant="125" id="wWL-vN-F7M"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="子 丑 寅 午 未 亥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6q-Kr-uR1">
-                    <rect key="frame" x="290" y="444" width="116" height="22"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-iO-vsU">
+                    <rect key="frame" x="204" y="410" width="6" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="Gjy-nf-thE"/>
+                        <constraint firstAttribute="width" constant="6" id="RH6-hS-YKD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-iO-vsU">
-                    <rect key="frame" x="211" y="445" width="6" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丙申年 壬辰月 癸酉日 丁巳时" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Do-L8-Yjw">
+                    <rect key="frame" x="73" y="140" width="268" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="4fr-RP-0qx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="丙申年 壬辰月 癸酉日 丁巳时" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Do-L8-Yjw">
-                    <rect key="frame" x="87" y="146" width="264" height="28"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="精进于佛法,最好" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRJ-eg-gVE">
+                    <rect key="frame" x="101" y="164" width="240" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="C2F-UX-7fl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="精进于佛法,最好" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRJ-eg-gVE">
-                    <rect key="frame" x="143" y="176" width="124" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="药师佛节日,作何善恶成千倍,释迦牟尼佛出家日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQq-LM-3ZP">
+                    <rect key="frame" x="47" y="326" width="320" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="gGQ-nN-Hpd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="药师佛节日,作何善恶成千倍,释迦牟尼佛出家日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQq-LM-3ZP">
-                    <rect key="frame" x="54" y="380" width="321" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="三月十三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kob-DL-KNx">
+                    <rect key="frame" x="104" y="56" width="115" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="115" id="YEt-EV-pnn"/>
+                        <constraint firstAttribute="height" constant="20" id="qj4-Rn-205"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="三月十三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kob-DL-KNx">
-                    <rect key="frame" x="120" y="59" width="115" height="20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期四" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCY-dM-DXs">
+                    <rect key="frame" x="104" y="80" width="115" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="1d5-2l-81t"/>
+                        <constraint firstAttribute="width" constant="115" id="gHC-Tx-n98"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="星期四" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCY-dM-DXs">
-                    <rect key="frame" x="120" y="82" width="115" height="20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小寒05:23:36" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdv-W6-FSV">
+                    <rect key="frame" x="244" y="80" width="130" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="NTE-Rv-4bD"/>
+                        <constraint firstAttribute="width" constant="130" id="cIi-Ys-Xpe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="小寒05:23:36" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdv-W6-FSV">
-                    <rect key="frame" x="238" y="83" width="130" height="20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="理发" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpN-aR-gwG">
+                    <rect key="frame" x="73" y="164" width="28" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="oGh-t2-n8i"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="理发" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpN-aR-gwG">
-                    <rect key="frame" x="87" y="176" width="34" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-4-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZq-ZR-jp5">
+                    <rect key="frame" x="104" y="32" width="115" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="8ti-4D-TKw"/>
+                        <constraint firstAttribute="width" constant="115" id="Lon-kf-EGS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                     <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2016-4-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZq-ZR-jp5">
-                    <rect key="frame" x="120" y="35" width="115" height="20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYt-FO-A4h">
+                    <rect key="frame" x="118" y="209" width="223" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="JRt-jF-zo8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
+                    <color key="textColor" red="0.66666666666666663" green="0.2627450980392157" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYt-FO-A4h">
-                    <rect key="frame" x="143" y="230" width="208" height="33"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="忌- Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="OAp-nS-rdF">
-                    <rect key="frame" x="73" y="301" width="48" height="47"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="忌- Assistor.png" translatesAutoresizingMaskIntoConstraints="NO" id="OAp-nS-rdF">
+                    <rect key="frame" x="73" y="278" width="28" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="5h6-Kh-1UC"/>
+                        <constraint firstAttribute="height" constant="24" id="GUK-g5-9o7"/>
+                    </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCH-G5-Nlw">
-                    <rect key="frame" x="143" y="301" width="208" height="47"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCH-G5-Nlw">
+                    <rect key="frame" x="118" y="272" width="223" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="gE3-Ds-10m"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.28627450980392155" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="凶时" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Da-lS-OYW">
+                    <rect key="frame" x="231" y="410" width="30" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="k0q-KM-dmm"/>
+                        <constraint firstAttribute="height" constant="21" id="vOd-E5-jLy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
+                    <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="l2b-3G-eSQ" secondAttribute="trailing" constant="28" id="1XG-Rt-g8Y"/>
+                <constraint firstItem="q6q-Kr-uR1" firstAttribute="top" secondItem="vQq-LM-3ZP" secondAttribute="bottom" constant="60" id="1th-dt-EGp"/>
+                <constraint firstItem="DCY-dM-DXs" firstAttribute="width" secondItem="TZq-ZR-jp5" secondAttribute="width" id="3BJ-ul-W1y"/>
+                <constraint firstItem="kob-DL-KNx" firstAttribute="height" secondItem="TZq-ZR-jp5" secondAttribute="height" id="4Js-xX-AkF"/>
+                <constraint firstItem="cQ2-IU-6bx" firstAttribute="top" secondItem="2Ud-n2-GaN" secondAttribute="bottom" constant="16" id="5FB-oG-MCt"/>
+                <constraint firstItem="UpN-aR-gwG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="73" id="5VY-W0-3XC"/>
+                <constraint firstItem="1Da-lS-OYW" firstAttribute="top" secondItem="vQq-LM-3ZP" secondAttribute="bottom" constant="60" id="6bV-Wg-ehz"/>
+                <constraint firstItem="oCH-G5-Nlw" firstAttribute="centerY" secondItem="OAp-nS-rdF" secondAttribute="centerY" id="8bd-oC-RYL"/>
+                <constraint firstItem="BGw-mn-Pfw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="BFL-Pg-tmE"/>
+                <constraint firstAttribute="trailing" secondItem="oCH-G5-Nlw" secondAttribute="trailing" constant="73" id="Dmr-DH-on6"/>
+                <constraint firstItem="OAp-nS-rdF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="73" id="Eio-PP-2DP"/>
+                <constraint firstItem="rZK-Th-yxH" firstAttribute="top" secondItem="vQq-LM-3ZP" secondAttribute="bottom" constant="60" id="F4b-xR-6Js"/>
+                <constraint firstItem="TZq-ZR-jp5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="FSB-mo-PXj"/>
+                <constraint firstItem="C8E-iO-vsU" firstAttribute="top" secondItem="2Ud-n2-GaN" secondAttribute="bottom" constant="16" id="FoS-05-QC6"/>
+                <constraint firstItem="BGw-mn-Pfw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="31" id="FwA-eg-4X6"/>
+                <constraint firstItem="DCY-dM-DXs" firstAttribute="top" secondItem="kob-DL-KNx" secondAttribute="bottom" constant="4" id="L2b-qr-ihF"/>
+                <constraint firstItem="vQq-LM-3ZP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="47" id="O29-bJ-es1"/>
+                <constraint firstItem="kob-DL-KNx" firstAttribute="top" secondItem="TZq-ZR-jp5" secondAttribute="bottom" constant="4" id="P8f-d1-ocO"/>
+                <constraint firstItem="DCY-dM-DXs" firstAttribute="leading" secondItem="BGw-mn-Pfw" secondAttribute="trailing" constant="12" id="PdX-kT-NEq"/>
+                <constraint firstAttribute="trailing" secondItem="tYt-FO-A4h" secondAttribute="trailing" constant="73" id="Pjm-RM-iOJ"/>
+                <constraint firstItem="wdv-W6-FSV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="RYc-3r-EfA"/>
+                <constraint firstItem="vQq-LM-3ZP" firstAttribute="top" secondItem="l2b-3G-eSQ" secondAttribute="bottom" constant="10" id="UMZ-aR-sc1"/>
+                <constraint firstItem="tYt-FO-A4h" firstAttribute="leading" secondItem="4xM-8c-DDb" secondAttribute="trailing" constant="17" id="VXT-dn-ssc"/>
+                <constraint firstItem="9Do-L8-Yjw" firstAttribute="top" secondItem="wdv-W6-FSV" secondAttribute="bottom" constant="40" id="YAK-nJ-FNv"/>
+                <constraint firstItem="4xM-8c-DDb" firstAttribute="top" secondItem="UpN-aR-gwG" secondAttribute="bottom" constant="35" id="Znf-dW-ZGY"/>
+                <constraint firstAttribute="trailing" secondItem="vQq-LM-3ZP" secondAttribute="trailing" constant="47" id="an8-yc-79d"/>
+                <constraint firstItem="uRJ-eg-gVE" firstAttribute="top" secondItem="9Do-L8-Yjw" secondAttribute="bottom" constant="8" id="bej-Pe-OYh"/>
+                <constraint firstItem="9Do-L8-Yjw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="73" id="fKF-mc-tct"/>
+                <constraint firstAttribute="trailing" secondItem="uRJ-eg-gVE" secondAttribute="trailing" constant="73" id="ftx-Eh-Ymb"/>
+                <constraint firstItem="2Ud-n2-GaN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ghf-LC-icg"/>
+                <constraint firstItem="oCH-G5-Nlw" firstAttribute="leading" secondItem="OAp-nS-rdF" secondAttribute="trailing" constant="17" id="h0F-fO-ezD"/>
+                <constraint firstItem="C8E-iO-vsU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="h5R-rp-2iB"/>
+                <constraint firstItem="TZq-ZR-jp5" firstAttribute="leading" secondItem="BGw-mn-Pfw" secondAttribute="trailing" constant="12" id="hRs-5y-zur"/>
+                <constraint firstItem="uRJ-eg-gVE" firstAttribute="leading" secondItem="UpN-aR-gwG" secondAttribute="trailing" id="hW8-tq-ekD"/>
+                <constraint firstItem="kob-DL-KNx" firstAttribute="leading" secondItem="BGw-mn-Pfw" secondAttribute="trailing" constant="12" id="hYR-K4-IhO"/>
+                <constraint firstItem="l2b-3G-eSQ" firstAttribute="top" secondItem="wdv-W6-FSV" secondAttribute="bottom" constant="34" id="izc-sK-6tv"/>
+                <constraint firstItem="OAp-nS-rdF" firstAttribute="top" secondItem="4xM-8c-DDb" secondAttribute="bottom" constant="40" id="jMc-L6-lxa"/>
+                <constraint firstItem="tYt-FO-A4h" firstAttribute="centerY" secondItem="4xM-8c-DDb" secondAttribute="centerY" id="kIQ-pj-pft"/>
+                <constraint firstItem="2Ud-n2-GaN" firstAttribute="top" secondItem="vQq-LM-3ZP" secondAttribute="bottom" constant="23" id="kL0-cU-sfJ"/>
+                <constraint firstItem="4xM-8c-DDb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="73" id="lJA-fk-liC"/>
+                <constraint firstAttribute="trailing" secondItem="wdv-W6-FSV" secondAttribute="trailing" constant="40" id="nQp-fI-GYA"/>
+                <constraint firstItem="rZK-Th-yxH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="nmy-ai-VM6"/>
+                <constraint firstAttribute="trailing" secondItem="q6q-Kr-uR1" secondAttribute="trailing" constant="21" id="qrb-IF-egX"/>
+                <constraint firstItem="1Da-lS-OYW" firstAttribute="leading" secondItem="C8E-iO-vsU" secondAttribute="trailing" constant="21" id="sCX-0N-dfT"/>
+                <constraint firstItem="kob-DL-KNx" firstAttribute="width" secondItem="TZq-ZR-jp5" secondAttribute="width" id="tyI-aD-KnX"/>
+                <constraint firstItem="UpN-aR-gwG" firstAttribute="top" secondItem="9Do-L8-Yjw" secondAttribute="bottom" constant="8" id="vjL-xm-BES"/>
+                <constraint firstItem="l2b-3G-eSQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="w0l-W8-IyV"/>
+                <constraint firstItem="C8E-iO-vsU" firstAttribute="leading" secondItem="cQ2-IU-6bx" secondAttribute="trailing" constant="21" id="xGa-Xh-tFI"/>
+                <constraint firstItem="DCY-dM-DXs" firstAttribute="height" secondItem="TZq-ZR-jp5" secondAttribute="height" id="zs3-Hp-HyW"/>
+                <constraint firstAttribute="trailing" secondItem="9Do-L8-Yjw" secondAttribute="trailing" constant="73" id="zx8-BZ-xGP"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <connections>
                 <outlet property="BadhourLabel" destination="q6q-Kr-uR1" id="QgZ-L7-1z2"/>

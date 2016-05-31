@@ -20,6 +20,7 @@
             <string>KaiTi</string>
             <string>KaiTi</string>
             <string>KaiTi</string>
+            <string>KaiTi</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -49,7 +50,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="qYe-z8-46U"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -58,7 +59,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="p3p-Gb-pzE"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -81,7 +82,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Bph-n7-vnH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -90,26 +91,26 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="19" id="dE0-sQ-qiF"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="凶时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxt-jN-cWK">
-                        <rect key="frame" x="213" y="589" width="28" height="21"/>
+                        <rect key="frame" x="212" y="589" width="28" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="CKk-76-3S3"/>
                             <constraint firstAttribute="height" constant="21" id="YB3-C9-qA4"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="子 丑 寅 午 未 亥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pen-KE-3Tu">
-                        <rect key="frame" x="251" y="589" width="104" height="21"/>
+                        <rect key="frame" x="250" y="589" width="105" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="kS1-u0-5bi"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -144,12 +145,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUm-4w-a5S">
-                        <rect key="frame" x="188" y="589" width="12" height="21"/>
+                        <rect key="frame" x="187" y="589" width="12" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="BfT-uh-4Wf"/>
                             <constraint firstAttribute="width" constant="12" id="MVd-GI-ZDT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -160,12 +161,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="子 丑 寅 午 未 亥 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsP-xV-Rt0">
-                        <rect key="frame" x="68" y="589" width="107" height="21"/>
+                        <rect key="frame" x="60" y="589" width="117" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="107" id="BYQ-69-yqy"/>
+                            <constraint firstAttribute="width" constant="117" id="BYQ-69-yqy"/>
                             <constraint firstAttribute="height" constant="21" id="Uta-ii-0u3"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -174,7 +175,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="fCE-Ti-bxg"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                         <color key="textColor" red="0.66666666666666663" green="0.2627450980392157" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -184,7 +185,7 @@
                             <constraint firstAttribute="height" constant="35" id="okM-Kc-3eN"/>
                             <constraint firstAttribute="height" constant="35" id="xB9-nc-bBn"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="16"/>
                         <color key="textColor" red="0.20000000000000001" green="0.28627450980392155" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -218,12 +219,12 @@
                         <state key="normal" title="Button" image="图标3 - Assistor.png"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吉时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYT-gU-QVA">
-                        <rect key="frame" x="24" y="589" width="34" height="21"/>
+                        <rect key="frame" x="24" y="589" width="28" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="34" id="NpI-hh-jGi"/>
+                            <constraint firstAttribute="width" constant="28" id="NpI-hh-jGi"/>
                             <constraint firstAttribute="height" constant="21" id="bK5-X8-Zpp"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="KaiTi" family="KaiTi" pointSize="14"/>
                         <color key="textColor" red="0.66666666669999997" green="0.26274509800000001" blue="0.1333333333" alpha="0.92520059119999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -256,7 +257,7 @@
                 <constraint firstAttribute="trailing" secondItem="D6k-Jc-GaM" secondAttribute="trailing" constant="28" id="JwW-Z8-AFa"/>
                 <constraint firstItem="hoB-UQ-eFl" firstAttribute="width" secondItem="T3h-jV-5it" secondAttribute="width" id="L7x-Uw-7kd"/>
                 <constraint firstAttribute="bottom" secondItem="D6k-Jc-GaM" secondAttribute="bottom" constant="138" id="LoR-je-MyI"/>
-                <constraint firstItem="OUm-4w-a5S" firstAttribute="leading" secondItem="IsP-xV-Rt0" secondAttribute="trailing" constant="13" id="Ov2-Os-HNG"/>
+                <constraint firstItem="OUm-4w-a5S" firstAttribute="leading" secondItem="IsP-xV-Rt0" secondAttribute="trailing" constant="10" id="Ov2-Os-HNG"/>
                 <constraint firstItem="6PK-kH-P2c" firstAttribute="top" secondItem="T3h-jV-5it" secondAttribute="bottom" constant="3" id="PRJ-2r-eX4"/>
                 <constraint firstItem="4Sk-8F-nEm" firstAttribute="top" secondItem="baB-K9-9I6" secondAttribute="bottom" constant="33" id="Pn3-Ph-7F6"/>
                 <constraint firstItem="wJt-iG-DUu" firstAttribute="top" secondItem="PqR-Qk-hra" secondAttribute="bottom" constant="32" id="Q7D-TL-uMs"/>
@@ -293,7 +294,7 @@
                 <constraint firstItem="oEW-ZL-F6d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="lX4-Ow-iK6"/>
                 <constraint firstItem="4Sk-8F-nEm" firstAttribute="top" secondItem="D6k-Jc-GaM" secondAttribute="bottom" constant="21" id="njA-EH-94R"/>
                 <constraint firstItem="baB-K9-9I6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="73" id="nnW-7w-0Pu"/>
-                <constraint firstItem="IsP-xV-Rt0" firstAttribute="leading" secondItem="nYT-gU-QVA" secondAttribute="trailing" constant="10" id="o12-Lk-ang"/>
+                <constraint firstItem="IsP-xV-Rt0" firstAttribute="leading" secondItem="nYT-gU-QVA" secondAttribute="trailing" constant="8" id="o12-Lk-ang"/>
                 <constraint firstItem="KwA-af-irb" firstAttribute="leading" secondItem="mwb-nz-mh8" secondAttribute="trailing" constant="26" id="o5q-ni-c4D"/>
                 <constraint firstItem="eWI-Rp-esB" firstAttribute="top" secondItem="it3-sf-0EV" secondAttribute="bottom" constant="40" id="oCH-5g-NVu"/>
                 <constraint firstAttribute="trailing" secondItem="it3-sf-0EV" secondAttribute="trailing" constant="16" id="oKc-Zl-gsc"/>
